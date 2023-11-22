@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+  {{ super() }}
+  {% if page.title == 'Mask' %}
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+  {% endif %}
+  {% if page.title == 'Intersect' %}
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+  {% endif %}
+  {% if page.title == 'Persist' %}
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+  {% endif %}
+  {% if page.title == 'Focus' %}
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+  {% endif %}
+  {% if page.title == 'Collapse' %}
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+  {% endif %}
+  {% if page.title == 'Anchor' %}
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/anchor@3.x.x/dist/cdn.min.js"></script>
+  {% endif %}
+  {% if page.title == 'Morph' %}
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/morph@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    document.querySelector('#morph-button-1').addEventListener('click', () => {
+        let el = document.querySelector('#morph-demo-1')
+
+        Alpine.morph(el, `
+            <div x-data="{ message: 'Измените меня, затем нажмите кнопку!' }" id="morph-demo-1">
+                <h4>Посмотрите, как были добавлены новые элементы</h4>
+                <input type="text" x-model="message" style="width: 100%">
+                <span x-text="message"></span>
+                <h4>но состояние этого компонента не изменилось? Магия.</h4>
+            </div>
+        `)
+    })
+  </script>
+  {% endif %}
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+{% endblock %}

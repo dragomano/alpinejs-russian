@@ -1,0 +1,26 @@
+.md-footer-meta__inner {
+    justify-content: center;
+}
+.md-source__facts {
+    display: none;
+}
+.md-copyright__highlight {
+    text-align: center;
+}
+.demo {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #7c4dff;
+}
+.demo input, .demo textarea, .demo select {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #7c4dff;
+    margin: 6px;
+}
+.demo button {
+    margin: 6px;
+}
+.demo .md-button + span {
+    margin-left: 1em;
+}

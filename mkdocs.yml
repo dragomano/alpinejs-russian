@@ -1,0 +1,157 @@
+# Project information
+site_name: Документация Alpine.js на русском
+site_author: Bugo
+site_url: https://dragomano.github.io/alpinejs-russian/
+
+repo_url: https://github.com/dragomano/alpinejs-russian
+edit_uri: edit/main/docs/
+
+# Configuration
+theme:
+  name: material
+  custom_dir: overrides
+  features:
+    - navigation.top
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.indexes
+    - navigation.footer
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - content.tabs.link
+    - content.code.copy
+    - content.code.select
+  icon:
+    logo: simple/alpinedotjs
+    repo: fontawesome/brands/github
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      primary: light blue
+      accent: orange
+      scheme: default
+      toggle:
+        icon: material/brightness-4
+        name: Тёмный режим
+    - media: '(prefers-color-scheme: dark)'
+      primary: green
+      accent: orange
+      scheme: slate
+      toggle:
+        icon: material/brightness-7
+        name: Светлый режим
+  language: ru
+  font:
+    text: Inter
+    code: Fira Code
+
+extra:
+  generator: false
+  social:
+    - icon: simple/alpinedotjs
+      link: https://alpinejs.dev
+      name: Официальный сайт Alpine.js
+    - icon: fontawesome/brands/github
+      link: https://github.com/alpinejs/alpine
+      name: Репозиторий Alpine.js
+
+# Customization
+extra_css:
+  - extra.css
+
+# Extensions
+markdown_extensions:
+  - meta
+  - tables
+  - toc:
+      title: Содержание
+      permalink: ⚓︎
+      permalink_title: Постоянная ссылка
+      slugify: !!python/name:slugify.slugify
+  - admonition
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - def_list
+  - attr_list
+  - md_in_html
+  - pymdownx.keys
+
+# Plugins
+plugins:
+  - search:
+      lang:
+        - en
+        - ru
+  - minify:
+      minify_html: true
+  - mkdocs-video
+
+# Page tree
+nav:
+  - index.md
+  - upgrade-guide.md
+  - Основы:
+      - essentials/installation.md
+      - essentials/state.md
+      - essentials/templating.md
+      - essentials/events.md
+      - essentials/lifecycle.md
+  - Директивы:
+      - directives/data.md
+      - directives/init.md
+      - directives/show.md
+      - directives/bind.md
+      - directives/on.md
+      - directives/text.md
+      - directives/html.md
+      - directives/model.md
+      - directives/modelable.md
+      - directives/for.md
+      - directives/transition.md
+      - directives/effect.md
+      - directives/ignore.md
+      - directives/ref.md
+      - directives/cloak.md
+      - directives/teleport.md
+      - directives/if.md
+      - directives/id.md
+  - Магия:
+      - magics/el.md
+      - magics/refs.md
+      - magics/store.md
+      - magics/watch.md
+      - magics/dispatch.md
+      - magics/nextTick.md
+      - magics/root.md
+      - magics/data.md
+      - magics/id.md
+  - Глобальные:
+      - globals/alpine-data.md
+      - globals/alpine-store.md
+      - globals/alpine-bind.md
+  - Плагины:
+      - plugins/mask.md
+      - plugins/intersect.md
+      - plugins/persist.md
+      - plugins/focus.md
+      - plugins/collapse.md
+      - plugins/anchor.md
+      - plugins/morph.md
+  - Дополнительно:
+      - advanced/reactivity.md
+      - advanced/extending.md
+      - advanced/async.md
+      - advanced/csp.md
