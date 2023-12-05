@@ -42,7 +42,7 @@
     { id: 1, label: 'Красный' },
     { id: 2, label: 'Оранжевый' },
     { id: 3, label: 'Жёлтый' },
-]}"
+  ]}"
 >
   <template x-for="color in colors" :key="color.id">
     <li x-text="color.label"></li>

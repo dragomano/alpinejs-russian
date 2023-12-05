@@ -46,8 +46,7 @@ import Alpine from 'alpinejs'
 import anchor from '@alpinejs/anchor'
 
 Alpine.plugin(anchor)
-
-...
+Alpine.start();
 ```
 
 <a name="x-anchor"></a>
