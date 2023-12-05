@@ -150,6 +150,7 @@ nav:
       - plugins/collapse.md
       - plugins/anchor.md
       - plugins/morph.md
+      - plugins/slug.md
   - Дополнительно:
       - advanced/reactivity.md
       - advanced/extending.md
