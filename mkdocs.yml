@@ -59,6 +59,9 @@ extra:
       name: Репозиторий Alpine.js
 
 # Customization
+extra_javascript:
+  - extra.js
+
 extra_css:
   - extra.css
 
