@@ -26,7 +26,7 @@ description: Преобразуем строки в слаги с помощью
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs-slug@1.1.2/dist/slug.min.js"></script>
 
 <!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 ```
 
 ### Через NPM
@@ -40,10 +40,10 @@ npm install @alpinejs/focus
 Затем инициализируйте его в своей сборке:
 
 ```js
-import Alpine from 'alpinejs'
+import Alpine from 'alpinejs';
 import slug from 'alpinejs-slug';
 
-Alpine.plugin(slug)
+Alpine.plugin(slug);
 Alpine.start();
 ```
 

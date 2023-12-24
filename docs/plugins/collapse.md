@@ -23,10 +23,10 @@ description: Свертывание и разворачивание элемен
 
 ```html
 <!-- Alpine Plugins -->
-<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3/dist/cdn.min.js"></script>
 
 <!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 ```
 
 ### Через NPM
@@ -40,10 +40,10 @@ npm install @alpinejs/collapse
 Затем инициализируйте его в своей сборке:
 
 ```js
-import Alpine from 'alpinejs'
-import collapse from '@alpinejs/collapse'
+import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse';
 
-Alpine.plugin(collapse)
+Alpine.plugin(collapse);
 Alpine.start();
 ```
 

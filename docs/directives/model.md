@@ -53,6 +53,7 @@
 - `<input type="checkbox">`
 - `<input type="radio">`
 - `<select>`
+- `<input type="range"`
 
 <a name="text-inputs"></a>
 
@@ -270,6 +271,25 @@
                 </template>
             </select>
             <div class="pt-4">Цвет: <span x-text="color"></span></div>
+        </div>
+    </div>
+
+<a name="range-inputs"></a>
+
+## Ползунок
+
+```html
+<input type="range" x-model="range" min="0" max="1" step="0.1" />
+
+<span x-text="range"></span>
+```
+
+!!! example "Пример"
+
+    <div class="demo">
+        <div x-data="{ range: 0.5 }">
+            <input type="range" x-model="range" min="0" max="1" step="0.1">
+            <div class="pt-4" x-text="range"></div>
         </div>
     </div>
 

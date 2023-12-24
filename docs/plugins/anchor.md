@@ -25,10 +25,10 @@ description: Привязка позиционирования элемента 
 
 ```html
 <!-- Alpine Plugins -->
-<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/anchor@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/anchor@3/dist/cdn.min.js"></script>
 
 <!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 ```
 
 ### Через NPM
@@ -42,10 +42,10 @@ npm install @alpinejs/anchor
 Затем инициализируйте его в своей сборке:
 
 ```js
-import Alpine from 'alpinejs'
-import anchor from '@alpinejs/anchor'
+import Alpine from 'alpinejs';
+import anchor from '@alpinejs/anchor';
 
-Alpine.plugin(anchor)
+Alpine.plugin(anchor);
 Alpine.start();
 ```
 

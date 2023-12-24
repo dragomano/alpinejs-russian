@@ -1,6 +1,6 @@
 # x-for
 
-Директива Alpine `x-for` позволяет создавать элементы DOM путем перебора списка. Вот простой пример его использования для создания списка цветов на основе массива.
+Директива Alpine `x-for` позволяет создавать элементы DOM путём перебора списка. Вот простой пример его использования для создания списка цветов на основе массива.
 
 ```html
 <ul x-data="{ colors: ['Красный', 'Оранжевый', 'Жёлтый'] }">
@@ -17,6 +17,26 @@
             <template x-for="color in colors">
                 <li x-text="color"></li>
             </template>
+        </ul>
+    </div>
+
+Вы также можете передавать объекты в `x-for`.
+
+```html
+<ul x-data="{ car: { make: 'Jeep', model: 'Grand Cherokee', color: 'Black' } }">
+  <template x-for="(value, index) in car">
+    <li><span x-text="index"></span>: <span x-text="value"></span></li>
+  </template>
+</ul>
+```
+
+!!! example "Пример"
+
+    <div class="demo">
+        <ul x-data="{ car: { make: 'Джип', model: 'Grand Cherokee', color: 'Чёрный' } }">
+          <template x-for="(value, index) in car">
+            <li><span x-text="index"></span>: <span x-text="value"></span></li>
+          </template>
         </ul>
     </div>
 

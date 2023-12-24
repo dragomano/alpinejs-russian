@@ -23,10 +23,10 @@ description: Автоматическое форматирование текс�
 
 ```html
 <!-- Alpine Plugins -->
-<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3/dist/cdn.min.js"></script>
 
 <!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 ```
 
 ### Через NPM
@@ -40,10 +40,10 @@ npm install @alpinejs/mask
 Затем инициализируйте его в своей сборке:
 
 ```js
-import Alpine from 'alpinejs'
-import mask from '@alpinejs/mask'
+import Alpine from 'alpinejs';
+import mask from '@alpinejs/mask';
 
-Alpine.plugin(mask)
+Alpine.plugin(mask);
 Alpine.start();
 ```
 

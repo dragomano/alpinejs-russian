@@ -24,10 +24,10 @@ description: Удобное сохранение данных при загру�
 
 ```html
 <!-- Alpine Plugins -->
-<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3/dist/cdn.min.js"></script>
 
 <!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 ```
 
 ### Через NPM
@@ -41,10 +41,10 @@ npm install @alpinejs/persist
 Затем инициализируйте его в своей сборке:
 
 ```js
-import Alpine from 'alpinejs'
-import persist from '@alpinejs/persist'
+import Alpine from 'alpinejs';
+import persist from '@alpinejs/persist';
 
-Alpine.plugin(persist)
+Alpine.plugin(persist);
 Alpine.start();
 ```
 

@@ -42,10 +42,10 @@ description: Преобразование элемента в предостав
 
 ```html
 <!-- Alpine Plugins -->
-<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/morph@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/morph@3/dist/cdn.min.js"></script>
 
 <!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 ```
 
 ### Через NPM
@@ -59,10 +59,10 @@ npm install @alpinejs/morph
 Затем инициализируйте его в своей сборке:
 
 ```js
-import Alpine from 'alpinejs'
-import morph from '@alpinejs/morph'
+import Alpine from 'alpinejs';
+import morph from '@alpinejs/morph';
 
-Alpine.plugin(morph)
+Alpine.plugin(morph);
 Alpine.start();
 ```
 

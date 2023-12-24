@@ -29,10 +29,10 @@ description: Удобное управление фокусом в предел�
 
 ```html
 <!-- Alpine Plugins -->
-<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3/dist/cdn.min.js"></script>
 
 <!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 ```
 
 ### Через NPM
@@ -46,10 +46,10 @@ npm install @alpinejs/focus
 Затем инициализируйте его в своей сборке:
 
 ```js
-import Alpine from 'alpinejs'
-import focus from '@alpinejs/focus'
+import Alpine from 'alpinejs';
+import focus from '@alpinejs/focus';
 
-Alpine.plugin(focus)
+Alpine.plugin(focus);
 Alpine.start();
 ```
 
