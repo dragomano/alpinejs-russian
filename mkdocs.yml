@@ -24,6 +24,7 @@ theme:
     - content.tabs.link
     - content.code.copy
     - content.code.select
+    - content.action.edit
   icon:
     logo: simple/alpinedotjs
     repo: fontawesome/brands/github
