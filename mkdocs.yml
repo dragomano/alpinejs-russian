@@ -156,7 +156,7 @@ nav:
       - plugins/morph.md
       - plugins/slug.md
   - Дополнительно:
+      - advanced/csp.md
       - advanced/reactivity.md
       - advanced/extending.md
       - advanced/async.md
-      - advanced/csp.md

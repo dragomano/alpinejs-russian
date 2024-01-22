@@ -33,12 +33,12 @@
 Если вы решили использовать шаг сборки для своего кода Alpine, то вам следует зарегистрировать свои компоненты следующим образом:
 
 ```js
-import Alpine from `alpinejs`
-import dropdown from './dropdown.js'
+import Alpine from 'alpinejs';
+import dropdown from './dropdown.js';
 
-Alpine.data('dropdown', dropdown)
+Alpine.data('dropdown', dropdown);
 
-Alpine.start()
+Alpine.start();
 ```
 
 Предполагается, что у вас есть файл `dropdown.js` со следующим содержимым:

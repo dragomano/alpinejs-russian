@@ -31,7 +31,7 @@
 Обратите внимание на `@3` в предоставленной ссылке CDN. При этом будет использована последняя версия Alpine из 3 линейки. Для стабильности работы рекомендуется жёстко запрограммировать последнюю версию в ссылке CDN.
 
 ```html
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.4/dist/cdn.min.js"></script>
 ```
 
 Вот и всё! Alpine теперь доступен для использования на вашей странице.

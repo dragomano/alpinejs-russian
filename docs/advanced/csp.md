@@ -4,51 +4,89 @@ title: CSP
 
 # CSP (Политика безопасности содержимого)
 
-Чтобы Alpine мог выполнять простые строки из атрибутов HTML в виде выражений JavaScript, например `x-on:click="console.log()"`, ему необходимо полагаться на утилиты, которые нарушают принцип «unsafe-eval»
+Чтобы Alpine мог выполнять простые строки из HTML-атрибутов как выражения JavaScript, например `x-on:click="console.log()"`, ему необходимо использовать утилиты, нарушающие принцип «unsafe-eval» [Политики безопасности содержимого](https://developer.mozilla.org/ru/docs/Web/HTTP/CSP), которую некоторые приложения могут применять в целях безопасности.
 
 !!! info "К сведению"
 
     Под капотом Alpine фактически не использует eval(), поскольку он медленный и проблематичный. Вместо этого он использует объявления функций, которые намного лучше, но всё же нарушают «unsafe-eval».
 
-Чтобы адаптироваться к средам, где необходим этот CSP, Alpine предложит альтернативную сборку, которая не нарушает «unsafe-eval», но имеет более строгий синтаксис.
+Чтобы приспособиться к средам, где этот CSP необходим, Alpine предлагает альтернативную сборку, которая не нарушает «unsafe-eval», но имеет более строгий синтаксис.
 
 <a name="installation"></a>
 
 ## Установка
 
-Сборка CSP еще официально не выпущена. Однако её можно собрать из исходного кода. Для этого клонируйте репозиторий [`alpinejs/alpine`](https://github.com/alpinejs/alpine) и запустите:
+Вы можете использовать эту сборку, включив её в тег `<script>` или установив через NPM:
 
-```shell
-npm install
-npm run build
-```
+### Через CDN
 
-В результате будет создан каталог `/packages/csp/dist/` с собранными файлами. Скопировав соответствующий файл в свой проект, можно включить его либо через тег `<script>`, либо через импорт модуля:
-
-<a name="script-tag"></a>
-
-### Тег script
+Вы можете включить CDN этой сборки в виде тега `<script>`, как это делается в стандартной сборке Alpine:
 
 ```html
-<html>
-  <script src="/path/to/cdn.js" defer></script>
-</html>
+<!-- Ядро Alpine, дружественное к CSP -->
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3/dist/cdn.min.js"></script>
 ```
 
-<a name="module-import"></a>
+### Через NPM
 
-### Импорт модуля
+Вы можете установить эту сборку из NPM для использования внутри вашего пакета следующим образом:
+
+```shell
+npm install @alpinejs/csp
+```
+
+Затем инициализируйте его из вашего пакета:
 
 ```js
-import Alpine from './path/to/module.esm.js';
+import Alpine from '@alpinejs/csp';
 
 window.Alpine = Alpine;
 window.Alpine.start();
 ```
 
-<a name="restrictions"></a>
+<a name="basic-example"></a>
 
-## Ограничения
+## Базовый пример
+
+Чтобы дать представление о том, как может выглядеть использование сборки CSP, вот копируемый HTML-файл с работающим компонентом счётчика, использующим обычную настройку CSP:
+
+```html
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'nonce-a23gbfz9e'"
+    />
+    <script
+      defer
+      nonce="a23gbfz9e"
+      src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body>
+    <div x-data="counter">
+      <button x-on:click="count++"></button>
+      <span x-text="count"></span>
+    </div>
+    <script nonce="a23gbfz9e">
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('counter', () => {
+          return {
+            count: 1,
+            increment() {
+              this.count++;
+            },
+          };
+        });
+      });
+    </script>
+  </body>
+</html>
+```
+
+<a name="api-restrictions"></a>
+
+## Ограничения API
 
 Поскольку Alpine больше не может интерпретировать строки как обычный JavaScript, ему приходится разбирать и конструировать из них JavaScript-функции вручную.
 
