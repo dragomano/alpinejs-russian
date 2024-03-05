@@ -6,9 +6,9 @@
 
 ```html
 <div x-data="{ message: '' }">
-    <input type="text" x-model="message">
+  <input type="text" x-model="message" />
 
-    <span x-text="message">
+  <span x-text="message"></span>
 </div>
 ```
 

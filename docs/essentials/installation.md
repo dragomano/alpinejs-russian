@@ -28,10 +28,13 @@
 
     Не забудьте атрибут «defer» в теге `<script>`.
 
-Обратите внимание на `@3` в предоставленной ссылке CDN. При этом будет использована последняя версия Alpine из 3 линейки. Для стабильности работы рекомендуется жёстко запрограммировать последнюю версию в ссылке CDN:
+Обратите внимание на `@3` в предоставленной ссылке CDN. При этом будет использована последняя версия Alpine из 3 линейки. Для стабильности работы рекомендуется жёстко запрограммировать последнюю версию (на сегодня это <strong x-data="{ version: '3.x.x' }" x-init="fetch('https://cdn.jsdelivr.net/npm/alpinejs@3/package.json')
+  .then(response => response.json())
+  .then(data => version = data.version)">
+<span x-text="version"></span></strong>) в ссылке CDN:
 
 ```html
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.6/dist/cdn.min.js"></script>
 ```
 
 Вот и всё! Alpine теперь доступен для использования на вашей странице.

@@ -96,6 +96,10 @@ Alpine.start();
 <div x-intersect:leave="shown = true">...</div>
 ```
 
+> По умолчанию это означает, что _весь элемент_ не находится в области просмотра. Используйте `x-intersect:leave.full`, чтобы запустить выражение, когда только _часть элемента_ не находится в области просмотра.
+
+> [→ Подробнее о базовом API `IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+
 <a name="modifiers"></a>
 
 ## Модификаторы
