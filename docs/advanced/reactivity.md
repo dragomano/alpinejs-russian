@@ -69,9 +69,9 @@ Alpine.effect(() => {
 Чтобы связать всё воедино, давайте посмотрим на простой пример компонента «счётчик» вообще без использования синтаксиса Alpine, а только с использованием `Alpine.reactive` и `Alpine.effect`:
 
 ```html
-<button>Increment</button>
+<button>Увеличить</button>
 
-Count: <span></span>
+Счётчик: <span></span>
 ```
 
 ```js

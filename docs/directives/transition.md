@@ -4,12 +4,12 @@ Alpine уже из коробки предоставляет надежную у
 
 Существует два основных способа организации переходов в Alpine:
 
-- [Хэлпер `x-transition`](#the-transition-helper)
+- [Хелпер `x-transition`](#the-transition-helper)
 - [Применение классов CSS](#applying-css-classes)
 
 <a name="the-transition-helper"></a>
 
-## Хэлпер `x-transition`
+## Хелпер `x-transition`
 
 Самый простой способ реализовать переход с помощью Alpine - это добавить `x-transition` к элементу с `x-show` на нем. Например:
 
