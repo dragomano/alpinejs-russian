@@ -375,7 +375,7 @@
 Но если связанное свойство пусто, вы можете использовать атрибут _value_ входного значения для заполнения свойства, добавив модификатор `.fill`:
 
 <div x-data="{ message: null }">
-  <input x-model.fill="message" value="Это сообщение по умолчанию.">
+  <input type="text" x-model.fill="message" value="Это сообщение по умолчанию.">
 </div>
 
 <a name="programmatic access"></a>
