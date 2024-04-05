@@ -1,7 +1,7 @@
 # Project information
-site_name: Документация Alpine.js на русском
+site_name: Alpine.js по-русски
 site_author: Bugo
-site_url: https://dragomano.github.io/alpinejs-russian/
+site_url: https://alpinejs.dragomano.ru/
 
 repo_url: https://github.com/dragomano/alpinejs-russian
 edit_uri: edit/main/docs/
