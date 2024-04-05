@@ -18,13 +18,6 @@ export default defineConfig({
       head: [
         {
           tag: 'script',
-          attrs: {
-            src: 'https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js',
-            defer: true,
-          },
-        },
-        {
-          tag: 'script',
           content: `(function (c, l, a, r, i, t, y) {
             c[a] =
               c[a] ||
