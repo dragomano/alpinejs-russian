@@ -1,0 +1,16 @@
+---
+title: $el
+description: Знакомимся с магическим свойством $el в Alpine.js
+sidebar:
+  order: 1
+---
+
+`$el` — это магическое свойство, которое может быть использовано для получения текущего узла DOM.
+
+```html live "$el"
+<div x-data>
+  <button x-on:click="$el.innerHTML = 'Привет, мир!'">
+    Замени меня на «Привет, мир!»
+  </button>
+</div>
+```

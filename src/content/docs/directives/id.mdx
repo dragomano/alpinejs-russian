@@ -1,0 +1,34 @@
+---
+title: x-id
+description: Описание директивы x-id в Alpine.js
+sidebar:
+  order: 18
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+`x-id` позволяет вам объявить новую «область действия» для любых новых идентификаторов, созданных с помощью `$id()`. Он принимает массив строк (имена идентификаторов) и добавляет к каждому сгенерированному в нём суффиксу `$id('...')`, который уникален для других идентификаторов на странице.
+
+`x-id` предназначен для использования в сочетании с магией `$id(...)`.
+
+<LinkCard title="Посмотрите документацию <strong>$id</strong>, чтобы лучше понять эту функцию." href="/magics/id" />
+
+Вот краткий пример использования этой директивы:
+
+```html
+<div x-id="['text-input']">
+  <label :for="$id('text-input')">Имя пользователя</label>
+  <!-- for="text-input-1" -->
+
+  <input type="text" :id="$id('text-input')" />
+  <!-- id="text-input-1" -->
+</div>
+
+<div x-id="['text-input']">
+  <label :for="$id('text-input')">Имя пользователя</label>
+  <!-- for="text-input-2" -->
+
+  <input type="text" :id="$id('text-input')" />
+  <!-- id="text-input-2" -->
+</div>
+```

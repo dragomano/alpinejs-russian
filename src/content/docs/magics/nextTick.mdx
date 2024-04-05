@@ -1,0 +1,39 @@
+---
+title: $nextTick
+description: Знакомимся с магическим свойством $nextTick в Alpine.js
+sidebar:
+  order: 6
+---
+
+`$nextTick` — это магическое свойство, которое позволяет выполнять заданное выражение только ПОСЛЕ того, как Alpine произвёл реактивное обновление DOM. Это удобно в тех случаях, когда требуется взаимодействовать с состоянием DOM после того, как в нём отразились все сделанные обновления данных.
+
+```html live
+<div x-data="{ title: 'Привет' }">
+  <button
+    @click="
+            title = 'Привет, мир!';
+            $nextTick(() => { console.log($el.innerText) });
+        "
+    x-text="title"
+  ></button>
+</div>
+```
+
+В приведённом выше примере вместо вывода в консоли «Привет» мы увидим «Привет, мир!», поскольку `$nextTick` использовался для ожидания, пока Alpine завершит обновление DOM.
+
+## Promises
+
+`$nextTick` возвращает объект [Promise](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) («обещание»), что позволяет использовать `$nextTick` для приостановки работы асинхронной функции до завершения ожидаемых обновлений данных. При таком использовании `$nextTick` также не требует передачи аргумента.
+
+```html
+<div x-data="{ title: 'Привет' }">
+  <button
+    @click="
+            title = 'Привет, мир!';
+            await $nextTick();
+            console.log($el.innerText);
+        "
+    x-text="title"
+  ></button>
+</div>
+```

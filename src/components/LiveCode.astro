@@ -1,0 +1,27 @@
+<div class="live-code-layout">
+  <slot name="code" />
+  <div class="example-container">
+    <div>
+      <slot name="example" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .live-code-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .example-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+    background: var(--ec-frm-edBg, var(--astro-code-color-background));
+    border-style: solid;
+    border-width: var(--ec-brdWd, 1px);
+    border-color: var(--ec-brdCol, var(--sl-color-gray-5));
+    border-bottom: none;
+  }
+</style>

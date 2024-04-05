@@ -1,0 +1,50 @@
+---
+title: $store
+description: Знакомимся с магическим свойством $store в Alpine.js
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Вы можете использовать `$store` для удобного доступа к глобальным хранилищам Alpine, зарегистрированным с помощью [`Alpine.store(...)`](/globals/alpine-store). Например:
+
+```html wrap "Alpine.store"
+<button x-data @click="$store.darkMode.toggle()">Переключить тёмный режим</button>
+
+<div x-data :class="$store.darkMode.on && 'bg-black'">...</div>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('darkMode', {
+      on: false,
+
+      toggle() {
+        this.on = !this.on;
+      },
+    });
+  });
+</script>
+```
+
+Учитывая, что мы зарегистрировали хранилище `darkMode` и установили значение `on` в «false», при нажатии кнопки `<button>` значение `on` будет «true» и цвет фона страницы изменится на чёрный.
+
+## Хранилища с одним значением
+
+Если вам не нужен целый объект для хранилища, вы можете задать и использовать в качестве хранилища любой тип данных.
+
+Вот пример, приведённый выше, но использующий булево значение:
+
+```html wrap "Alpine.store"
+<button x-data @click="$store.darkMode = !$store.darkMode">Переключить тёмный режим</button>
+
+<div x-data :class="$store.darkMode && 'bg-black'">...</div>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('darkMode', false);
+  });
+</script>
+```
+
+<LinkCard title="Подробнее об <strong>Alpine.store</strong>" href="/globals/alpine-store" />

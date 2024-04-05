@@ -1,0 +1,158 @@
+---
+title: Anchor
+description: Привязка позиционирования элемента к другому элементу на странице с помощью плагина для Alpine.js
+sidebar:
+  order: 6
+---
+
+Плагин Anchor позволяет легко привязать позиционирование элемента к другому элементу на странице.
+
+Эта функциональность полезна при создании в Alpine выпадающих меню, всплывающих окон, диалоговых окон и всплывающих подсказок.
+
+Функциональность «привязки», используемая в этом плагине, предоставляется проектом [Floating UI](https://floating-ui.com/).
+
+## Установка
+
+Вы можете использовать этот плагин, включив его из тега `<script>` или установив с помощью менеджера пакетов.
+
+### Через CDN
+
+Вы можете подключить CDN-сборку этого плагина с помощью тега `<script>`, только подключать нужно ДО основного JS-файла Alpine.
+
+```html
+<!-- Alpine Plugins -->
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/anchor@3/dist/cdn.min.js"></script>
+
+<!-- Alpine Core -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+```
+
+### Через менеджер пакетов
+
+Вы можете установить Anchor для использования внутри вашей сборки следующим образом:
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="npm">
+    ```shell
+    npm install @alpinejs/anchor
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```shell
+    pnpm add @alpinejs/anchor
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```shell
+    yarn add @alpinejs/anchor
+    ```
+  </TabItem>
+</Tabs>
+
+Затем инициализируйте его в своей сборке:
+
+```js
+import Alpine from 'alpinejs';
+import anchor from '@alpinejs/anchor';
+
+Alpine.plugin(anchor);
+Alpine.start();
+```
+
+## x-anchor
+
+Основным API для использования этого плагина является директива `x-anchor`.
+
+Чтобы использовать этот плагин, добавьте директиву `x-anchor` к любому элементу и передайте ему ссылку на элемент, к которому вы хотите привязать его позицию (часто это кнопка на странице).
+
+По умолчанию `x-anchor` устанавливает CSS элемента в значение `position: absolute` и соответствующие значения `top` и `left`. Если привязанный элемент обычно отображается под ссылочным элементом, но на странице не хватает места, его стилизация будет скорректирована таким образом, чтобы он отображался над этим элементом.
+
+Например, вот простой выпадающий список, привязанный к кнопке, которая его переключает:
+
+```html live "x-anchor" wrap
+<div x-data="{ open: false }" class="overflow-hidden">
+  <div class="flex justify-center">
+    <button x-ref="button" x-on:click="open = !open">Переключить</button>
+  </div>
+  <div x-show="open" x-anchor="$refs.button" class="bg-white rounded p-2 border shadow z-10">
+    Содержимое
+  </div>
+</div>
+```
+
+## Позиционирование
+
+`x-anchor` позволяет настраивать позиционирование закреплённого элемента с помощью следующих модификаторов:
+
+- Снизу: `.bottom`, `.bottom-start`, `.bottom-end`
+- Сверху: `.top`, `.top-start`, `.top-end`
+- Слева: `.left`, `.left-start`, `.left-end`
+- Справа: `.right`, `.right-start`, `.right-end`
+
+Приведём пример использования `.bottom-start` для размещения выпадающего элемента ниже и правее элемента ссылки:
+
+```html live ".bottom-start" wrap
+<div x-data="{ open: false }" class="overflow-hidden">
+  <div class="flex justify-center">
+    <button x-ref="button" x-on:click="open = !open">Переключить</button>
+  </div>
+  <div x-show="open" x-anchor.bottom-start="$refs.button" class="bg-white rounded p-2 border shadow z-10">
+    Содержимое
+  </div>
+</div>
+```
+
+## Смещение
+
+Вы можете добавить смещение к привязанному элементу с помощью модификатора `.offset.[px value]` следующим образом:
+
+```html live ".offset" wrap
+<div x-data="{ open: false }" class="overflow-hidden">
+  <div class="flex justify-center">
+    <button x-ref="button" x-on:click="open = !open">Переключить</button>
+  </div>
+  <div x-show="open" x-anchor.offset.10="$refs.button" class="bg-white rounded p-2 border shadow z-10">
+    Содержимое
+  </div>
+</div>
+```
+
+## Ручная стилизация
+
+По умолчанию `x-anchor` применяет стили позиционирования к вашему элементу под капотом. Если вы предпочитаете полный контроль над стилем, вы можете передать модификатор `.no-style` и использовать магию `$anchor` для доступа к значениям внутри другого выражения Alpine.
+
+Ниже приведён пример обхода внутренней стилизации `x-anchor` и применения стилей самостоятельно с помощью `x-bind:style`:
+
+```html live ".no-style" "x-bind:style" wrap
+<div x-data="{ open: false }" class="overflow-hidden">
+  <div class="flex justify-center">
+    <button x-ref="button" x-on:click="open = !open">Переключить</button>
+  </div>
+  <div
+    x-show="open"
+    x-anchor.no-style="$refs.button"
+    x-bind:style="{ top: $anchor.y+'px', left: $anchor.x+'px', color: 'red' }"
+  >
+    Содержимое
+  </div>
+</div>
+```
+
+## Привязка к идентификатору
+
+До сих пор все примеры были связаны с привязкой к другим элементам с помощью refs Alpine.
+
+Поскольку `x-anchor` принимает ссылку на любой элемент DOM, вы можете использовать утилиты типа `document.getElementById()` для привязки к элементу по его атрибуту `id`:
+
+```html live wrap "document.getElementById"
+<div x-data="{ open: false }" class="overflow-hidden">
+  <div class="flex justify-center">
+    <button id="trigger" x-on:click="open = !open">Переключить</button>
+  </div>
+  <div x-show="open" x-anchor.top.offset.25="document.getElementById('trigger')" class="bg-white rounded p-2 border shadow z-10">
+    Содержимое
+  </div>
+</div>
+```

@@ -1,0 +1,143 @@
+---
+title: Slug
+description: Преобразуем строки в слаги с помощью AlpineJS и Slugify
+---
+
+Плагин Slug облегчит вам задачу создания красивых адресов из заданных строк.
+
+:::note
+    Этот плагин не является официальным и включён в эту документацию переводчиком.
+:::
+
+## Установка
+
+Вы можете использовать этот плагин, включив его из тега `<script>` или установив с помощью менеджера пакетов.
+
+### Через CDN
+
+Вы можете подключить CDN-сборку этого плагина с помощью тега `<script>`, только подключать нужно ДО основного JS-файла Alpine.
+
+```html
+<!-- Alpine Plugins -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs-slug@1/dist/slug.min.js"></script>
+
+<!-- Alpine Core -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+```
+
+### Через менеджер пакетов
+
+Вы можете установить Slug для использования внутри вашей сборки следующим образом:
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="npm">
+    ```shell
+    npm install alpinejs-slug
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```shell
+    pnpm add alpinejs-slug
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```shell
+    yarn add alpinejs-slug
+    ```
+  </TabItem>
+</Tabs>
+
+Затем инициализируйте его в своей сборке:
+
+```js {2, 4}
+import Alpine from 'alpinejs';
+import slug from 'alpinejs-slug';
+
+Alpine.plugin(slug);
+Alpine.start();
+```
+
+## Модификаторы
+
+### keep-case
+
+Модификатор `keep-case` позволяет сохранять регистр слов в строке после преобразования в слаг.
+
+Значение по умолчанию: `false`
+
+```html live "keep-case"
+<div x-data="{ title: 'Привет, Мир' }">
+  <input type="text" x-model="title" />
+
+  <input class="mt-2" type="text" x-slug.keep-case="title" />
+</div>
+```
+
+### replacement
+
+Модификатор `replacement` отвечает за символ замены пробела.
+
+Значение по умолчанию: `-`
+
+```html live "replacement"
+<div x-data="{ title: 'Привет, Мир' }">
+  <input type="text" x-model="title" />
+  <p x-slug.replacement._="title"></p>
+</div>
+```
+
+### not-strict
+
+Модификатор `not-strict` позволяет включить нестрогое преобразование. Например, при строгом преобразовании такие символы, как восклицательный знак, исчезают, а при нестрогом, наоборот, остаются.
+
+Значение по умолчанию: `false`
+
+```html live "not-strict"
+<div x-data="{ title: 'Привет, Мир!' }">
+  <input type="text" x-model="title" />
+  <p x-slug.not-strict="title"></p>
+</div>
+```
+
+### untrimmed
+
+По умолчанию любые пробелы вокруг преобразуемой строки просто исчезают. А при добавлении этого модификатора — заменяются на символ, указанный модификатором `replacement`.
+
+Значение по умолчанию: `false`
+
+```html live "untrimmed"
+<div x-data="{ title: ' Привет, Мир ' }">
+  <input type="text" x-model="title" />
+  <p x-slug.untrimmed="title"></p>
+  <p x-slug.untrimmed.replacement._="title"></p>
+</div>
+```
+
+### locale
+
+Вы можете задать преобразование конкретных символов в зависимости от локали. Текущий список поддерживаемых локалей и символов [доступен по ссылке](https://github.com/simov/slugify/blob/master/config/locales.json).
+
+Значение по умолчанию: `{}`
+
+```html "locale"
+<div x-data="{ title: 'Alpine JS! ♥' }">
+  <input type="text" x-model="title" />
+  <p x-slug="title"></p>
+  <p x-slug.locale.de="title"></p>
+</div>
+```
+
+### lazy
+
+Предотвращает изменение входного значения `x-slug` при загрузке страницы. Он будет меняться только при изменении входного `x-slug`, на который нацелен запрос.
+
+Значение по умолчанию: `false`
+
+```html live "lazy"
+<div x-data="{ title: 'Привет, Мир!' }">
+  <input type="text" x-model="title" />
+  <p x-slug.lazy="title"></p>
+</div>
+```

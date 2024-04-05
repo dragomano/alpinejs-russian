@@ -1,0 +1,62 @@
+---
+const { lang, slug } = Astro.props;
+---
+{
+    slug && (
+        <div class="comments">
+            <script src="https://giscus.app/client.js"
+                data-repo="dragomano/alpinejs-russian"
+                data-repo-id="R_kgDOKwwvAA"
+                data-category="Q&A"
+                data-category-id="DIC_kwDOKwwvAM4Cb9ss"
+                data-mapping="pathname"
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang={lang}
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+            </script>
+        </div>
+
+        <!-- Synchronize Giscus theme with palette -->
+        <script>
+            const theme = () => {
+                const palette = localStorage.getItem('starlight-theme') || 'preferred_color_scheme'
+
+                return palette === "dark"
+                    ? "transparent_dark"
+                    : (palette === 'light' ? "light" : "preferred_color_scheme")
+            }
+
+            const giscus = document.querySelector("script[src*=giscus]")
+
+            // Instruct Giscus to set theme
+            giscus.setAttribute("data-theme", theme())
+
+            // Register event handlers after documented loaded
+            document.addEventListener("DOMContentLoaded", function() {
+                const ref = document.querySelector("starlight-theme-select")
+
+                ref.addEventListener("change", function() {
+                    // Instruct Giscus to change theme
+                    const frame = document.querySelector(".giscus-frame")
+
+                    frame.contentWindow.postMessage(
+                        { giscus: { setConfig: { theme: theme() } } },
+                        "https://giscus.app"
+                    )
+                })
+            })
+        </script>
+    )
+}
+
+<style is:global>
+    .comments {
+        margin: 2rem auto 3rem;
+    }
+</style>

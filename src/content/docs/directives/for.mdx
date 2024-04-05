@@ -1,0 +1,117 @@
+---
+title: x-for
+description: Описание директивы x-for в Alpine.js
+sidebar:
+  order: 10
+---
+
+Директива Alpine `x-for` позволяет создавать элементы DOM путём перебора списка. Вот простой пример его использования для создания списка цветов на основе массива.
+
+```html live "x-for"
+<ul x-data="{ colors: ['Красный', 'Оранжевый', 'Жёлтый'] }">
+  <template x-for="color in colors">
+    <li x-text="color"></li>
+  </template>
+</ul>
+```
+
+Вы также можете передавать объекты в `x-for`.
+
+```html live "x-for"
+<ul x-data="{ car: { make: 'Jeep', model: 'Grand Cherokee', color: 'Black' } }">
+  <template x-for="(value, index) in car">
+    <li><span x-text="index"></span>: <span x-text="value"></span></li>
+  </template>
+</ul>
+```
+
+В отношении `x-for` стоит отметить два правила:
+
+:::caution
+    `x-for` ДОЛЖЕН быть объявлен в элементе `<template>`.
+:::
+
+:::caution
+    Этот элемент `<template>` ДОЛЖЕН содержать только один корневой элемент.
+:::
+
+## Ключи
+
+Если вы собираетесь переупорядочивать элементы, важно указывать уникальные ключи для каждой итерации `x-for`. Без динамических ключей Alpine может быть сложно отслеживать, что переупорядочивается, и это может вызвать странные побочные эффекты.
+
+```html ":key"
+<ul
+  x-data="{ colors: [
+    { id: 1, label: 'Красный' },
+    { id: 2, label: 'Оранжевый' },
+    { id: 3, label: 'Жёлтый' },
+  ]}"
+>
+  <template x-for="color in colors" :key="color.id">
+    <li x-text="color.label"></li>
+  </template>
+</ul>
+```
+
+Теперь, если цвета добавляются, удаляются, переупорядочиваются или изменяются их идентификаторы, Alpine сохранит или уничтожит итерированные элементы `<li>` соответственно.
+
+## Доступ к индексам
+
+Если вам нужно получить доступ к индексу каждого элемента в итерации, вы можете сделать это, используя синтаксис `([item], [index]) in [items]` следующим образом:
+
+```html "index"
+<ul x-data="{ colors: ['Красный', 'Оранжевый', 'Жёлтый'] }">
+  <template x-for="(color, index) in colors">
+    <li>
+      <span x-text="index + ': '"></span>
+      <span x-text="color"></span>
+    </li>
+  </template>
+</ul>
+```
+
+Вы также можете получить доступ к индексу внутри динамического выражения `:key`.
+
+```html ":key"
+<template x-for="(color, index) in colors" :key="index"></template>
+```
+
+## Итерация по диапазону
+
+Если вам нужно просто выполнить цикл `n` раз, а не перебирать массив, Alpine предлагает сокращённый синтаксис.
+
+```html "i in 10"
+<ul>
+  <template x-for="i in 10">
+    <li x-text="i"></li>
+  </template>
+</ul>
+```
+
+`i` в данном случае можно назвать как угодно.
+
+## Содержимое `<template>`
+
+Как упоминалось выше, тег `<template>` должен содержать только один корневой элемент.
+
+Например, следующий код не будет работать:
+
+```html live
+<div x-data="{ colors: ['Красный', 'Жёлтый', 'Оранжевый'] }">
+  <template x-for="color in colors">
+    <span>Следующий цвет: </span><span x-text="color"></span>
+  </template>
+</div>
+```
+
+А этот код заработает:
+
+```html live
+<div x-data="{ colors: ['Красный', 'Жёлтый', 'Оранжевый'] }">
+  <template x-for="color in colors">
+    <p>
+      <span>Следующий цвет: </span><span x-text="color"></span>
+    </p>
+  </template>
+</div>
+```

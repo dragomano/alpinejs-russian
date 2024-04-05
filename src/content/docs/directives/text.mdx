@@ -1,0 +1,17 @@
+---
+title: x-text
+description: Описание директивы x-text в Alpine.js
+sidebar:
+  order: 6
+---
+
+`x-text` помещает результат заданного выражения в свойство _innerText_ элемента.
+
+Приведём базовый пример использования `x-text` для отображения имени пользователя.
+
+```html live
+<div x-data="{ username: 'calebporzio' }">
+  Имя пользователя: <strong x-text="username"></strong>
+</div>
+```
+Теперь внутреннее текстовое содержимое тега `<strong>` будет заменено на `calebporzio`.

@@ -1,0 +1,14 @@
+---
+title: $root
+description: Знакомимся с магическим свойством $root в Alpine.js
+sidebar:
+  order: 7
+---
+
+`$root` — это магическое свойство, которое может быть использовано для получения корневого элемента любого компонента Alpine. Другими словами, ближайший элемент в дереве DOM, содержащий `x-data`.
+
+```html live "$root"
+<div x-data data-message="Привет, мир!">
+  <button @click="alert($root.dataset.message)">Привет!</button>
+</div>
+```

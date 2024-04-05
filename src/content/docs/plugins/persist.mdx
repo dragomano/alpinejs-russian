@@ -1,0 +1,196 @@
+---
+title: Persist
+description: Удобное сохранение данных при загрузке страницы с помощью localStorage и плагина для Alpine.js
+sidebar:
+  order: 3
+---
+
+Плагин Persist позволяет сохранять состояние Alpine при разных загрузках страницы.
+
+Это полезно для сохранения фильтров поиска, активных вкладок и других функций, когда пользователи будут разочарованы, если их конфигурация будет сброшена после обновления или ухода и повторного посещения страницы.
+
+## Установка
+
+Вы можете использовать этот плагин, включив его из тега `<script>` или установив с помощью менеджера пакетов.
+
+### Через CDN
+
+Вы можете подключить CDN-сборку этого плагина с помощью тега `<script>`, только подключать нужно ДО основного JS-файла Alpine.
+
+```html
+<!-- Alpine Plugins -->
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3/dist/cdn.min.js"></script>
+
+<!-- Alpine Core -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+```
+
+### Через менеджер пакетов
+
+Вы можете установить Persist для использования внутри вашей сборки следующим образом:
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="npm">
+    ```shell
+    npm install @alpinejs/persist
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```shell
+    pnpm add @alpinejs/persist
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```shell
+    yarn add @alpinejs/persist
+    ```
+  </TabItem>
+</Tabs>
+
+Затем инициализируйте его в своей сборке:
+
+```js {2, 4}
+import Alpine from 'alpinejs';
+import persist from '@alpinejs/persist';
+
+Alpine.plugin(persist);
+Alpine.start();
+```
+
+## $persist
+
+Основным API для использования этого плагина является магический метод `$persist`.
+
+Вы можете обернуть любое значение внутри `x-data` с помощью `$persist`, как показано ниже, чтобы сохранить его значение при загрузке страницы:
+
+```html live "$persist"
+<div x-data="{ count: $persist(0) }">
+  <button x-on:click="count++">Увеличить <span x-text="count"></span></button>
+</div>
+```
+
+В приведённом выше примере, поскольку мы обернули `0` в `$persist()`, Alpine теперь будет перехватывать изменения, внесенные в `count`, и сохранять их при всех загрузках страницы.
+
+Вы можете попробовать сделать это самостоятельно, увеличив значение «count» в приведённом выше примере, затем обновить эту страницу и заметить, что «count» сохраняет свое состояние и не сбрасывается в «0».
+
+## Как это работает?
+
+Если значение обернуто в `$persist`, то при инициализации Alpine зарегистрирует собственный наблюдатель для этого значения. Теперь каждый раз, когда это значение по какой-либо причине будет изменяться, Alpine будет сохранять новое значение в [localStorage](https://developer.mozilla.org/ru/docs/Web/API/Window/localStorage).
+
+Теперь при перезагрузке страницы Alpine будет проверять localStorage (используя имя свойства в качестве ключа) на наличие значения. Если он найдет такое свойство, то сразу же установит значение свойства из localStorage.
+
+Вы можете наблюдать это поведение, открыв средство просмотра localStorage в [инструменте разработчика](https://developer.chrome.com/docs/devtools/storage/localstorage/) вашего браузера:
+
+![Инструменты разработчика Chrome, показывающие представление localStorage со счетчиком, равным 0](https://alpinejs.dev/img/persist_devtools.png)
+
+Вы заметите, что, просто посетив эту страницу, Alpine уже установил значение «count» в localStorage. Вы также заметите, что к имени свойства «count» добавляется префикс «_x_» как способ размещения этих значений в пространстве имен, чтобы Alpine не конфликтовал с другими инструментами, использующими localStorage.
+
+Теперь измените «count» в следующем примере и обратите внимание на изменения, внесенные Alpine в localStorage:
+
+```html live "$persist"
+<div x-data="{ count: $persist(0) }">
+  <button x-on:click="count++">Увеличить <span x-text="count"></span></button>
+</div>
+```
+
+:::note
+    `$persist` работает как с примитивными значениями, так и с массивами и объектами.
+:::
+
+:::caution
+    При изменении типа переменной localStorage должен быть очищен.
+:::
+
+:::note
+    Учитывая предыдущий пример, если мы изменим _count_ на значение `$persist({ value: 0 })`, то localStorage должен быть очищен или переменная _count_ переименована.
+:::
+
+## Установка пользовательского ключа
+
+По умолчанию Alpine использует ключ свойства, которому присваивается `$persist(...)` (_count_ в приведённых выше примерах).
+
+Рассмотрим сценарий, в котором у вас есть несколько компонентов Alpine на страницах или даже на одной странице, и все они используют _count_ в качестве ключа свойства.
+
+У Alpine не будет возможности различать эти компоненты.
+
+В этих случаях вы можете установить свой собственный ключ для любого постоянного значения, используя модификатор `.as`, например:
+
+```html ".as"
+<div x-data="{ count: $persist(0).as('other-count') }">
+  <button x-on:click="count++">Увеличить</button>
+
+  <span x-text="count"></span>
+</div>
+```
+
+Теперь Alpine сохранит и получит указанное выше значение «count», используя ключ «other-count».
+
+Вот вид Chrome Devtools, который вы можете увидеть сами:
+
+![Инструменты разработчика Chrome, показывающие представление localStorage со счетчиком, равным 0](https://alpinejs.dev/img/persist_custom_key_devtools.png)
+
+## Использование пользовательского хранилища
+
+По умолчанию данные сохраняются в localStorage, у них нет срока действия, и они сохраняются даже при закрытии страницы.
+
+Рассмотрим сценарий, в котором требуется очистить данные после того, как пользователь закроет вкладку. В этом случае можно сохранять данные в _sessionStorage_ с помощью модификатора `.using` следующим образом:
+
+```html ".using"
+<div x-data="{ count: $persist(0).using(sessionStorage) }">
+  <button x-on:click="count++">Увеличить</button>
+
+  <span x-text="count"></span>
+</div>
+```
+
+Вы также можете определить свой собственный объект хранилища, используя функции `getItem` и `setItem`. Например, вы можете решить использовать сеансовый файл cookie в качестве хранилища, выполнив следующие действия:
+
+```html "getItem" "setItem"
+<script>
+  window.cookieStorage = {
+    getItem(key) {
+      let cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].split('=');
+        if (key == cookie[0].trim()) {
+          return decodeURIComponent(cookie[1]);
+        }
+      }
+      return null;
+    },
+    setItem(key, value) {
+      document.cookie = key + ' = ' + encodeURIComponent(value);
+    },
+  };
+</script>
+
+<div x-data="{ count: $persist(0).using(cookieStorage) }">
+  <button x-on:click="count++">Увеличить</button>
+
+  <span x-text="count"></span>
+</div>
+```
+
+## Использование $persist с Alpine.data
+
+Если вы хотите использовать `$persist` с `Alpine.data`, то вам необходимо использовать стандартную функцию вместо функции-стрелки, чтобы Alpine мог связать пользовательский контекст `this` при первоначальной оценке области видимости компонента.
+
+```js {3}
+Alpine.data('dropdown', function () {
+  return {
+    open: this.$persist(false),
+  };
+});
+```
+
+## Использование глобальной функции Alpine.$persist
+
+Функция `Alpine.$persist` доступна глобально, поэтому её можно использовать вне контекста `x-data`. Это полезно для сохранения данных из других источников, таких как [`Alpine.store`](/globals/alpine-store).
+
+```js "Alpine.$persist"
+Alpine.store('darkMode', {
+  on: Alpine.$persist(true).as('darkMode_on'),
+});
+```

@@ -1,0 +1,105 @@
+---
+title: Установка
+description: Краткая инструкция по подключению Alpine.js к вашему проекту
+sidebar:
+  order: 1
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Есть 2 способа включить Alpine в ваш проект:
+
+- Подключение через тег `<script>`
+- Импорт в качестве модуля
+
+И то, и другое совершенно справедливо. Всё зависит от потребностей проекта и вкуса разработчика.
+
+## Подключение через тег `<script>`
+
+Это, безусловно, самый простой способ начать работу с Alpine. Включите следующий тег `<script>` в заголовок вашей HTML-страницы.
+
+```html {4} wrap
+<html>
+  <head>
+    ...
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+  </head>
+  ...
+</html>
+```
+
+:::note
+Не забудьте атрибут «defer» в теге `<script>`.
+:::
+
+Обратите внимание на `@3` в предоставленной ссылке CDN. При этом будет использована последняя версия Alpine из 3 линейки. Для стабильности работы рекомендуется жёстко запрограммировать последнюю версию в ссылке CDN:
+
+import { Code } from '@astrojs/starlight/components';
+
+export const getLatestVersion = async () => {
+  try {
+    const response = await fetch('https://cdn.jsdelivr.net/npm/alpinejs@3/package.json');
+    const data = await response.json();
+
+    return data.version;
+  } catch {
+    return '3.x.x';
+  }
+}
+
+export const version = await getLatestVersion()
+export const requiredCode = `<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@${version}/dist/cdn.min.js"></script>`;
+
+<Code code={requiredCode} wrap lang="html" mark={version} />
+
+Вот и всё! Alpine теперь доступен для использования на вашей странице.
+
+## Импорт в качестве модуля
+
+Если вы предпочитаете более надежный подход, вы можете установить Alpine через менеджер пакетов и импортировать его в пакет.
+
+Запустите следующую команду, чтобы установить его.
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="npm">
+    ```shell
+    npm install alpinejs
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```shell
+    pnpm add alpinejs
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```shell
+    yarn add alpinejs
+    ```
+  </TabItem>
+</Tabs>
+
+Теперь импортируйте Alpine в свой пакет и инициализируйте его следующим образом:
+
+```js
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();
+```
+
+:::note
+Определение `window.Alpine = Alpine` не является обязательным, но его полезно иметь для свободы и гибкости. Например, при работе с Alpine из инструментов разработчика.
+:::
+
+:::tip
+Если вы импортировали Alpine в пакет, вам необходимо убедиться, что вы регистрируете любой код расширения МЕЖДУ импортом глобального объекта `Alpine` и до вызова `Alpine.start()`.
+:::
+
+:::note
+Убедитесь, что `Alpine.start()` вызывается только один раз на странице. Вызов его более одного раза приведет к одновременному запуску нескольких «экземпляров» Alpine.
+:::
+
+<LinkCard title="Подробнее о расширении Alpine" href="/advanced/extending" />

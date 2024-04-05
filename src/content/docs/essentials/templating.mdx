@@ -1,0 +1,244 @@
+---
+title: Шаблонизация
+description: Как работать с DOM элементами в Alpine.js
+sidebar:
+  order: 3
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+Alpine предлагает несколько полезных директив для управления DOM на веб-странице.
+
+Давайте рассмотрим здесь несколько основных директив шаблонов, но обязательно просмотрите доступные директивы на боковой панели, чтобы получить исчерпывающий список.
+
+## Текстовое содержимое
+
+Alpine позволяет легко управлять текстовым содержимым элемента с помощью директивы `x-text`.
+
+```html live "x-text"
+<div x-data="{ title: 'Начало' }">
+  <h3 x-text="title"></h3>
+</div>
+```
+
+Теперь Alpine установит текстовое содержимое `<h1>` со значением `title` («Начало»). Когда `title` изменится, изменится и содержимое `<h1>`.
+
+Подобно другим директивам в Alpine, вы можете использовать любое выражение JavaScript, которое вам нравится. Например:
+
+```html live "x-text"
+<div class="demo" x-data>
+  <span x-text="1 + 2"></span>
+</div>
+```
+
+`<span>` теперь будет содержать сумму «1» и «2».
+
+<LinkCard title="Подробнее об <strong>x-text</strong>" href="/directives/text" />
+
+## Переключение элементов
+
+Переключение элементов — обычная потребность на веб-страницах и в приложениях. Выпадающие списки, модальные окна, диалоги, «показать далее» и т. д. — всё это хорошие примеры.
+
+Alpine предлагает директивы `x-show` и `x-if` для переключения элементов на странице.
+
+### `x-show`
+
+Вот простой компонент переключения, использующий `x-show`:
+
+```html live "x-show"
+<div x-data="{ open: false }">
+  <button @click="open = !open">Развернуть</button>
+  <div x-show="open">Содержимое...</div>
+</div>
+```
+
+Теперь весь `<div>`, содержащий содержимое, будет отображаться и скрываться в зависимости от значения `open`.
+
+Alpine добавляет свойство CSS `display: none;` к элементу, когда он должен быть скрыт.
+
+<LinkCard title="Подробнее об <strong>x-show</strong>" href="/directives/show" />
+
+Это хорошо работает в большинстве случаев, но иногда вам может потребоваться полностью добавить или полностью удалить элемент из DOM. Вот для чего нужен `x-if`.
+
+### `x-if`
+
+Вот тот же переключатель, что и раньше, но на этот раз вместо `x-show` используется `x-if`:
+
+```html live "x-if"
+<div x-data="{ open: false }">
+  <button @click="open = !open">Развернуть</button>
+  <template x-if="open">
+    <div>Содержимое...</div>
+  </template>
+</div>
+```
+
+Обратите внимание, что `x-if` должен быть объявлен в теге `<template>`. Это сделано для того, чтобы Alpine мог использовать существующее поведение браузера элемента `<template>` и использовать его в качестве источника целевого `<div>` для добавления и удаления со страницы.
+
+Если `open` имеет значение true, Alpine добавит `<div>` к тегу `<template>` и удалит его, если `open` имеет значение false.
+
+<LinkCard title="Подробнее об <strong>x-if</strong>" href="/directives/if" />
+
+## Переключение с помощью переходов
+
+Alpine упрощает плавный переход между «показанным» и «скрытым» состояниями с помощью директивы `x-transition`.
+
+:::note
+    `x-transition` работает только с `x-show`, но не с `x-if`.
+:::
+
+Вот ещё раз простой пример переключения, но на этот раз с применением переходов:
+
+```html live "x-transition"
+<div x-data="{ open: false }">
+  <button @click="open = !open">Развернуть</button>
+  <div x-show="open" x-transition>Содержимое...</div>
+</div>
+```
+
+Давайте рассмотрим часть шаблона, связанную с переходами:
+
+```html
+<div x-show="open" x-transition></div>
+```
+
+`x-transition` сам по себе применит к переключателю разумные переходы по умолчанию (затухание и масштабирование).
+
+Есть два способа настройки этих переходов:
+
+- Хелперы переходов
+- CSS-классы переходов.
+
+Давайте рассмотрим каждый из этих подходов:
+
+### Хелперы переходов
+
+Допустим, вы хотите увеличить продолжительность перехода. Вы можете вручную указать это с помощью модификатора `.duration` следующим образом:
+
+```html live "x-transition.duration.500ms"
+<div x-data="{ open: false }">
+  <button @click="open = !open">Развернуть</button>
+  <div x-show="open" x-transition.duration.500ms>Содержимое...</div>
+</div>
+```
+
+Теперь переход будет длиться 500 миллисекунд.
+
+Если вы хотите указать разные значения для входных и выходных переходов, вы можете использовать `x-transition:enter` и `x-transition:leave`:
+
+```html live wrap "x-transition:enter" "x-transition:leave"
+<div x-data="{ open: false }">
+  <button @click="open = !open">Развернуть</button>
+  <div x-show="open" x-transition:enter.duration.500ms x-transition:leave.duration.1000ms>Содержимое...</div>
+</div>
+```
+
+Кроме того, вы можете добавить `.opacity` или `.scale`, чтобы передать только это свойство. Например:
+
+```html live "x-transition.opacity"
+<div x-data="{ open: false }">
+  <button @click="open = !open">Развернуть</button>
+  <div x-show="open" x-transition.opacity>Содержимое...</div>
+</div>
+```
+
+<LinkCard title="Подробнее об <strong>x-transition</strong>" href="/directives/transition#хелпер-x-transition" />
+
+### Классы переходов
+
+Если вам нужен более детальный контроль над переходами в вашем приложении, вы можете применить определённые классы CSS на определённых этапах перехода, используя следующий синтаксис (в этом примере используется [Tailwind CSS](https://tailwindcss.ru)):
+
+```html live {5-10}
+<div x-data="{ open: false }">
+  <button @click="open = !open">Развернуть</button>
+  <div
+    x-show="open"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform scale-90"
+    x-transition:enter-end="opacity-100 transform scale-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100 transform scale-100"
+    x-transition:leave-end="opacity-0 transform scale-90"
+  >Содержимое...</div>
+</div>
+```
+
+<LinkCard title="Подробнее о классах переходов" href="/directives/transition#применение-классов-css" />
+
+## Привязка атрибутов
+
+Вы можете добавлять атрибуты HTML, такие как `class`, `style`, `disabled` и т. д., к элементам в Alpine, используя директиву `x-bind`.
+
+Вот пример динамически связанного атрибута `class`:
+
+```html live
+<div x-data="{ red: false }">
+  <button x-bind:class="red && 'red_button'" @click="red = !red">
+      Переключить цвет
+  </button>
+</div>
+```
+
+Для краткости можно опустить `x-bind` и использовать сокращённый синтаксис `:`:
+
+```html
+<button ... :class="red && 'red_button'"></button>
+```
+
+Включение и выключение классов на основе данных, содержащихся в Alpine, является распространённой потребностью. Приведём пример переключения класса с использованием синтаксиса объекта привязки `class` в Alpine: (Примечание: этот синтаксис доступен только для атрибутов `class`):
+
+```html live
+<div x-data="{ open: true }">
+  <button @click="open = !open">Переключить</button>
+  <div :class="{ 'hidden': !open }">Содержимое...</div>
+</div>
+```
+
+Теперь класс `hidden` будет добавлен к элементу, если значение `open` равно `false`, и удалён, если значение `open` равно `true`.
+
+## Повторение элементов
+
+Alpine позволяет итерировать части шаблона на основе данных JavaScript с помощью директивы `x-for`. Приведём простой пример:
+
+```html live {3, 8}
+<div x-data="{ statuses: ['открыто', 'закрыто', 'архивировано'] }">
+  <ul class="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
+    <template x-for="status in statuses">
+      <li class="flex items-center">
+          <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+          </svg>
+          <span x-text="status"></span>
+      </li>
+    </template>
+  </ul>
+</div>
+```
+
+Аналогично `x-if`, `x-for` должен применяться к тегу `<template>`. Внутренне Alpine будет добавлять содержимое тега `<template>` на каждой итерации цикла.
+
+Как видно, новая переменная `status` доступна в области видимости итерируемых шаблонов.
+
+<LinkCard title="Подробнее об <strong>x-for</strong>" href="/directives/for" />
+
+## Внутренний HTML
+
+Alpine позволяет легко управлять HTML-содержимым элемента с помощью директивы `x-html`.
+
+```html live "x-html"
+<div x-data="{ title: '<h3>Начало</h3>' }">
+  <div x-html="title"></div>
+</div>
+```
+
+Теперь Alpine задаст текстовое содержимое `<div>` элементом `<h1>Начало</h1>`. При изменении `title` будет изменяться и содержимое `<h1>`.
+
+:::caution
+    Использовать только на доверенном контенте и никогда на контенте, предоставленном пользователем.
+:::
+
+:::danger
+    Динамический рендеринг HTML из сторонних источников может легко привести к появлению XSS-уязвимостей.
+:::
+
+<LinkCard title="Подробнее об <strong>x-html</strong>" href="/directives/html" />

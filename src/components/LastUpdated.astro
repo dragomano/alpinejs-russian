@@ -1,0 +1,23 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import LastUpdated from '@astrojs/starlight/components/LastUpdated.astro';
+
+const { slug } = Astro.props;
+const source = 'https://alpinejs.dev/' + slug;
+---
+<a href={source} class="sl-flex">
+    <Icon name="external" size="1.2em" /> Оригинальная документация
+</a>
+<LastUpdated {...Astro.props} />
+
+<style>
+    a {
+        gap: 0.5rem;
+        align-items: center;
+        text-decoration: none;
+        color: var(--sl-color-gray-3);
+    }
+    a:hover {
+        color: var(--sl-color-white);
+    }
+</style>

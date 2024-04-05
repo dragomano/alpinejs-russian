@@ -1,0 +1,53 @@
+---
+title: Обучающие статьи и ролики
+description: Список полезных русскоязычных ресурсов о фреймворке Alpine.js
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Устали от сухой теории и ищете практические примеры? Тогда эти ссылки могут вам пригодиться:
+
+<CardGrid>
+  <LinkCard
+    title="Alpine.js — легковесный фреймворк с удобным синтаксисом"
+    href="https://habr.com/ru/articles/501312/"
+    description="Статья на Хабре"
+  />
+  <LinkCard
+    title="Alpine Toolbox"
+    href="https://www.alpinetoolbox.com"
+    description="Готовые примеры кода на Alpine.js"
+  />
+  <LinkCard
+    title="Создание компонента на Alpine.js"
+    href="https://php.dragomano.ru/znakomstvo-s-populyarnymi-js-freymvorkami-chast-1/"
+    description="Знакомство с современными JS фреймворками - часть 1"
+  />
+  <LinkCard
+    title="Code Examples and Guides on Functionality with Alpine JS"
+    href="https://js.hyperui.dev"
+    description="Уникальный ресурс с примерами готовых компонентов"
+  />
+</CardGrid>
+
+import YouTubeGrid from '@components/youtube-grid.astro';
+
+<YouTubeGrid
+  videos={[
+    {
+      href: 'https://www.youtube.com/watch?v=gszM-iaQMSs&list=PLFO2pzRBZxX2ZSfn-8W1d2e65j8oDm5Kn&index=1&t=3s',
+      title: 'AlpineJS с нуля',
+      description:
+        'Серия видеоруков по Alpine JS',
+    },
+    {
+      href: 'https://www.youtube.com/watch?v=0GUp65155xY',
+      title: 'Alpine.js полный курс',
+      description: '1.5-часовой курс об Alpine.js',
+    },
+  ]}
+/>
+
+:::tip[У вас есть что добавить?]
+  Присылайте ссылки на ресурсы, посвящённые Alpine.js
+:::

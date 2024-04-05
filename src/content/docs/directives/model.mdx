@@ -1,0 +1,269 @@
+---
+title: x-model
+description: Описание директивы x-model в Alpine.js
+sidebar:
+  order: 8
+---
+
+`x-model` позволяет вам привязать значение входного элемента к данным Alpine.
+
+Вот простой пример использования `x-model` для привязки значения текстового поля к фрагменту данных в Alpine.
+
+```html live "x-model"
+<div x-data="{ message: '' }">
+  <input type="text" x-model="message" placeholder="Введите сообщение..." />
+  <div class="pt-4" x-text="message"></div>
+</div>
+```
+
+Теперь, когда пользователь вводит текст в текстовое поле, `message` будет отражаться в теге `<div>` ниже.
+
+Директива `x-model` имеет двустороннюю привязку, что означает, что она одновременно «устанавливает» и «получает». Помимо изменения данных, если изменяются сами данные, элемент отразит это изменение.
+
+Мы можем использовать тот же пример, что и выше, но на этот раз мы добавим кнопку для изменения значения свойства `message`.
+
+```html wrap live {3}
+<div x-data="{ message: '' }">
+  <input class="mb-4" type="text" x-model="message" placeholder="Введите сообщение..." />
+  <button x-on:click="message = 'изменено'">Изменить сообщение</button>
+</div>
+```
+
+Теперь при нажатии кнопки `<button>` значение элемента ввода мгновенно обновится до «изменено».
+
+`x-model` работает со следующими элементами ввода:
+
+- `<input type="text">`
+- `<textarea>`
+- `<input type="checkbox">`
+- `<input type="radio">`
+- `<select>`
+- `<input type="range"`
+
+## Текстовое поле
+
+```html live
+<div x-data="{ message: '' }">
+    <input type="text" x-model="message" placeholder="Введите сообщение">
+    <div class="pt-4" x-text="message"></div>
+</div>
+```
+
+## Текстовая область
+
+```html live
+<div x-data="{ message: '' }">
+    <textarea x-model="message" placeholder="Введите сообщение"></textarea>
+    <div x-text="message"></div>
+</div>
+```
+
+## Флажок
+
+### Одиночный флажок с логическим значением
+
+```html live
+<div x-data="{ open: '' }">
+    <input type="checkbox" id="checkbox" x-model="open">
+    <label for="checkbox" x-text="open"></label>
+</div>
+```
+
+### Несколько флажков, привязанных к массиву
+
+```html live
+<div x-data="{ colors: [] }">
+  <div class="flex items-baseline gap-4">
+    <label><input type="checkbox" value="Красный" x-model="colors">Красный</label>
+    <label><input type="checkbox" value="Оранжевый" x-model="colors">Оранжевый</label>
+    <label><input type="checkbox" value="Жёлтый" x-model="colors">Жёлтый</label>
+  </div>
+  <div>
+    Цвета: <span x-text="colors"></span>
+  </div>
+</div>
+```
+
+## Переключатели
+
+```html live
+<div x-data="{ answer: '' }">
+  <div class="flex items-baseline gap-4">
+    <label><input type="radio" value="Да" x-model="answer" />Да</label>
+    <label><input type="radio" value="Нет" x-model="answer" />Нет</label>
+  </div>
+  <div>
+    Ответ: <span x-text="answer"></span>
+  </div>
+</div>
+```
+
+## Выпадающий список
+
+### Одиночный выбор
+
+```html live
+<div x-data="{ color: '' }">
+  <select x-model="color">
+      <option>Красный</option>
+      <option>Оранжевый</option>
+      <option>Жёлтый</option>
+  </select>
+  <div>
+    Цвет: <span x-text="color"></span>
+  </div>
+</div>
+```
+
+### Одиночный выбор с заполнителем
+
+```html live
+<div x-data="{ color: '' }">
+  <select x-model="color">
+      <option value="" disabled>Выберите цвет</option>
+      <option>Красный</option>
+      <option>Оранжевый</option>
+      <option>Жёлтый</option>
+  </select>
+  <div>
+    Цвет: <span x-text="color"></span>
+  </div>
+</div>
+```
+
+### Множественный выбор
+
+```html live
+<div x-data="{ color: '' }">
+  <select x-model="color" multiple>
+      <option>Красный</option>
+      <option>Оранжевый</option>
+      <option>Жёлтый</option>
+  </select>
+  <div>
+    Цвета: <span x-text="color"></span>
+  </div>
+</div>
+```
+
+### Динамически заполняемые параметры выбора
+
+```html live
+<div x-data="{ color: '' }">
+  <select x-model="color">
+    <template x-for="color in ['Красный', 'Оранжевый', 'Жёлтый']">
+      <option x-text="color"></option>
+    </template>
+  </select>
+  <div>
+    Цвет: <span x-text="color"></span>
+  </div>
+</div>
+```
+
+## Ползунок
+
+```html live
+<div x-data="{ range: 0.5 }">
+  <input type="range" x-model="range" min="0" max="1" step="0.1">
+  <div x-text="range"></div>
+</div>
+```
+
+## Модификаторы
+
+### `.lazy`
+
+При вводе текста по умолчанию `x-model` обновляет свойство при каждом нажатии клавиши. Добавив модификатор `.lazy`, вы можете заставить входные данные `x-model` обновлять свойство только тогда, когда пользователь фокусируется на элементе ввода.
+
+Это удобно для таких вещей, как проверка формы в реальном времени, когда вы, возможно, не захотите показывать ошибку проверки ввода, пока пользователь не «перейдёт» к другому полю.
+
+```html live "lazy"
+<div x-data="{ username: 'Борис' }">
+  <input type="text" x-model.lazy="username" />
+  <span x-show="username.length > 20">Имя пользователя слишком длинное.</span>
+</div>
+```
+
+### `.number`
+
+По умолчанию любые данные, хранящиеся в свойстве через `x-model`, сохраняются в виде строки. Чтобы заставить Alpine сохранить значение как число JavaScript, добавьте модификатор `.number`.
+
+```html "number"
+<input type="text" x-model.number="age" /> <span x-text="typeof age"></span>
+```
+
+### `.boolean`
+
+По умолчанию любые данные, хранящиеся в свойстве через `x-model`, сохраняются в виде строки. Чтобы заставить Alpine сохранить значение как логическое значение JavaScript, добавьте модификатор `.boolean`. И целые числа (1/0), и строки (true/false) являются допустимыми логическими значениями.
+
+```html live "boolean"
+<div x-data="{ isActive: false }">
+  <select x-model.boolean="isActive">
+    <option value="true">Да</option>
+    <option value="false">Нет</option>
+  </select>
+  <span x-text="typeof isActive"></span>
+</div>
+```
+
+### `.debounce`
+
+Добавив `.debounce` к `x-model`, вы можете легко отменить обновление связанного ввода.
+
+Это полезно для таких вещей, как входные данные поиска в реальном времени, которые извлекают новые данные с сервера каждый раз, когда изменяется свойство поиска.
+
+```html "debounce"
+<input type="text" x-model.debounce="search" />
+```
+
+Время задержки выполнения по умолчанию составляет 250 миллисекунд, вы можете легко настроить его, добавив модификатор времени:
+
+```html "debounce.500ms"
+<input type="text" x-model.debounce.500ms="search" />
+```
+
+### `.throttle`
+
+Подобно `.debounce`, вы можете ограничить обновление свойств, инициируемое `x-model`, только обновлением через указанный интервал.
+
+```html "throttle"
+<input type="text" x-model.throttle="search">
+```
+
+Интервал по умолчанию составляет 250 миллисекунд, вы можете легко настроить его, добавив модификатор времени:
+
+```html "throttle.500ms"
+<input type="text" x-model.throttle.500ms="search" />
+```
+
+### `.fill`
+
+По умолчанию, если входные данные имеют атрибут _value_, Alpine игнорирует их, и вместо этого значение входных данных устанавливается равным значению свойства, привязанного с помощью `x-model`.
+
+Но если связанное свойство пусто, вы можете использовать атрибут _value_ входного значения для заполнения свойства, добавив модификатор `.fill`:
+
+```html "fill"
+<div x-data="{ message: null }">
+  <input type="text" x-model.fill="message" value="Это сообщение по умолчанию.">
+</div>
+```
+
+## Программный доступ
+
+Alpine предоставляет встроенные утилиты для получения и настройки свойств, связанных с `x-model` Это полезно для сложных утилит Alpine, которые могут захотеть переопределить поведение `x-model` по умолчанию, или в случаях, когда вы хотите разрешить `x-model` для элемента, не являющегося полем ввода.
+
+Вы можете получить доступ к этим утилитам через свойство `_x_model` в элементе `x-model`. `_x_model` имеет два метода для получения и установки связанного свойства:
+
+- `el._x_model.get()` (возвращает значение связанного свойстваy)
+- `el._x_model.set()` (устанавливает значение связанного свойства)
+
+```html live "_x_model.set" "_x_model.get"
+<div x-data="{ username: 'calebporzio' }">
+  <div x-ref="div" x-model="username"></div>
+  <button @click="$refs.div._x_model.set('phantomatrix')">
+    Изменить имя пользователя на <strong class="pl-2">phantomatrix</strong>
+  </button>
+  <div x-text="$refs.div._x_model.get()"></div>
+</div>
+```
