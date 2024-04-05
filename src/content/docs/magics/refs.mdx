@@ -20,7 +20,7 @@ sidebar:
 
 В Alpine v2 можно было динамически привязывать `$refs` к элементам, как показано ниже:
 
-```html live
+```html live ":x-ref"
 <div x-data="{ items: [{ id: 1, name: 'Первый' }, { id: 2, name: 'Второй' }] }">
   <template x-for="item in items" :key="item.id">
     <div :x-ref="item.name">какой-то контент...</div>

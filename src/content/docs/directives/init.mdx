@@ -17,8 +17,11 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 А вот другой пример, где `x-init` используется для получения некоторого JSON и сохранения его в `x-data` перед обработкой компонента:
 
-```html wrap "x-init"
-<div x-data="{ posts: [] }" x-init="posts = await (await fetch('/posts')).json()">...</div>
+```html "x-init"
+<div
+  x-data="{ posts: [] }"
+  x-init="posts = await (await fetch('/posts')).json()"
+>...</div>
 ```
 
 ## $nextTick
@@ -49,7 +52,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 <strong>Загляните в консоль</strong>
 ```
 
-## Автоматическое выполнение метода `init()`
+## Автовыполнение метода `init()`
 
 Если объект `x-data` компонента содержит метод `init()`, он будет вызван автоматически. Например:
 

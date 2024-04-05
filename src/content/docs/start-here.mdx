@@ -3,24 +3,28 @@ title: Первые шаги
 description: Знакомство с основами Alpine.js
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
+import { LinkCard, Steps } from '@astrojs/starlight/components';
 
-Создайте где-нибудь на компьютере пустой HTML-файл с именем типа `i-love-alpine.html`
+<Steps>
 
-Используя текстовый редактор, заполните файл таким содержимым:
+1. Создайте где-нибудь на компьютере пустой HTML-файл с именем типа `i-love-alpine.html`
 
-```html wrap
-<html>
-  <head>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
-  </head>
-  <body>
-    <h1 x-data="{ message: 'Я ❤️ Alpine' }" x-text="message"></h1>
-  </body>
-</html>
-```
+2. Используя текстовый редактор, заполните файл таким содержимым:
 
-Откройте свой файл в браузере — если вы увидите `Я ❤️ Alpine`, то можете продолжать!
+    ```html wrap
+    <html>
+      <head>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+      </head>
+      <body>
+        <h1 x-data="{ message: 'Я ❤️ Alpine' }" x-text="message"></h1>
+      </body>
+    </html>
+    ```
+
+3. Откройте свой файл в браузере — если вы увидите `Я ❤️ Alpine`, то можете продолжать!
+
+</Steps>
 
 Теперь, когда всё готово к работе, давайте рассмотрим три практических примера для обучения основам Alpine. К концу этого упражнения вы должны быть более чем готовы к созданию собственных проектов. Продолжим.
 
@@ -30,7 +34,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Вставьте следующее в тег `<body>`:
 
-```html live
+```html live "x-data" "x-on:click" "x-text"
 <div x-data="{ count: 0 }">
   <button x-on:click="count++">
     Увеличить счётчик
@@ -243,7 +247,7 @@ return this.items.filter((i) => i.startsWith(this.search));
 
 <LinkCard title="Подробнее об <strong>x-for</strong>" href="/directives/for"/>
 
-## Резюме
+## Итоги
 
 Если вы дошли до этого момента, значит, в Alpine вы познакомились со следующими директивами:
 

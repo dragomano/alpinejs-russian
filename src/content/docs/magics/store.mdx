@@ -9,7 +9,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Вы можете использовать `$store` для удобного доступа к глобальным хранилищам Alpine, зарегистрированным с помощью [`Alpine.store(...)`](/globals/alpine-store). Например:
 
-```html wrap "Alpine.store"
+```html wrap "$store" "Alpine.store"
 <button x-data @click="$store.darkMode.toggle()">Переключить тёмный режим</button>
 
 <div x-data :class="$store.darkMode.on && 'bg-black'">...</div>
@@ -35,7 +35,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Вот пример, приведённый выше, но использующий булево значение:
 
-```html wrap "Alpine.store"
+```html wrap "$store" "Alpine.store"
 <button x-data @click="$store.darkMode = !$store.darkMode">Переключить тёмный режим</button>
 
 <div x-data :class="$store.darkMode && 'bg-black'">...</div>

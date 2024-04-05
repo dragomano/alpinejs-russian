@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
+import { LinkCard, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
 Есть 2 способа включить Alpine в ваш проект:
 
@@ -56,50 +56,52 @@ export const requiredCode = `<script defer src="https://cdn.jsdelivr.net/npm/alp
 
 ## Импорт в качестве модуля
 
-Если вы предпочитаете более надежный подход, вы можете установить Alpine через менеджер пакетов и импортировать его в пакет.
+Если вы предпочитаете более надёжный подход, вы можете установить Alpine через менеджер пакетов и импортировать его в пакет.
 
-Запустите следующую команду, чтобы установить его.
+<Steps>
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+1. Запустите следующую команду, чтобы установить его.
 
-<Tabs>
-  <TabItem label="npm">
-    ```shell
-    npm install alpinejs
+    <Tabs>
+      <TabItem label="npm">
+        ```shell
+        npm install alpinejs
+        ```
+      </TabItem>
+      <TabItem label="pnpm">
+        ```shell
+        pnpm add alpinejs
+        ```
+      </TabItem>
+      <TabItem label="yarn">
+        ```shell
+        yarn add alpinejs
+        ```
+      </TabItem>
+    </Tabs>
+
+2. Теперь импортируйте Alpine в свой пакет и инициализируйте его следующим образом:
+
+    ```js
+    import Alpine from 'alpinejs';
+
+    window.Alpine = Alpine;
+
+    Alpine.start();
     ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```shell
-    pnpm add alpinejs
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```shell
-    yarn add alpinejs
-    ```
-  </TabItem>
-</Tabs>
 
-Теперь импортируйте Alpine в свой пакет и инициализируйте его следующим образом:
-
-```js
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
-```
+</Steps>
 
 :::note
 Определение `window.Alpine = Alpine` не является обязательным, но его полезно иметь для свободы и гибкости. Например, при работе с Alpine из инструментов разработчика.
 :::
 
 :::tip
-Если вы импортировали Alpine в пакет, вам необходимо убедиться, что вы регистрируете любой код расширения МЕЖДУ импортом глобального объекта `Alpine` и до вызова `Alpine.start()`.
+Если вы импортировали Alpine в пакет, вам необходимо убедиться, что вы регистрируете любой код расширения **ПОСЛЕ** импорта глобального объекта `Alpine` и **ДО** вызова `Alpine.start()`.
 :::
 
 :::note
-Убедитесь, что `Alpine.start()` вызывается только один раз на странице. Вызов его более одного раза приведет к одновременному запуску нескольких «экземпляров» Alpine.
+Убедитесь, что `Alpine.start()` вызывается **только один раз** на странице. Вызов его более одного раза приведёт к одновременному запуску нескольких «экземпляров» Alpine.
 :::
 
 <LinkCard title="Подробнее о расширении Alpine" href="/advanced/extending" />
