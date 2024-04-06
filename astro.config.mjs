@@ -17,6 +17,13 @@ export default defineConfig({
       description: 'Документация Alpine.js на русском языке.',
       head: [
         {
+          tag: 'meta',
+          attrs: {
+            name: 'google-site-verification',
+            content: 'fq1A8llkn1XRVaPfBInN-TPoDtGsEUQmvEr3QVrEsyI',
+          },
+        },
+        {
           tag: 'script',
           content: `(function (c, l, a, r, i, t, y) {
             c[a] =
