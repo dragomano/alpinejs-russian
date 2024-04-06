@@ -13,7 +13,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Приведём пример выпадающего компонента:
 
-```html live
+```html live "x-data"
 <div x-data="{ open: false }">
   <button @click="open = !open">Переключить содержимое</button>
   <div x-show="open">Содержимое...</div>
@@ -46,7 +46,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Например, давайте выделим поведение «Переключить содержимое» в метод `x-data`.
 
-```html live {2}
+```html live "toggle()"
 <div x-data="{ open: false, toggle() { this.open = !this.open } }">
   <button @click="toggle()">Переключить содержимое</button>
   <div x-show="open">Содержимое...</div>
@@ -84,7 +84,6 @@ import { LinkCard } from '@astrojs/starlight/components';
 }"
 >
   <button @click="toggle()">Переключить содержимое</button>
-
   <div x-show="isOpen">Содержимое...</div>
 </div>
 ```
@@ -99,13 +98,13 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 В этих случаях всегда можно передать пустой объект.
 
-```html
+```html "x-data"
 <div x-data="{}"></div>
 ```
 
 Однако при желании можно полностью отказаться от значения атрибута, если это будет выглядеть лучше.
 
-```html
+```html "x-data"
 <div x-data></div>
 ```
 
@@ -113,7 +112,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Иногда внутри компонента Alpine может быть только один элемент, как, например, в следующем случае:
 
-```html live
+```html live {2}
 <div x-data="{ open: true }">
   <button @click="open = false" x-show="open">Скрыть меня</button>
 </div>
@@ -121,8 +120,11 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 В этих случаях можно объявить `x-data` непосредственно на этом отдельном элементе:
 
-```html
-<button x-data="{ open: true }" @click="open = false" x-show="open">Скрыть меня</button>
+```html "x-data"
+<button
+  x-data="{ open: true }"
+  @click="open = false" x-show="open"
+>Скрыть меня</button>
 ```
 
 ## Переиспользуемые данные
@@ -131,7 +133,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Приведём небольшой пример:
 
-```html live
+```html live "dropdown"
 <div x-data="dropdown">
   <button @click="toggle">Переключить содержимое</button>
   <div x-show="open">Содержимое...</div>
