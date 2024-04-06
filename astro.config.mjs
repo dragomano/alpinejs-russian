@@ -45,7 +45,7 @@ export default defineConfig({
       },
       customCss: ['./src/styles/custom.css'],
       expressiveCode: {
-        themes: ['dracula', 'github-light'],
+        themes: ['dracula', 'starlight-light'],
         styleOverrides: {
           borderRadius: '0.5rem',
           frames: {
