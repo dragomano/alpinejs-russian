@@ -4,6 +4,9 @@ description: Знакомство с основами Alpine.js
 ---
 
 import { LinkCard, Steps } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 <Steps>
 
@@ -246,6 +249,79 @@ return this.items.filter((i) => i.startsWith(this.search));
 Теперь любой элемент внутри тега `<template>` будет повторяться для каждого элемента внутри `filteredItems`, а все выражения, вычисляемые внутри цикла, будут иметь прямой доступ к итерационной переменной (в данном случае `item`).
 
 <LinkCard title="Подробнее об <strong>x-for</strong>" href="/directives/for"/>
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Самая важная директива в Alpine.js...
+
+    <MultipleChoice>
+      <Option>
+        `x-show`
+      </Option>
+      <Option isCorrect>
+        `x-data`
+      </Option>
+      <Option>
+        `x-model`
+      </Option>
+    </MultipleChoice>
+
+2. Нажатие на какую из кнопок приведёт к переключению спойлера?
+
+    ```html wrap
+    <div x-data="{ open: false }">
+      // код кнопки
+
+      <div x-show="open" @click.outside="open = false">Содержимое...</div>
+    </div>
+    ```
+
+    <MultipleChoice>
+      <Option isCorrect>
+         ```html wrap
+         <button @click="open = !open">Переключить</button>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <button @click="open = false">Переключить</button>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <button>Переключить</button>
+         ```
+      </Option>
+    </MultipleChoice>
+
+3. Синтаксис геттеров внутри объекта `x-data` выглядит как... 
+
+    <MultipleChoice>
+      <Option>
+        ```js wrap
+        const funcName = () => {
+          // ...
+        }
+        ```
+      </Option>
+      <Option>
+        ```js wrap
+        function funcName() {
+          // ...
+        }
+        ```
+      </Option>
+      <Option isCorrect>
+        ```js wrap
+        get funcName() {
+          // ...
+        }
+        ```
+      </Option>
+    </MultipleChoice>
+
+</Box>
 
 ## Итоги
 

@@ -6,6 +6,9 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Alpine позволяет легко прослушивать события браузера и реагировать на них.
 
@@ -39,7 +42,7 @@ Alpine позволяет легко прослушивать события б�
 </div>
 ```
 
-Вы даже можете комбинировать модификаторы клавиш, чтобы прослушивать комбинации, например, нажатие `Enter` при удержании `Sift`:
+Вы даже можете комбинировать модификаторы клавиш, чтобы прослушивать комбинации, например, нажатие `Enter` при удержании `Shift`:
 
 ```html wrap live "@keyup.shift.enter"
 <div x-data>
@@ -100,3 +103,80 @@ Alpine позволяет легко прослушивать события б�
 Теперь, поскольку в нашем втором компоненте мы прослушиваем «foo» (с `.window`), при нажатии кнопки этот слушатель подхватит его и зарегистрирует сообщение «Событие foo было отправлено».
 
 <LinkCard title="Подробнее об <strong>x-on</strong>" href="/directives/on" />
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Какой из указанных вариантов синтаксиса неверен?
+
+    <MultipleChoice>
+      <Option>
+        ```html wrap
+        <div x-data>
+          <button x-on:click="alert('нажато')">Нажми меня</button>
+        </div>
+        ```
+      </Option>
+      <Option isCorrect>
+        ```html wrap
+        <div x-data>
+          <button onClick="alert('нажато')">Нажми меня</button>
+        </div>
+        ```
+      </Option>
+      <Option>
+        ```html wrap
+        <div x-data>
+          <button @click="alert('нажато')">Нажми меня</button>
+        </div>
+        ```
+      </Option>
+    </MultipleChoice>
+
+2. Как получить доступ к объекту события?
+
+    <MultipleChoice>
+      <Option>
+         ```html wrap
+         <button @click="$target.remove()">Удалить меня</button>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <button @click="$object.remove()">Удалить меня</button>
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+         <button @click="$event.target.remove()">Удалить меня</button>
+         ```
+      </Option>
+    </MultipleChoice>
+
+3. Как прослушивать пользовательские события?
+
+    <MultipleChoice>
+      <Option isCorrect>
+         ```html wrap
+        <div x-data @foo="alert('Событие foo было отправлено')">
+          <button @click="$dispatch('foo')">Отправить</button>
+        </div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+        <div x-data @foo="alert('Событие foo было отправлено')">
+          <button @click="$customEvent('foo')">Отправить</button>
+        </div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+        <div x-data @foo="alert('Событие foo было отправлено')">
+          <button @click="$event('foo')">Отправить</button>
+        </div>
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

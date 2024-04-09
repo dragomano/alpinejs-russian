@@ -6,8 +6,11 @@ sidebar:
 ---
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
-Alpine уже из коробки предоставляет надежную утилиту для переходов. С помощью нескольких директив `x-transition` можно создавать плавные переходы между отображением и скрытием элемента.
+Alpine уже из коробки предоставляет надёжную утилиту для переходов. С помощью нескольких директив `x-transition` можно создавать плавные переходы между отображением и скрытием элемента.
 
 Существует два основных способа организации переходов в Alpine:
 
@@ -136,3 +139,36 @@ Alpine уже из коробки предоставляет надежную у
 | `:leave`       | Применяется на протяжении всей фазы выхода.                                                                                                   |
 | `:leave-start` | Добавляется сразу при срабатывании перехода выхода, удаляется через один кадр.                                                                |
 | `:leave-end`   | Добавляется один кадр после срабатывания перехода выхода (одновременно с удалением `leave-start`), удаляется по завершении перехода/анимации. |
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Как указать продолжительность перехода?
+
+    <MultipleChoice>
+      <Option>
+         `x-transition.time.10s`
+      </Option>
+      <Option isCorrect>
+         `x-transition.duration.50ms`
+      </Option>
+      <Option>
+         `x-transition.origin.fast`
+      </Option>
+    </MultipleChoice>
+
+2. Какой из вариантов отвечает за переход выхода?
+
+    <MultipleChoice>
+      <Option isCorrect>
+         `x-transition:leave`
+      </Option>
+      <Option>
+         `x-transition:exit`
+      </Option>
+      <Option>
+         `x-transition:enter`
+      </Option>
+    </MultipleChoice>
+
+</Box>

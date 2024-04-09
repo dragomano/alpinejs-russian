@@ -6,6 +6,9 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Директива `x-init` позволяет вам подключиться к фазе инициализации любого элемента в Alpine.
 
@@ -92,3 +95,50 @@ Alpine.data('dropdown', () => ({
   ...
 </div>
 ```
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Как выполнить какой-то код в Alpine только после отрисовки элемента?
+
+    <MultipleChoice>
+      <Option isCorrect>
+         ```html wrap
+         <div x-init="$nextTick(() => { ... })"></div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <div x-init="$useEffect(() => { ... })"></div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <div x-init="$onMount(() => { ... })"></div>
+         ```
+      </Option>
+    </MultipleChoice>
+
+2. Какая из строчек отобразится в консоли?
+
+    ```html wrap
+    <span x-init="console.log('Строчка 2')"></span>
+
+    <div x-data>
+      <span x-init="console.log('Строчка 1')"></span>
+    </div>
+    ```
+
+    <MultipleChoice>
+      <Option>
+         Только 1
+      </Option>
+      <Option isCorrect>
+         Обе
+      </Option>
+      <Option>
+         Только 2
+      </Option>
+    </MultipleChoice>
+
+</Box>

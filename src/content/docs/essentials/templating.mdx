@@ -6,6 +6,9 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Alpine предлагает несколько полезных директив для управления DOM на веб-странице.
 
@@ -26,7 +29,7 @@ Alpine позволяет легко управлять текстовым со�
 Подобно другим директивам в Alpine, вы можете использовать любое выражение JavaScript, которое вам нравится. Например:
 
 ```html live "x-text"
-<div class="demo" x-data>
+<div x-data>
   <span x-text="1 + 2"></span>
 </div>
 ```
@@ -242,3 +245,42 @@ Alpine позволяет легко управлять HTML-содержимы�
 :::
 
 <LinkCard title="Подробнее об <strong>x-html</strong>" href="/directives/html" />
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Что отобразится на странице с помощью указанной разметки?
+
+    ```html wrap
+    <div x-data>
+      <span x-text="1 + 2"></span>
+    </div>
+    ```
+
+    <MultipleChoice>
+      <Option>
+        1 + 2
+      </Option>
+      <Option>
+        12
+      </Option>
+      <Option isCorrect>
+        3
+      </Option>
+    </MultipleChoice>
+
+2. Какой из этих хелперов переходов не существует?
+
+    <MultipleChoice>
+      <Option>
+         `x-transition.opacity`
+      </Option>
+      <Option isCorrect>
+         `x-transition.break`
+      </Option>
+      <Option>
+         `x-transition.scale`
+      </Option>
+    </MultipleChoice>
+
+</Box>

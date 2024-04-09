@@ -6,6 +6,9 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 В Alpine всё начинается с директивы `x-data`.
 
@@ -153,3 +156,50 @@ import { LinkCard } from '@astrojs/starlight/components';
 ```
 
 <LinkCard title="Подробнее об <strong>Alpine.data</strong>" href="/globals/alpine-data" />
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Свойства, определённые в директиве `x-data`...
+
+    ```html wrap
+    <div x-data="...">
+      <div x-data="...">
+        <div x-data="..."></div>
+      </div>
+    </div>
+    ```
+
+    <MultipleChoice>
+      <Option>
+        видны только на первом уровне вложенности
+      </Option>
+      <Option isCorrect>
+        доступны всем дочерним элементам
+      </Option>
+      <Option>
+        не могут быть переопределены ниже
+      </Option>
+    </MultipleChoice>
+
+2. Как определить компонент Alpine.js без каких-либо данных?
+
+    <MultipleChoice>
+      <Option isCorrect>
+         ```html wrap
+         <div x-data="{}"></div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <div x-data=""></div>
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+         <div x-data></div>
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

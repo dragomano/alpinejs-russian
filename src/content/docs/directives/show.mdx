@@ -5,6 +5,10 @@ sidebar:
   order: 3
 ---
 
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
+
 `x-show` — одна из самых полезных и мощных директив Alpine. Она обеспечивает выразительный способ отображения и скрытия элементов DOM.
 
 Вот пример простого раскрывающегося компонента с использованием `x-show`:
@@ -48,3 +52,26 @@ sidebar:
   <div x-show.important="open">Содержимое списка...</div>
 </div>
 ```
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+Что делает `x-show` с элементом?
+
+    ```html wrap
+    <div x-show="false">...</div>
+    ```
+
+    <MultipleChoice>
+      <Option>
+         Полностью скрывает его из разметки HTML
+      </Option>
+      <Option>
+         Прячет элемент между тегами комментариев
+      </Option>
+      <Option isCorrect>
+         Добавляет атрибут `style="display: none"`
+      </Option>
+    </MultipleChoice>
+
+</Box>

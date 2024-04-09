@@ -5,6 +5,10 @@ sidebar:
   order: 5
 ---
 
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
+
 `$dispatch` — полезное сокращение для диспетчеризации событий браузера.
 
 ```html live "$dispatch"
@@ -78,3 +82,37 @@ sidebar:
 ```
 
 Это открывает возможности для создания пользовательских компонентов ввода, значение которых можно установить с помощью `x-model`.
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+Правильный вариант использования событий в этом коде...
+
+    <MultipleChoice>
+      <Option>
+         ```html wrap
+        <div x-data>
+          <span @notify.once="..."></span>
+          <button @click="$dispatch('notify')">Уведомить</button>
+        </div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+        <div x-data>
+          <span @notify="..."></span>
+          <button @click="$dispatch('notify')">Уведомить</button>
+        </div>
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+        <div x-data>
+          <span @notify.window="..."></span>
+          <button @click="$dispatch('notify')">Уведомить</button>
+        </div>
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

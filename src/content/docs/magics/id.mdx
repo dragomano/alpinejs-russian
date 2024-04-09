@@ -5,6 +5,10 @@ sidebar:
   order: 9
 ---
 
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
+
 `$id` — это магическое свойство, которое можно использовать для генерации идентификатора элемента и обеспечения того, что он не будет конфликтовать с другими одноимёнными идентификаторами на той же странице.
 
 Эта утилита очень полезна при создании многократно используемых компонентов (предположительно в шаблоне внутреннего интерфейса), которые могут встречаться на странице несколько раз и использовать атрибуты ID.
@@ -96,3 +100,44 @@ sidebar:
 ```
 
 Это неполный пример списка, но всё равно будет полезно продемонстрировать сценарий, в котором вам может потребоваться, чтобы каждый идентификатор в группе по-прежнему был уникальным для страницы, но при этом вводился в цикле, чтобы вы могли ссылаться на отдельные идентификаторы внутри этой группы.
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+Как правильно связать `label` с `input` в этом коде?
+
+    ```html wrap
+    <div>
+        <label>
+        <input type="text">
+    </div>
+    ```
+
+    <MultipleChoice>
+      <Option isCorrect>
+         ```html wrap
+        <div x-id="['text-input']">
+            <label :for="$id('text-input')">
+            <input type="text" :id="$id('text-input')">
+        </div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+        <div x-data="{ id: 'text-input' }">
+            <label :for="id">
+            <input type="text" :id="id">
+        </div>
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+        <div x-data="{ id: $id('text-input') }">
+            <label :for="id">
+            <input type="text" :id="id">
+        </div>
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

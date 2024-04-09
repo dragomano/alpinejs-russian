@@ -5,6 +5,10 @@ sidebar:
   order: 1
 ---
 
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
+
 `Alpine.data(...)` предоставляет возможность повторного использования контекстов `x-data` в вашем приложении.
 
 Для примера приведём надуманный компонент `dropdown`:
@@ -165,3 +169,52 @@ Alpine.data('dropdown', () => ({
   },
 }));
 ```
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Правильный вызов провайдеров `Alpine.data`...
+
+    <MultipleChoice>
+      <Option isCorrect>
+         `x-data="func"`
+      </Option>
+      <Option>
+         `x-data="{ func() }"`
+      </Option>
+      <Option isCorrect>
+         `x-data="func()"`
+      </Option>
+    </MultipleChoice>
+
+2. Как обратиться к магическому методу `$watch` компонента??
+
+    ```js wrap
+    Alpine.data('dropdown', () => ({
+        open: false,
+
+        init() {
+            // обращаемся к методу $watch
+        }
+    }))
+    ```
+
+    <MultipleChoice>
+      <Option>
+         ```js wrap
+         $watch('open', () => {...})
+         ```
+      </Option>
+      <Option isCorrect>
+         ```js wrap
+         this.$watch('open', () => {...})
+         ```
+      </Option>
+      <Option>
+         ```js wrap
+         return $watch('open', () => {...})
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

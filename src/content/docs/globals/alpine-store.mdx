@@ -6,12 +6,15 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Alpine предлагает глобальное управление состоянием через API `Alpine.store()`.
 
 ## Регистрация хранилища
 
-Вы можете либо определить хранилище Alpine внутри слушателя `alpine:init` (в случае включения Alpine через тег `<script>`), либо определить его перед ручным вызовом `Alpine.start()` (в случае импорта Alpine в сборку):
+Вы можете либо определить хранилище Alpine внутри слушателя `alpine:init` (в случае включения Alpine через тег `<script>`), либо определить его перед ручным вызовом `Alpine.start()` (в случае импорта Alpine в сборке):
 
 <Tabs>
   <TabItem label="В теге script">
@@ -115,3 +118,36 @@ Alpine предлагает глобальное управление состо
   });
 </script>
 ```
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Как получить доступ к хранилищу Alpine с именем `myStore`?
+
+    <MultipleChoice>
+      <Option>
+         `myStore.get()`
+      </Option>
+      <Option isCorrect>
+         `$store.myStore`
+      </Option>
+      <Option>
+         `$store['my-store']`
+      </Option>
+    </MultipleChoice>
+
+2. Когда выполняется метод `init` внутри хранилища?
+
+    <MultipleChoice>
+      <Option>
+         непосредственно перед регистрацией хранилища
+      </Option>
+      <Option>
+         одновременно с регистрацией хранилища
+      </Option>
+      <Option isCorrect>
+         сразу после регистрации хранилища
+      </Option>
+    </MultipleChoice>
+
+</Box>

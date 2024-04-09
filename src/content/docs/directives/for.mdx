@@ -5,7 +5,11 @@ sidebar:
   order: 10
 ---
 
-Директива Alpine `x-for` позволяет создавать элементы DOM путём перебора списка. Вот простой пример его использования для создания списка цветов на основе массива.
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
+
+Директива Alpine `x-for` позволяет создавать элементы DOM путём перебора списка. Вот простой пример её использования для создания списка цветов на основе массива.
 
 ```html live "x-for"
 <ul x-data="{ colors: ['Красный', 'Оранжевый', 'Жёлтый'] }">
@@ -18,7 +22,7 @@ sidebar:
 Вы также можете передавать объекты в `x-for`.
 
 ```html live "x-for"
-<ul x-data="{ car: { make: 'Jeep', model: 'Grand Cherokee', color: 'Black' } }">
+<ul x-data="{ car: { make: 'Внедорожник', model: 'Grand Cherokee', color: 'чёрный' } }">
   <template x-for="(value, index) in car">
     <li><span x-text="index"></span>: <span x-text="value"></span></li>
   </template>
@@ -115,3 +119,38 @@ sidebar:
   </template>
 </div>
 ```
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+Правильный вариант использования `x-for`...
+
+    <MultipleChoice>
+      <Option isCorrect>
+         ```html wrap
+          <ul x-data="{ numbers: [1, 2, 3] }">
+            <template x-for="number in numbers">
+              <li x-text="number"></li>
+            </template>
+          </ul>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+          <ul x-data="{ numbers: [1, 2, 3] }">
+            <li x-for="number in numbers" x-text="number"></li>
+          </ul>
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+          <ul x-data>
+            <template x-for="(_, i) in 3">
+              <li x-text="i + 1"></li>
+            </template>
+          </ul>
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

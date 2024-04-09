@@ -5,6 +5,10 @@ sidebar:
   order: 4
 ---
 
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
+
 `x-bind` позволяет устанавливать HTML-атрибуты элементов на основе результата работы JavaScript-выражений.
 
 Например, вот компонент, в котором мы будем использовать `x-bind` для установки значения _placeholder_ для текстового поля.
@@ -191,3 +195,54 @@ sidebar:
 :::tip
 Если «привязываемая» или «применяемая» директива — `x-for`, вы должны вернуть нормальную строку выражения из обратного вызова. Например: `['x-for']() { return 'item in items' }`
 :::
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Как передать элементу `input` значение атрибута `required`?
+
+    ```html wrap
+    <div x-data="{ required: true }">
+      <input type="text" />
+    </div>
+    ```
+
+    <MultipleChoice>
+      <Option>
+         ```html wrap
+         <input type="text" required="required" />
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+         <input type="text" :required="required" />
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+         <input type="text" x-bind:required="required" />
+         ```
+      </Option>
+    </MultipleChoice>
+
+2. Какой из блоков станет красным?
+
+    <MultipleChoice>
+      <Option>
+         ```html wrap
+         <div x-data :style="{ color: 'red' }">&nbsp;</div>
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+         <div x-data :style="{ background: 'red' }">&nbsp;</div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <div x-data :class="{ 'red': true }">&nbsp;</div>
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

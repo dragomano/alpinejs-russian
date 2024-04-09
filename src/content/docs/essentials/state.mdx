@@ -6,6 +6,9 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Состояние (данные JavaScript, изменения которых Alpine отслеживает) лежит в основе всего, что вы делаете в Alpine. Вы можете предоставить локальные данные для фрагмента HTML или сделать их глобально доступными для использования в любом месте страницы, используя `x-data` или `Alpine.store()` соответственно.
 
@@ -123,3 +126,30 @@ Alpine.store('tabs', {
 ```
 
 <LinkCard title="Подробнее об <strong>Alpine.store()</strong>" href="/globals/alpine-store" />
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+Какой вариант использования `x-data` правильный?
+
+    <MultipleChoice>
+      <Option isCorrect>
+         ```html wrap
+         <button
+          x-data="{ label: 'Нажмите здесь' }"
+          x-text="label"
+        ></button>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <div x-data="{ label: 'Нажмите здесь' }">...</div>
+         <button x-text="label"></button>
+         ```
+      </Option>
+      <Option>
+         Ни один из представленных
+      </Option>
+    </MultipleChoice>
+
+</Box>

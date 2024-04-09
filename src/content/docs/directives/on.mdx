@@ -6,6 +6,9 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 `x-on` позволяет вам легко запускать код для отправленных событий DOM.
 
@@ -301,3 +304,48 @@ Alpine предлагает ряд модификаторов директив �
 ```
 
 <LinkCard title="Подробнее о фазе захвата и всплытия событий" href="https://developer.mozilla.org/ru/docs/Web/API/EventTarget/addEventListener#usecapture" />
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Как перехватить нажатие пробела?
+
+    <MultipleChoice>
+      <Option>
+         ```html wrap
+         <input type="text" @keydown.probel="..." />
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <input type="text" @keyup.spaceDown="..." />
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+         <input type="text" @keyup.space="..." />
+         ```
+      </Option>
+    </MultipleChoice>
+
+2. Какой из вариантов кода подойдет для прослушивания события `ohMyGosh`?
+
+    <MultipleChoice>
+      <Option>
+         ```html wrap
+         <div @oh-my-gosh.capture="...">...</div>
+         ```
+      </Option>
+      <Option isCorrect>
+         ```html wrap
+         <div @oh-my-gosh.camel="...">...</div>
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <div @ohMyGosh.dash="...">...</div>
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

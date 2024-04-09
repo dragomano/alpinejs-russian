@@ -6,6 +6,9 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Alpine имеет очень открытую кодовую базу, которая позволяет расширять её различными способами. Фактически, каждая доступная директива и магия в самом Alpine используют именно эти API. Теоретически вы можете восстановить всю функциональность Alpine, используя их самостоятельно.
 
@@ -61,7 +64,7 @@ window.Alpine = Alpine
 window.Alpine.start()
 ```
 
-Теперь, когда мы знаем, как подключать API расширений, давайте более подробно рассмотрим, как использовать каждый из них:
+Теперь, когда мы знаем, как подключать API расширений, давайте более подробно рассмотрим, как использовать каждый из них.
 
 ## Пользовательские директивы
 
@@ -372,3 +375,96 @@ export default function (Alpine) {
 Вы увидите, что `Alpine.plugin` невероятно прост. Он принимает обратный вызов и немедленно вызывает его, предоставляя глобальный объект `Alpine` в качестве параметра для использования внутри него.
 
 Затем вы можете расширять Alpine по своему усмотрению.
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Порядок регистрации расширения при использовании сборки Alpine...
+
+    <MultipleChoice>
+      <Option>
+         ПЕРЕД импортом глобального объекта Alpine и ПЕРЕД вызовом `Alpine.start()`
+      </Option>
+      <Option isCorrect>
+         ПОСЛЕ импорта глобального объекта Alpine и ПЕРЕД вызовом `Alpine.start()`
+      </Option>
+      <Option>
+         ПЕРЕД импортом глобального объекта Alpine и ПОСЛЕ вызова `Alpine.start()`
+      </Option>
+    </MultipleChoice>
+
+2. Как зарегистрировать хелпер `$now` для вывода текущего времени?
+
+    ```html wrap
+    <span x-data x-text="$now"></span>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        // код расширения
+      });
+    </script>
+    ```
+
+    <MultipleChoice>
+      <Option>
+         ```js wrap
+          Alpine.data('now', () => {
+            return new Date().toLocaleTimeString();
+          });
+         ```
+      </Option>
+      <Option isCorrect>
+         ```js wrap
+          Alpine.magic('now', () => {
+            return new Date().toLocaleTimeString();
+          });
+         ```
+      </Option>
+      <Option>
+         ```js wrap
+          Alpine.bind('now', () => {
+            return new Date().toLocaleTimeString();
+          });
+         ```
+      </Option>
+    </MultipleChoice>
+
+2. Как создать свою директиву `x-lowercase`?
+
+    ```html wrap
+    <div x-data>
+      <span x-lowercase>НЕНАВИЖУ КАПС!</span>
+    </div>
+
+    <script>
+      document.addEventListener('alpine:init', () => {
+        // определение директивы
+      });
+    </script>
+    ```
+
+    <MultipleChoice>
+      <Option>
+         ```js wrap
+          Alpine.custom('x-lowercase', (el) => {
+            el.textContent = el.textContent.toLowerCase();
+          });
+         ```
+      </Option>
+      <Option>
+         ```js wrap
+          Alpine.data('lowercase', (el) => {
+            el.textContent = el.textContent.toLowerCase();
+          });
+         ```
+      </Option>
+      <Option isCorrect>
+         ```js wrap
+          Alpine.directive('lowercase', (el) => {
+            el.textContent = el.textContent.toLowerCase();
+          });
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

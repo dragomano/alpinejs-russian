@@ -6,12 +6,15 @@ sidebar:
 ---
 
 import { LinkCard, Steps } from '@astrojs/starlight/components';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 У Alpine есть несколько различных методов подключения к различным частям жизненного цикла. Пройдемся по наиболее полезным для ознакомления:
 
 ## Инициализация элемента
 
-Еще один чрезвычайно полезный крючок жизненного цикла в Alpine — директива `x-init`.
+Ещё один чрезвычайно полезный крючок жизненного цикла в Alpine — директива `x-init`.
 
 `x-init` может быть добавлен к любому элементу на странице и будет выполнять любой JavaScript, который вы вызываете внутри него, когда Alpine начинает инициализировать этот элемент.
 
@@ -102,3 +105,36 @@ Alpine позволяет выполнять код при изменении ф
     ```
 
 </Steps>
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+Какой из указанных вариантов синтаксиса неверен?
+
+    <MultipleChoice>
+      <Option>
+        ```html wrap
+        <button x-init="console.log('...')"></button>
+        ```
+      </Option>
+      <Option isCorrect>
+        ```js wrap
+        Alpine.init('dropdown', () => ({
+          mount() {
+            // ...
+          },
+        }));
+        ```
+      </Option>
+      <Option>
+        ```js wrap
+        Alpine.data('dropdown', () => ({
+          init() {
+            // ...
+          },
+        }));
+        ```
+      </Option>
+    </MultipleChoice>
+
+</Box>

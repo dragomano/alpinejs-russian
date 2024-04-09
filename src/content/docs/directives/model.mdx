@@ -5,6 +5,10 @@ sidebar:
   order: 8
 ---
 
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
+
 `x-model` позволяет вам привязать значение входного элемента к данным Alpine.
 
 Вот простой пример использования `x-model` для привязки значения текстового поля к фрагменту данных в Alpine.
@@ -189,8 +193,9 @@ sidebar:
 
 По умолчанию любые данные, хранящиеся в свойстве через `x-model`, сохраняются в виде строки. Чтобы заставить Alpine сохранить значение как число JavaScript, добавьте модификатор `.number`.
 
-```html "number"
-<input type="text" x-model.number="age" /> <span x-text="typeof age"></span>
+```html live "number"
+<input type="text" x-model.number="age" />
+<span x-text="typeof age"></span>
 ```
 
 ### `.boolean`
@@ -267,3 +272,42 @@ Alpine предоставляет встроенные утилиты для п�
   <div x-text="$refs.div._x_model.get()"></div>
 </div>
 ```
+
+<Box icon="question-mark">
+## Проверьте свои знания
+
+1. Директива `x-model`...
+
+    <MultipleChoice>
+      <Option>
+         работает в паре с `x-text`
+      </Option>
+      <Option>
+         не работает с элементами форм
+      </Option>
+      <Option isCorrect>
+         имеет двустороннюю привязку
+      </Option>
+    </MultipleChoice>
+
+2. Как принудить Alpine сохранять введённое значение в виде числа?
+
+    <MultipleChoice>
+      <Option isCorrect>
+         ```html wrap
+         <input type="text" x-model.number="..." />
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <input type="text" x-model.integer="..." />
+         ```
+      </Option>
+      <Option>
+         ```html wrap
+         <input type="text" x-model.fill="..." />
+         ```
+      </Option>
+    </MultipleChoice>
+
+</Box>
