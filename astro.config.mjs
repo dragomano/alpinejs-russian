@@ -5,6 +5,8 @@ import starlightImageZoom from 'starlight-image-zoom';
 import tailwind from '@astrojs/tailwind';
 import liveCode from 'astro-live-code';
 import alpine from '@astrojs/alpinejs';
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 // https://astro.build/config
 export default defineConfig({
@@ -131,4 +133,16 @@ export default defineConfig({
     }),
     tailwind(),
   ],
+  markdown: {
+    rehypePlugins: [
+      rehypeHeadingIds,
+      [
+        rehypeAutolinkHeadings,
+        {
+          // Wrap the heading text in a link.
+          behavior: 'wrap',
+        },
+      ],
+    ],
+  },
 });
