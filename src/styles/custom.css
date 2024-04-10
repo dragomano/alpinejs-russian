@@ -11,10 +11,15 @@
 /* Style the Markdown heading links. */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) > a {
     color: var(--sl-color-white);
-    text-decoration: none;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: orange;
+    text-underline-position: auto;
+    text-underline-offset: 0.35em;
+    transition: all .2s;
 
     &:hover {
-        text-decoration: underline;
+        text-decoration: none;
     }
 }
 
