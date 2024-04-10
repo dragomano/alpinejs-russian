@@ -24,7 +24,7 @@ hero:
 
 Alpine — это надёжный и простой инструмент для создания поведения непосредственно в вашей разметке. Думайте об этом как о jQuery для современного Интернета. Добавьте тег `script` и приступайте к работе.
 
-```html {1}
+```html wrap {1}
 <script src="//unpkg.com/alpinejs" defer></script>
 
 <div x-data="{ open: false }">
@@ -47,7 +47,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
     <CardGrid stagger>
       <Card title="x-data">
         Объявляйте новый компонент Alpine и его данные для блока HTML:
-        ```html "x-data"
+        ```html wrap "x-data"
         <div x-data="{ open: false }">
             ...
         </div>
@@ -55,7 +55,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-bind">
         Устанавливайте динамические атрибуты HTML для элемента:
-        ```html "x-bind"
+        ```html wrap "x-bind"
         <div x-bind:class="! open ? 'hidden' : ''">
           ...
         </div>
@@ -63,7 +63,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-on">
         Прослушивайте события браузера на элементе:
-        ```html "x-on"
+        ```html wrap "x-on"
         <button x-on:click="open = ! open">
           Переключить
         </button>
@@ -71,7 +71,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-text">
         Устанавливайте текстовое содержимое элемента:
-        ```html "x-text"
+        ```html wrap "x-text"
         <div>
           Авторское право © <span x-text="new Date().getFullYear()"></span>
         </div>
@@ -79,7 +79,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-html">
         Устанавливайте внутренний HTML элемента:
-        ```html "x-html"
+        ```html wrap "x-html"
         <div x-html="(await axios.get('/some/html/partial')).data">
           ...
         </div>
@@ -87,7 +87,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-model">
         Синхронизируйте часть данных с элементом ввода:
-        ```html "x-model"
+        ```html wrap "x-model"
         <div x-data="{ search: '' }">
           <input type="text" x-model="search">
 
@@ -97,7 +97,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-show">
         Переключайте видимость элемента:
-        ```html "x-show"
+        ```html wrap "x-show"
         <div x-show="open">
           ...
         </div>
@@ -105,7 +105,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-transition">
         Перемещайте элемент внутрь и наружу с помощью переходов CSS:
-        ```html "x-transition"
+        ```html wrap "x-transition"
         <div x-show="open" x-transition>
           ...
         </div>
@@ -113,7 +113,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-for">
         Повторяйте блок HTML на основе набора данных:
-        ```html "x-for"
+        ```html wrap "x-for"
         <template x-for="post in posts">
           <h2 x-text="post.title"></h2>
         </template>
@@ -121,7 +121,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-if">
         Добавляйте/удаляйте блок HTML по условию со страницы целиком:
-        ```html "x-if"
+        ```html wrap "x-if"
         <template x-if="open">
           <div>...</div>
         </template>
@@ -129,19 +129,19 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-init">
         Запускайте код, когда элемент инициализируется с помощью Alpine:
-        ```html "x-init"
+        ```html wrap "x-init"
         <div x-init="date = new Date()"></div>
         ```
       </Card>
       <Card title="x-effect">
         Выполняйте скрипт каждый раз, когда меняется одна из его зависимостей:
-        ```html "x-effect"
+        ```html wrap "x-effect"
         <div x-effect="console.log('count: '+count)"></div>
         ```
       </Card>
       <Card title="x-ref">
         Ссылайтесь на элементы напрямую по их указанным ключам, используя магическое свойство `$refs`:
-        ```html "x-ref"
+        ```html wrap "x-ref"
         <input type="text" x-ref="content">
 
         <button x-on:click="navigator.clipboard.writeText($refs.content.value)">
@@ -151,7 +151,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-cloak">
         Скрывайте блок HTML до тех пор, пока Alpine не завершит инициализацию его содержимого:
-        ```html "x-cloak"
+        ```html wrap "x-cloak"
         <div x-cloak>
           ...
         </div>
@@ -159,7 +159,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="x-ignore">
         Предотвращайте инициализацию блока HTML с помощью Alpine:
-        ```html "x-ignore"
+        ```html wrap "x-ignore"
         <div x-ignore>
           ...
         </div>
@@ -171,19 +171,19 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
     <CardGrid>
       <Card title="$store">
         Получайте доступ к глобальному хранилищу, зарегистрированному с помощью `Alpine.store(...)`:
-        ```html "$store"
+        ```html wrap "$store"
         <h1 x-text="$store.site.title"></h1>
         ```
       </Card>
       <Card title="$el">
         Ссылайтесь на текущий элемент DOM:
-        ```html "$el"
+        ```html wrap "$el"
         <div x-init="new Pikaday($el)"></div>
         ```
       </Card>
       <Card title="$dispatch">
         Отправляйте пользовательское событие браузера из текущего элемента:
-        ```html "$dispatch"
+        ```html wrap "$dispatch"
         <div x-on:notify="...">
           <button x-on:click="$dispatch('notify')">...</button>
         </div>
@@ -191,7 +191,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="$watch">
         Отслеживайте фрагмент данных и при его изменении запускайте предоставленный обратный вызов:
-        ```html "$watch"
+        ```html wrap "$watch"
         <div x-init="$watch('count', value => {
           console.log('count: ' + value)
         })">...</div>
@@ -199,7 +199,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="$refs">
         Ссылайтесь на элемент по ключу (задается с помощью `x-ref`):
-        ```html "$refs"
+        ```html wrap "$refs"
         <div x-init="$refs.button.remove()">
           <button x-ref="button">Удалите меня</button>
         </div>
@@ -207,7 +207,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="$nextTick">
         Дожидайтесь следующего «тика» (отрисовка в браузере) для запуска части кода:
-        ```html "$nextTick"
+        ```html wrap "$nextTick"
         <div
           x-text="count"
           x-text="$nextTick(() => {
@@ -222,7 +222,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
     <CardGrid>
       <Card title="Alpine.data">
         Повторно используйте объект данных и ссылайтесь на него с помощью `x-data`:
-        ```html "x-data" "Alpine.data"
+        ```html wrap "x-data" "Alpine.data"
         <div x-data="dropdown">
           ...
         </div>
@@ -240,7 +240,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
       <Card title="Alpine.store">
         Объявляйте часть глобальных, реактивных данных, доступ к которым можно получить из любого места с помощью `$store`:
-        ```html "$store" "Alpine.store"
+        ```html wrap "$store" "Alpine.store"
         <button @click="$store.notifications.notify('...')">
           Уведомлять
         </button>
