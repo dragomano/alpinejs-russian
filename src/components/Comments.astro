@@ -1,8 +1,8 @@
 ---
-const { lang, slug } = Astro.props;
+const { editUrl, lang, slug } = Astro.props;
 ---
 {
-    slug && (
+    editUrl && slug && (
         <div class="comments">
             <script src="https://giscus.app/client.js"
                 data-repo="dragomano/alpinejs-russian"

@@ -2,13 +2,17 @@
 import { Icon } from '@astrojs/starlight/components';
 import LastUpdated from '@astrojs/starlight/components/LastUpdated.astro';
 
-const { slug } = Astro.props;
+const { editUrl, slug } = Astro.props;
 const source = 'https://alpinejs.dev/' + slug;
 ---
-<a href={source} class="sl-flex">
-    <Icon name="external" size="1.2em" /> Оригинальная документация
-</a>
-<LastUpdated {...Astro.props} />
+{
+    editUrl && (
+        <a href={source} class="sl-flex">
+            <Icon name="external" size="1.2em" /> Оригинальная документация
+        </a>
+        <LastUpdated {...Astro.props} />
+    )
+}
 
 <style>
     a {
