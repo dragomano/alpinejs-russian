@@ -7,6 +7,7 @@ import mask from '@alpinejs/mask';
 import morph from '@alpinejs/morph';
 import slug from 'alpinejs-slug'
 import persist from '@alpinejs/persist'
+import tash from 'alpinejs-tash'
 
 export default (Alpine: Alpine) => {
   Alpine.plugin(anchor);
@@ -17,4 +18,5 @@ export default (Alpine: Alpine) => {
   Alpine.plugin(morph);
   Alpine.plugin(slug);
   Alpine.plugin(persist);
+  Alpine.plugin(tash);
 };

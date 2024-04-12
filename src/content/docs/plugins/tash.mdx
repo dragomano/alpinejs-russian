@@ -1,0 +1,91 @@
+---
+title: Tash
+description: Используем интерполяцию React, Vue или Angular с помощью Alpine JS
+banner:
+  content: |
+    Этот плагин не является официальным и включён в эту документацию переводчиком.
+---
+
+Если вы привыкли к записи переменных в React, Vue или Angular, то этот плагин поможет использовать более привычный синтаксис при отображении Alpine JS `{переменных}` 🚀.
+
+## Установка
+
+Вы можете использовать этот плагин, включив его из тега `<script>` или установив с помощью менеджера пакетов.
+
+### Через CDN
+
+Вы можете подключить CDN-сборку этого плагина с помощью тега `<script>`, только подключать нужно ДО основного JS-файла Alpine.
+
+```html
+<!-- Tash Plugin -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs-tash@latest/dist/tash.min.js"></script>
+
+<!-- Alpine Core -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+```
+
+### Через менеджер пакетов
+
+Вы можете установить Tash для использования внутри вашей сборки следующим образом:
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="npm">
+    ```shell
+    npm add alpinejs-tash
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```shell
+    pnpm add alpinejs-tash
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```shell
+    yarn add alpinejs-tash
+    ```
+  </TabItem>
+</Tabs>
+
+Затем инициализируйте его в своей сборке:
+
+```js {2, 4}
+import Alpine from 'alpinejs';
+import tash from 'alpinejs-tash';
+
+Alpine.plugin(tash);
+Alpine.start();
+```
+
+## Использование
+
+### Стиль React
+
+```html live "x-tash"
+<div x-data="{ name: 'Вася', age: 50, company: 'GitHub' }">
+  <p x-tash="name, age, company">
+    Привет, я {name}! Мне {age} лет и я работаю в {company}!
+  </p>
+</div>
+```
+
+### Стиль Vue
+
+```html live "x-tash"
+<div x-data="{ name: 'Вася', age: 50, company: 'GitHub' }">
+  <p x-tash.vue="name, age, company">
+    Привет, я {{ name }}! Мне {{ age }} лет и я работаю в {{ company }}!
+  </p>
+</div>
+```
+
+### Стиль Angular
+
+```html live "x-tash"
+<div x-data="{ name: 'Вася', age: 50, company: 'GitHub' }">
+  <p x-tash.angular="name, age, company">
+    Привет, я {{name}}! Мне {{age}} лет и я работаю в {{company}}!
+  </p>
+</div>
+```
