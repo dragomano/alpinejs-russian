@@ -2,8 +2,8 @@
 import { Icon } from '@astrojs/starlight/components';
 import LastUpdated from '@astrojs/starlight/components/LastUpdated.astro';
 
-const { editUrl, slug } = Astro.props;
-const source = 'https://alpinejs.dev/' + slug;
+const { entry, editUrl, slug } = Astro.props;
+const source = entry.data.origin ? entry.data.origin : ('https://alpinejs.dev/' + slug);
 ---
 {
     editUrl && (
