@@ -19,13 +19,26 @@ import { LinkCard } from '@astrojs/starlight/components';
 
 Вы можете подключить CDN-сборку этого плагина с помощью тега `<script>`, только подключать нужно ДО основного JS-файла Alpine.
 
-```html
-<!-- Intersect Plugin -->
-<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3/dist/cdn.min.js"></script>
+<Tabs>
+  <TabItem label="jsDelivr CDN">
+    ```html
+    <!-- Intersect Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3/dist/cdn.min.js"></script>
 
-<!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
-```
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+    ```
+  </TabItem>
+  <TabItem label="unpkg CDN">
+    ```html
+    <!-- Intersect Plugin -->
+    <script defer src="https://unpkg.com/@alpinejs/intersect@latest/dist/cdn.min.js"></script>
+
+    <!-- Alpine Core -->
+    <script defer src="https://unpkg.com/alpinejs@3/dist/cdn.min.js"></script>
+    ```
+  </TabItem>
+</Tabs>
 
 ### Через менеджер пакетов
 
