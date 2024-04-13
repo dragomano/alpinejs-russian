@@ -131,7 +131,9 @@ export default defineConfig({
     liveCode({
       layout: '@components/LiveCode.astro',
     }),
-    tailwind(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
   ],
   markdown: {
     rehypePlugins: [
