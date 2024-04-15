@@ -8,6 +8,7 @@ import morph from '@alpinejs/morph';
 import slug from 'alpinejs-slug'
 import persist from '@alpinejs/persist'
 import tash from 'alpinejs-tash'
+import Clipboard from '@ryangjchandler/alpine-clipboard'
 
 export default (Alpine: Alpine) => {
   Alpine.plugin(anchor);
@@ -19,4 +20,5 @@ export default (Alpine: Alpine) => {
   Alpine.plugin(slug);
   Alpine.plugin(persist);
   Alpine.plugin(tash);
+  Alpine.plugin(Clipboard)
 };

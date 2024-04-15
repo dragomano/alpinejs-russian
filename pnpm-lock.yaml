@@ -47,6 +47,9 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.1.0
     version: 5.1.0(astro@4.6.0)(tailwindcss@3.4.3)
+  '@ryangjchandler/alpine-clipboard':
+    specifier: ^2.3.0
+    version: 2.3.0
   '@types/alpinejs':
     specifier: ^3.13.10
     version: 3.13.10
@@ -1476,6 +1479,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@ryangjchandler/alpine-clipboard@2.3.0:
+    resolution: {integrity: sha512-r1YL/LL851vSemjgcca+M6Yz9SNtA9ATul8nJ0n0sAS1W3V1GUWvH0Od2XdQF1r36YJF+/4sUc0eHF/Zexw7dA==}
+    dev: false
 
   /@shikijs/core@1.3.0:
     resolution: {integrity: sha512-7fedsBfuILDTBmrYZNFI8B6ATTxhQAasUHllHmjvSZPnoq4bULWoTpHwmuQvZ8Aq03/tAa2IGo6RXqWtHdWaCA==}

@@ -1,0 +1,126 @@
+---
+title: Clipboard
+description: Копируем текст в буфер обмена с помощью Alpine JS
+origin: https://github.com/ryangjchandler/alpine-clipboard
+banner:
+  content: |
+    Этот плагин не является официальным и добавлен в эту документацию переводчиком.
+---
+
+Этот плагин добавляет новое магическое свойство `$clipboard` во все ваши компоненты Alpine, которое можно использовать для копирования любого фрагмента данных в буфер обмена пользователя.
+
+## Установка
+
+Вы можете использовать этот плагин, включив его из тега `<script>` или установив с помощью менеджера пакетов.
+
+### Через CDN
+
+Вы можете подключить CDN-сборку этого плагина с помощью тега `<script>`, только подключать нужно ДО основного JS-файла Alpine.
+
+```html
+<!-- Clipboard Plugin -->
+<script defer src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@latest/dist/alpine-clipboard.min.js"></script>
+
+<!-- Alpine Core -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+```
+
+### Через менеджер пакетов
+
+Вы можете установить Clipboard для использования внутри вашей сборки следующим образом:
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="npm">
+    ```shell
+    npm add @ryangjchandler/alpine-clipboard
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```shell
+    pnpm add @ryangjchandler/alpine-clipboard
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```shell
+    yarn add @ryangjchandler/alpine-clipboard
+    ```
+  </TabItem>
+</Tabs>
+
+Затем инициализируйте его в своей сборке:
+
+```js {2, 4}
+import Alpine from 'alpinejs';
+import Clipboard from '@ryangjchandler/alpine-clipboard'
+
+Alpine.plugin(Clipboard);
+Alpine.start();
+```
+
+## Использование
+
+:::note
+Clipboard API, используемый этим пакетом, работает только в безопасном контексте (https) и на localhost.
+:::
+
+Чтобы скопировать некоторые данные в буфер обмена, вызовите `$clipboard` из обработчика события в вашем компоненте:
+
+```html live "$clipboard"
+<div x-data="{ input: 'Какой-нибудь текст' }">
+  <input class="mb-2" x-model="input">
+  <button type="button" @click="$clipboard(input)">
+    Скопировать в буфер
+  </button>
+</div>
+```
+
+## Директива
+
+В этот пакет также входит директива `x-clipboard`, которую можно добавить к любому элементу (обычно кнопке), и она будет копировать результат выражения при нажатии.
+
+```html live "x-clipboard"
+<div x-data="{ input: 'Фу!' }">
+  <button x-clipboard="input">
+    Скопировать в буфер
+  </button>
+</div>
+```
+
+Если вы выполняете рендеринг на сервере, вы можете предпочесть скопировать необработанное содержимое вместо того, чтобы оценивать выражение как JavaScript. Это можно сделать, добавив к директиве модификатор `.raw`.
+
+Вот фрагмент разметки Laravel Blade для примера:
+
+```html "x-clipboard.raw"
+<button x-clipboard.raw="{{ $post->url() }}">
+  Скопировать в буфер
+</button>
+```
+
+## Объект и массив
+
+Поскольку в функцию `$clipboard` можно передавать любые свойства, если вы передадите объект или массив, то перед копированием в буфер обмена он будет пропущен через `JSON.stringify`:
+
+```html live "$clipboard"
+<div x-data="{ items: ['foo', 'bar'] }">
+  <button type="button" @click="$clipboard(items)">
+    Скопировать в буфер
+  </button>
+</div>
+```
+Теперь буфер обмена будет содержать `["foo", "bar"]`.
+
+## Хуки
+
+При установке этого пакета через npm можно использовать метод `Clipboard.configure()`, чтобы прикрепить хук `onCopy` к буферу обмена:
+
+```js "Clipboard.configure"
+import Clipboard from '@ryangjchandler/alpine-clipboard'
+
+Alpine.plugin(Clipboard.configure({
+  onCopy: () => {
+    console.log('Скопировано!')
+  }
+}))
+```
