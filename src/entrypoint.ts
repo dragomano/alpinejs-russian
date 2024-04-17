@@ -9,6 +9,7 @@ import slug from 'alpinejs-slug'
 import persist from '@alpinejs/persist'
 import tash from 'alpinejs-tash'
 import Clipboard from '@ryangjchandler/alpine-clipboard'
+import validate from "@colinaut/alpinejs-plugin-simple-validate";
 
 export default (Alpine: Alpine) => {
   Alpine.plugin(anchor);
@@ -21,4 +22,5 @@ export default (Alpine: Alpine) => {
   Alpine.plugin(persist);
   Alpine.plugin(tash);
   Alpine.plugin(Clipboard)
+  Alpine.plugin(validate)
 };
