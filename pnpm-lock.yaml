@@ -26,6 +26,9 @@ dependencies:
   '@alpinejs/persist':
     specifier: ^3.13.8
     version: 3.13.8
+  '@alpinejs/sort':
+    specifier: ^3.13.8
+    version: 3.13.8
   '@astro-community/astro-embed-youtube':
     specifier: ^0.5.2
     version: 0.5.2(astro@4.6.0)
@@ -126,6 +129,10 @@ packages:
 
   /@alpinejs/persist@3.13.8:
     resolution: {integrity: sha512-NLfU6yS1fdWp0O5ujT17yVxB6KnINh/deRrvcezP3eqZZxpXCgPb5a7OFje5VBhR6zxsfUJJ6Ukz5AthozhLTg==}
+    dev: false
+
+  /@alpinejs/sort@3.13.8:
+    resolution: {integrity: sha512-uIBky3jXwEpr0gyS4lb0MP6gpnfcgyoJIO1YTF2Qw6omsOobI+iZWj2kd5jMePA387zHSKn+lVW0eS/8YZNz1Q==}
     dev: false
 
   /@ampproject/remapping@2.3.0:
