@@ -45,7 +45,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
 <Tabs>
   <TabItem label="15 атрибутов">
     <CardGrid stagger>
-      <Card title="x-data">
+      <Card title="<a href=/directives/data>x-data</a>">
         Объявляйте новый компонент Alpine и его данные для блока HTML:
         ```html wrap "x-data"
         <div x-data="{ open: false }">
@@ -53,7 +53,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="x-bind">
+      <Card title="<a href=/directives/bind>x-bind</a>">
         Устанавливайте динамические атрибуты HTML для элемента:
         ```html wrap "x-bind"
         <div x-bind:class="! open ? 'hidden' : ''">
@@ -61,7 +61,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="x-on">
+      <Card title="<a href=/directives/on>x-on</a>">
         Прослушивайте события браузера на элементе:
         ```html wrap "x-on"
         <button x-on:click="open = ! open">
@@ -69,7 +69,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </button>
         ```
       </Card>
-      <Card title="x-text">
+      <Card title="<a href=/directives/text>x-text</a>">
         Устанавливайте текстовое содержимое элемента:
         ```html wrap "x-text"
         <div>
@@ -77,7 +77,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="x-html">
+      <Card title="<a href=/directives/html>x-html</a>">
         Устанавливайте внутренний HTML элемента:
         ```html wrap "x-html"
         <div x-html="(await axios.get('/some/html/partial')).data">
@@ -85,17 +85,16 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="x-model">
+      <Card title="<a href=/directives/model>x-model</a>">
         Синхронизируйте часть данных с элементом ввода:
         ```html wrap "x-model"
         <div x-data="{ search: '' }">
           <input type="text" x-model="search">
-
           Поиск: <span x-text="search"></span>
         </div>
         ```
       </Card>
-      <Card title="x-show">
+      <Card title="<a href=/directives/show>x-show</a>">
         Переключайте видимость элемента:
         ```html wrap "x-show"
         <div x-show="open">
@@ -103,7 +102,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="x-transition">
+      <Card title="<a href=/directives/transition>x-transition</a>">
         Перемещайте элемент внутрь и наружу с помощью переходов CSS:
         ```html wrap "x-transition"
         <div x-show="open" x-transition>
@@ -111,7 +110,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="x-for">
+      <Card title="<a href=/directives/for>x-for</a>">
         Повторяйте блок HTML на основе набора данных:
         ```html wrap "x-for"
         <template x-for="post in posts">
@@ -119,7 +118,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </template>
         ```
       </Card>
-      <Card title="x-if">
+      <Card title="<a href=/directives/if>x-if</a>">
         Добавляйте/удаляйте блок HTML по условию со страницы целиком:
         ```html wrap "x-if"
         <template x-if="open">
@@ -127,29 +126,28 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </template>
         ```
       </Card>
-      <Card title="x-init">
+      <Card title="<a href=/directives/init>x-init</a>">
         Запускайте код, когда элемент инициализируется с помощью Alpine:
         ```html wrap "x-init"
         <div x-init="date = new Date()"></div>
         ```
       </Card>
-      <Card title="x-effect">
+      <Card title="<a href=/directives/effect>x-effect</a>">
         Выполняйте скрипт каждый раз, когда меняется одна из его зависимостей:
         ```html wrap "x-effect"
         <div x-effect="console.log('count: '+count)"></div>
         ```
       </Card>
-      <Card title="x-ref">
+      <Card title="<a href=/directives/ref>x-ref</a>">
         Ссылайтесь на элементы напрямую по их указанным ключам, используя магическое свойство `$refs`:
         ```html wrap "x-ref"
         <input type="text" x-ref="content">
-
         <button x-on:click="navigator.clipboard.writeText($refs.content.value)">
           Скопировать
         </button>
         ```
       </Card>
-      <Card title="x-cloak">
+      <Card title="<a href=/directives/cloak>x-cloak</a>">
         Скрывайте блок HTML до тех пор, пока Alpine не завершит инициализацию его содержимого:
         ```html wrap "x-cloak"
         <div x-cloak>
@@ -157,7 +155,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="x-ignore">
+      <Card title="<a href=/directives/ignore>x-ignore</a>">
         Предотвращайте инициализацию блока HTML с помощью Alpine:
         ```html wrap "x-ignore"
         <div x-ignore>
@@ -169,19 +167,19 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
   </TabItem>
   <TabItem label="6 свойств">
     <CardGrid>
-      <Card title="$store">
+      <Card title="<a href=/magics/store>$store</a>">
         Получайте доступ к глобальному хранилищу, зарегистрированному с помощью `Alpine.store(...)`:
         ```html wrap "$store"
         <h1 x-text="$store.site.title"></h1>
         ```
       </Card>
-      <Card title="$el">
+      <Card title="<a href=/magics/el>$el</a>">
         Ссылайтесь на текущий элемент DOM:
         ```html wrap "$el"
         <div x-init="new Pikaday($el)"></div>
         ```
       </Card>
-      <Card title="$dispatch">
+      <Card title="<a href=/magics/dispatch>$dispatch</a>">
         Отправляйте пользовательское событие браузера из текущего элемента:
         ```html wrap "$dispatch"
         <div x-on:notify="...">
@@ -189,7 +187,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="$watch">
+      <Card title="<a href=/magics/watch>$watch</a>">
         Отслеживайте фрагмент данных и при его изменении запускайте предоставленный обратный вызов:
         ```html wrap "$watch"
         <div x-init="$watch('count', value => {
@@ -197,7 +195,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         })">...</div>
         ```
       </Card>
-      <Card title="$refs">
+      <Card title="<a href=/magics/refs>$refs</a>">
         Ссылайтесь на элемент по ключу (задается с помощью `x-ref`):
         ```html wrap "$refs"
         <div x-init="$refs.button.remove()">
@@ -205,7 +203,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="$nextTick">
+      <Card title="<a href=/magics/nexttick>$nextTick</a>">
         Дожидайтесь следующего «тика» (отрисовка в браузере) для запуска части кода:
         ```html wrap "$nextTick"
         <div
@@ -220,15 +218,14 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
   </TabItem>
   <TabItem label="2 метода">
     <CardGrid>
-      <Card title="Alpine.data">
+      <Card title="<a href=/globals/alpine-data>Alpine.data</a>">
         Повторно используйте объект данных и ссылайтесь на него с помощью `x-data`:
         ```html wrap "x-data" "Alpine.data"
         <div x-data="dropdown">
           ...
         </div>
-
-        ...
-
+        ```
+        ```js "Alpine.data"
         Alpine.data('dropdown', () => ({
           open: false,
 
@@ -238,15 +235,14 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         }))
         ```
       </Card>
-      <Card title="Alpine.store">
+      <Card title="<a href=/globals/alpine-store>Alpine.store</a>">
         Объявляйте часть глобальных, реактивных данных, доступ к которым можно получить из любого места с помощью `$store`:
         ```html wrap "$store" "Alpine.store"
-        <button @click="$store.notifications.notify('...')">
+        <button x-on:click="$store.notifications.notify('...')">
           Уведомлять
         </button>
-
-        ...
-
+        ```
+        ```js "Alpine.store"
         Alpine.store('notifications', {
           items: [],
 
