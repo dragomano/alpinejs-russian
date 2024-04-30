@@ -1,27 +1,30 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
-import LastUpdated from '@astrojs/starlight/components/LastUpdated.astro';
+import Default from '@astrojs/starlight/components/LastUpdated.astro';
 
 const { entry, editUrl, slug } = Astro.props;
-const source = entry.data.origin ? entry.data.origin : ('https://alpinejs.dev/' + slug);
+const source = entry.data.origin ? entry.data.origin : 'https://alpinejs.dev/' + slug;
 ---
+
 {
-    editUrl && (
-        <a href={source} class="sl-flex">
-            <Icon name="external" size="1.2em" /> Оригинальная документация
-        </a>
-        <LastUpdated {...Astro.props} />
-    )
+  editUrl && (
+    <>
+      <a href={source} class='sl-flex'>
+        <Icon name='external' size='1.2em' /> Оригинальная документация
+      </a>
+      <Default {...Astro.props} />
+    </>
+  )
 }
 
 <style>
-    a {
-        gap: 0.5rem;
-        align-items: center;
-        text-decoration: none;
-        color: var(--sl-color-gray-3);
-    }
-    a:hover {
-        color: var(--sl-color-white);
-    }
+  a {
+    gap: 0.5rem;
+    align-items: center;
+    text-decoration: none;
+    color: var(--sl-color-gray-3);
+  }
+  a:hover {
+    color: var(--sl-color-white);
+  }
 </style>
