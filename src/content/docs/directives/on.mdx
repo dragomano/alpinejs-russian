@@ -104,6 +104,37 @@ Alpine позволяет легко прослушивать события `ke
 | `.comma`                       | запятая, `,`                         |
 | `.slash`                       | косая черта, `/`                     |
 
+## События мыши
+
+Как и в случае с вышеупомянутыми событиями клавиатуры, Alpine позволяет использовать некоторые модификаторы клавиш для обработки событий `click`:
+
+| Модификатор | Клавиша события |
+| -------- | --------- |
+| `.shift` | shiftKey  |
+| `.ctrl`  | ctrlKey   |
+| `.cmd`   | metaKey   |
+| `.meta`  | metaKey   |
+| `.alt`   | altKey    |
+
+Они работают с событиями `click`, `auxclick`, `context` и `dblclick`, а также с `mouseover`, `mousemove`, `mouseenter`, `mouseleave`, `mouseout`, `mouseup` и `mousedown`.
+
+Вот пример кнопки, поведение которой меняется при нажатии клавиши `Shift`:
+
+```html live wrap "click" "shift" "mousemove" "mouseout"
+<div x-data="{ message: '' }">
+  <button type="button"
+    @click="message = 'выбрано'"
+    @click.shift="message = 'добавлено в выбранные'"
+    @mousemove.shift="message = 'добавить к выбору'"
+    @mouseout="message = 'выбрать'"
+    x-text="message"></button>
+</div>
+```
+
+:::note
+    Обычные события `click` с некоторыми модификаторами (например, `ctrl`) автоматически становятся событиями `contextmenu` в большинстве браузеров. Аналогично, события `right-click` будут вызывать событие `contextmenu`, но также будут вызывать событие `auxclick`, если событие `contextmenu` предотвращено.
+:::
+
 ## Пользовательские события
 
 Слушатели событий Alpine — это оболочка для собственных слушателей событий DOM. Таким образом, они могут прослушивать ЛЮБЫЕ события DOM, включая пользовательские события.
@@ -313,19 +344,19 @@ Alpine предлагает ряд модификаторов директив �
 
     <MultipleChoice>
       <Option>
-         ```html wrap
-         <input type="text" @keydown.probel="..." />
-         ```
+        ```html wrap
+        <input type="text" @keydown.probel="..." />
+        ```
       </Option>
       <Option>
-         ```html wrap
-         <input type="text" @keyup.spaceDown="..." />
-         ```
+        ```html wrap
+        <input type="text" @keyup.spaceDown="..." />
+        ```
       </Option>
       <Option isCorrect>
-         ```html wrap
-         <input type="text" @keyup.space="..." />
-         ```
+        ```html wrap
+        <input type="text" @keyup.space="..." />
+        ```
       </Option>
     </MultipleChoice>
 
@@ -333,19 +364,19 @@ Alpine предлагает ряд модификаторов директив �
 
     <MultipleChoice>
       <Option>
-         ```html wrap
-         <div @oh-my-gosh.capture="...">...</div>
-         ```
+        ```html wrap
+        <div @oh-my-gosh.capture="...">...</div>
+        ```
       </Option>
       <Option isCorrect>
-         ```html wrap
-         <div @oh-my-gosh.camel="...">...</div>
-         ```
+        ```html wrap
+        <div @oh-my-gosh.camel="...">...</div>
+        ```
       </Option>
       <Option>
-         ```html wrap
-         <div @ohMyGosh.dash="...">...</div>
-         ```
+        ```html wrap
+        <div @ohMyGosh.dash="...">...</div>
+        ```
       </Option>
     </MultipleChoice>
 
