@@ -8,6 +8,7 @@ banner:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
 
 Этот плагин добавляет новое магическое свойство `$clipboard` во все ваши компоненты Alpine, которое можно использовать для копирования любого фрагмента данных в буфер обмена пользователя.
 
@@ -44,23 +45,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Вы можете установить Clipboard для использования внутри вашей сборки следующим образом:
 
-<Tabs>
-  <TabItem label="npm">
-    ```shell
-    npm add @ryangjchandler/alpine-clipboard
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```shell
-    pnpm add @ryangjchandler/alpine-clipboard
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```shell
-    yarn add @ryangjchandler/alpine-clipboard
-    ```
-  </TabItem>
-</Tabs>
+<PackageManagers pkg="@ryangjchandler/alpine-clipboard" icons={false} />
 
 Затем инициализируйте его в своей сборке:
 

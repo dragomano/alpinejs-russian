@@ -5,6 +5,9 @@ sidebar:
   order: 1
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
+
 Плагин Mask позволяет автоматически форматировать поле ввода текста по мере его набора пользователем.
 
 Это удобно для различных типов входов: номера телефонов, кредитных карт, суммы в долларах, номера счетов, даты и т. д.
@@ -42,25 +45,7 @@ sidebar:
 
 Вы можете установить Mask для использования внутри вашей сборки следующим образом:
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-
-<Tabs>
-  <TabItem label="npm">
-    ```shell
-    npm add @alpinejs/mask
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```shell
-    pnpm add @alpinejs/mask
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```shell
-    yarn add @alpinejs/mask
-    ```
-  </TabItem>
-</Tabs>
+<PackageManagers pkg="@alpinejs/mask" icons={false} />
 
 Затем инициализируйте его в своей сборке:
 

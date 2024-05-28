@@ -5,6 +5,9 @@ sidebar:
   order: 5
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
+
 Плагин Collapse позволяет разворачивать и сворачивать элементы с помощью плавной анимации.
 
 Поскольку такое поведение и реализация отличаются от стандартной системы переходов Alpine, эта функциональность была выделена в специальный плагин.
@@ -42,25 +45,7 @@ sidebar:
 
 Вы можете установить Collapse для использования внутри вашей сборки следующим образом:
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-
-<Tabs>
-  <TabItem label="npm">
-    ```shell
-    npm add @alpinejs/collapse
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```shell
-    pnpm add @alpinejs/collapse
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```shell
-    yarn add @alpinejs/collapse
-    ```
-  </TabItem>
-</Tabs>
+<PackageManagers pkg="@alpinejs/collapse" icons={false} />
 
 Затем инициализируйте его в своей сборке:
 

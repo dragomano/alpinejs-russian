@@ -5,6 +5,9 @@ sidebar:
   order: 6
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
+
 Плагин Anchor позволяет легко привязать позиционирование элемента к другому элементу на странице.
 
 Эта функциональность полезна при создании в Alpine выпадающих меню, всплывающих окон, диалоговых окон и всплывающих подсказок.
@@ -44,25 +47,7 @@ sidebar:
 
 Вы можете установить Anchor для использования внутри вашей сборки следующим образом:
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-
-<Tabs>
-  <TabItem label="npm">
-    ```shell
-    npm add @alpinejs/anchor
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```shell
-    pnpm add @alpinejs/anchor
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```shell
-    yarn add @alpinejs/anchor
-    ```
-  </TabItem>
-</Tabs>
+<PackageManagers pkg="@alpinejs/anchor" icons={false} />
 
 Затем инициализируйте его в своей сборке:
 
