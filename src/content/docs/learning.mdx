@@ -5,31 +5,37 @@ origin: https://github.com/dragomano/alpinejs-russian/blob/main/src/content/docs
 ---
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { ShowcaseText, ShowcaseYouTube } from 'starlight-showcases'
 
 Устали от сухой теории и ищете практические примеры? Тогда эти ссылки могут вам пригодиться:
 
-<CardGrid>
-  <LinkCard
-    title="Alpine Toolbox [English]"
-    href="https://www.alpinetoolbox.com"
-    description="Готовые примеры кода на Alpine.js"
-  />
-  <LinkCard
-    title="Создание компонента Todos на Alpine.js"
-    href="https://php.dragomano.ru/znakomstvo-s-populyarnymi-js-freymvorkami-chast-1/"
-    description="Знакомство с современными JS фреймворками - Alpine.js"
-  />
-  <LinkCard
-    title="Code Examples and Guides on Functionality with Alpine JS [English]"
-    href="https://js.hyperui.dev"
-    description="Уникальный ресурс с примерами готовых компонентов"
-  />
-</CardGrid>
+<ShowcaseText
+  entries={[
+    {
+      href: 'https://www.alpinetoolbox.com',
+      title: 'Alpine Toolbox [English]',
+      description: 'Готовые примеры кода на Alpine.js',
+    },
+    {
+      href: 'https://php.dragomano.ru/znakomstvo-s-populyarnymi-js-freymvorkami-chast-1/',
+      title: 'Создание компонента Todos на Alpine.js',
+      description: 'Знакомство с современными JS фреймворками - Alpine.js',
+    },
+    {
+      href: 'https://js.hyperui.dev',
+      title: 'Code Examples and Guides on Functionality with Alpine JS [English]',
+      description: 'Уникальный ресурс с примерами готовых компонентов',
+    },
+    {
+      href: 'https://livewire.laravel.com/docs/alpine',
+      title: 'Alpine - Laravel Livewire [English]',
+      description: 'Использование Alpine совместно с Livewire',
+    },
+  ]}
+/>
 
-import YouTubeGrid from '@components/youtube-grid.astro';
-
-<YouTubeGrid
-  videos={[
+<ShowcaseYouTube
+  entries={[
     {
       href: 'https://www.youtube.com/watch?v=gszM-iaQMSs&list=PLFO2pzRBZxX2ZSfn-8W1d2e65j8oDm5Kn&index=1&t=3s',
       title: 'AlpineJS с нуля',

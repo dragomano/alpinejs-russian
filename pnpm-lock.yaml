@@ -95,6 +95,9 @@ importers:
       starlight-package-managers:
         specifier: ^0.6.0
         version: 0.6.0(@astrojs/starlight@0.23.1(astro@4.8.6(@types/node@18.19.33)))(astro@4.8.6(@types/node@18.19.33))
+      starlight-showcases:
+        specifier: ^0.1.0
+        version: 0.1.0(@astrojs/starlight@0.23.1(astro@4.8.6(@types/node@18.19.33)))(astro@4.8.6(@types/node@18.19.33))
       tailwindcss:
         specifier: ^3.4.3
         version: 3.4.3
@@ -2370,6 +2373,12 @@ packages:
     peerDependencies:
       '@astrojs/starlight': '>=0.22.0'
       astro: '>=4.2.7'
+
+  starlight-showcases@0.1.0:
+    resolution: {integrity: sha512-2udyLWBKvY9N5MY9tHzvCtaO4BtiesyU9aMequ7zjpgRH/fU6RZW0gzKI8mWSJZPLibRSUW6EKYn1rotOv3A/w==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.23.0'
 
   stdin-discarder@0.2.2:
     resolution: {integrity: sha512-UhDfHmA92YAlNnCfhmq0VeNL5bDbiZGg7sZ2IvPsXubGkiNa9EC+tUTsjBRsYUAz87btI6/1wf4XoVvQ3uRnmQ==}
@@ -5487,6 +5496,14 @@ snapshots:
     dependencies:
       '@astrojs/starlight': 0.23.1(astro@4.8.6(@types/node@18.19.33))
       astro: 4.8.6(@types/node@18.19.33)
+
+  starlight-showcases@0.1.0(@astrojs/starlight@0.23.1(astro@4.8.6(@types/node@18.19.33)))(astro@4.8.6(@types/node@18.19.33)):
+    dependencies:
+      '@astro-community/astro-embed-twitter': 0.5.4(astro@4.8.6(@types/node@18.19.33))
+      '@astro-community/astro-embed-youtube': 0.5.2(astro@4.8.6(@types/node@18.19.33))
+      '@astrojs/starlight': 0.23.1(astro@4.8.6(@types/node@18.19.33))
+    transitivePeerDependencies:
+      - astro
 
   stdin-discarder@0.2.2: {}
 
