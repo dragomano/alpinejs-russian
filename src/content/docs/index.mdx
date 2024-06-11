@@ -36,7 +36,7 @@ Alpine — это надёжный и простой инструмент для
 </div>
 ```
 
-Alpine — это коллекция из **15 атрибутов**, **6 свойств** и **2 методов**.
+Alpine — это коллекция из **15 атрибутов**, **6 свойств** и **3 методов**.
 
 Нет лучшего способа разобраться в том, что такое Alpine и на что он способен, чем увидеть это своими глазами:
 
@@ -216,7 +216,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
       </Card>
     </CardGrid>
   </TabItem>
-  <TabItem label="2 метода">
+  <TabItem label="3 метода">
     <CardGrid>
       <Card title="<a href=/globals/alpine-data>Alpine.data</a>">
         Повторно используйте объект данных и ссылайтесь на него с помощью `x-data`:
@@ -250,6 +250,25 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
             this.items.push(message)
           }
         })
+        ```
+      </Card>
+      <Card title="<a href=/globals/alpine-bind>Alpine.bind</a>">
+        Повторно используйте объект атрибутов и привязывайтесь к нему с помощью `x-bind`:
+        ```html wrap "x-bind" "Alpine.bind"
+        <button x-bind="SomeButton"></button>
+        ```
+        ```js "Alpine.bind"
+        Alpine.bind('SomeButton', () => ({
+          type: 'button',
+
+          '@click'() {
+            this.doSomething();
+          },
+
+          ':disabled'() {
+            return this.shouldDisable;
+          },
+        }))
         ```
       </Card>
     </CardGrid>

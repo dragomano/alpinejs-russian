@@ -73,7 +73,7 @@ export default defineConfig({
         github: 'https://github.com/dragomano/alpinejs-russian',
       },
       editLink: {
-        baseUrl: 'https://github.com/dragomano/alpinejs-russian/edit/main/docs/',
+        baseUrl: 'https://github.com/dragomano/alpinejs-russian/edit/main/',
       },
       sidebar: [
         {
