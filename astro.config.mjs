@@ -97,7 +97,7 @@ export default defineConfig({
           },
         },
         {
-          label: 'Магия',
+          label: 'Магические свойства',
           collapsed: true,
           autogenerate: {
             directory: 'magics',
