@@ -111,7 +111,6 @@ window.Alpine.start();
 <!-- Плохо -->
 <div x-data="{ count: 1 }">
   <button @click="count++">Увеличить</button>
-
   <span x-text="count"></span>
 </div>
 ```
@@ -122,7 +121,6 @@ window.Alpine.start();
 <!-- Хорошо -->
 <div x-data="counter">
   <button @click="increment">Увеличить</button>
-
   <span x-text="count"></span>
 </div>
 ```
@@ -135,4 +133,26 @@ Alpine.data('counter', () => ({
     this.count++;
   },
 }));
+```
+
+Сборка CSP поддерживает доступ к вложенным свойствам (аксессорам свойств) с использованием точечной нотации.
+
+```html "increment"
+<!-- Это тоже работает -->
+<div x-data="counter">
+    <button @click="foo.increment">Увеличить</button>
+    <span x-text="foo.count"></span>
+</div>
+```
+
+```js "increment"
+Alpine.data('counter', () => ({
+    foo: {
+        count: 1,
+
+        increment() {
+            this.count++
+        },
+    },
+}))
 ```
