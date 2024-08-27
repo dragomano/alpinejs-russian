@@ -2,7 +2,7 @@
 title: Focus
 description: Удобное управление фокусом в пределах страницы с помощью плагина для Alpine.js
 sidebar:
-  order: 4
+  order: 5
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -104,41 +104,41 @@ Focus предлагает специальный API для захвата фо
 Вот вложение в действии:
 
 ```html live wrap "x-trap"
-  <div x-data="{ open: false }">
-      <div :class="open && 'opacity-50'">
-          <button x-on:click="open = true">Открыть диалог</button>
-      </div>
-      <div x-show="open" x-trap="open" class="mt-4 space-y-4 p-4 border bg-yellow-100" x-on:keyup.escape.window="open = false">
-          <div>
-              <input type="text" placeholder="Какой-то ввод...">
-          </div>
-          <div>
-              <input type="text" placeholder="Ещё один ввод...">
-          </div>
-          <div x-data="{ open: false }">
-              <div :class="open && 'opacity-50'">
-                  <button x-on:click="open = true">Открыть вложенный диалог</button>
-              </div>
-              <div x-show="open" x-trap="open" class="mt-4 space-y-4 p-4 border border-gray-500 bg-yellow-200" x-on:keyup.escape.window="open = false">
-                  <strong>
-                      <div>Фокус теперь «заперт» внутри этого вложенного диалога. Вы не можете сфокусировать что-либо внутри внешнего диалога, пока он открыт. Если вы закроете это диалоговое окно, фокус будет возвращён последнему известному активному элементу.</div>
-                  </strong>
-                  <div>
-                      <input type="text" placeholder="Какой-то ввод...">
-                  </div>
-                  <div>
-                      <input type="text" placeholder="Ещё один ввод...">
-                  </div>
-                  <div>
-                      <button x-on:click="open = false">Закрыть вложенный диалог</button>
-                  </div>
-              </div>
-          </div>
-          <div>
-              <button x-on:click="open = false">Закрыть диалог</button>
-          </div>
-      </div>
+<div x-data="{ open: false }">
+  <div :class="open && 'opacity-50'">
+      <button x-on:click="open = true">Открыть диалог</button>
   </div>
+  <div x-show="open" x-trap="open" class="mt-4 space-y-4 p-4 border bg-yellow-100" x-on:keyup.escape.window="open = false">
+    <div>
+      <input type="text" placeholder="Какой-то ввод...">
+    </div>
+    <div>
+      <input type="text" placeholder="Ещё один ввод...">
+    </div>
+    <div x-data="{ open: false }">
+      <div :class="open && 'opacity-50'">
+        <button x-on:click="open = true">Открыть вложенный диалог</button>
+      </div>
+      <div x-show="open" x-trap="open" class="mt-4 space-y-4 p-4 border border-gray-500 bg-yellow-200" x-on:keyup.escape.window="open = false">
+        <strong>
+          <div>Фокус теперь «заперт» внутри этого вложенного диалога. Вы не можете сфокусировать что-либо внутри внешнего диалога, пока он открыт. Если вы закроете это диалоговое окно, фокус будет возвращён последнему известному активному элементу.</div>
+        </strong>
+        <div>
+          <input type="text" placeholder="Какой-то ввод...">
+        </div>
+        <div>
+          <input type="text" placeholder="Ещё один ввод...">
+        </div>
+        <div>
+          <button x-on:click="open = false">Закрыть вложенный диалог</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button x-on:click="open = false">Закрыть диалог</button>
+    </div>
+  </div>
+</div>
 ```
 
 ### Модификаторы
