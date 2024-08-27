@@ -1,0 +1,93 @@
+---
+title: Resize
+description: Удобная обёртка Alpine для API Resize Observer, которая позволяет легко реагировать на изменение размера элемента.
+sidebar:
+  order: 3
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
+
+Плагин Resize — это удобная обёртка для [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/Resize_Observer_API), которая позволяет легко реагировать на изменение размера элемента.
+
+Это полезно для настраиваемой анимации на основе размера, интеллектуального закрепления позиционирования, условного добавления атрибутов в зависимости от размера элемента и т. д.
+
+## Установка
+
+Вы можете использовать этот плагин, включив его из тега `<script>` или установив с помощью менеджера пакетов.
+
+### Через CDN
+
+Вы можете подключить CDN-сборку этого плагина с помощью тега `<script>`, только подключать нужно ДО основного JS-файла Alpine.
+
+<Tabs>
+  <TabItem label="jsDelivr CDN">
+    ```html
+    <!-- Resize Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/resize@3/dist/cdn.min.js"></script>
+
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+    ```
+  </TabItem>
+  <TabItem label="unpkg CDN">
+    ```html
+    <!-- Resize Plugin -->
+    <script defer src="https://unpkg.com/@alpinejs/resize@latest/dist/cdn.min.js"></script>
+
+    <!-- Alpine Core -->
+    <script defer src="https://unpkg.com/alpinejs@3/dist/cdn.min.js"></script>
+    ```
+  </TabItem>
+</Tabs>
+
+### Через менеджер пакетов
+
+Вы можете установить Resize для использования внутри вашей сборки следующим образом:
+
+<PackageManagers pkg="@alpinejs/persist" icons={false} />
+
+Затем инициализируйте его в своей сборке:
+
+```js {2, 4}
+import Alpine from 'alpinejs';
+import resize from '@alpinejs/resize';
+
+Alpine.plugin(resize);
+Alpine.start();
+```
+
+## x-resize
+
+Основным API для использования этого плагина является `x-resize`. Вы можете добавить `x-resize` к любому элементу в компоненте Alpine, и когда размер этого элемента будет изменён по какой-либо причине, будет выполнено выражение с двумя волшебными свойствами: `$width` и `$height`.
+
+Вот простой пример использования `x-resize` для отображения ширины и высоты элемента при изменении его размера:
+
+```html live "x-resize"
+<div
+  x-data="{ width: 0, height: 0 }"
+  x-resize="width = $width; height = $height"
+>
+  <i>Измените размер окна браузера, чтобы увидеть, как меняются значения ширины и высоты.</i>
+  <br><br>
+  <p x-text="'Ширина: ' + width + 'px'"></p>
+  <p x-text="'Высота: ' + height + 'px'"></p>
+</div>
+```
+
+## Модификаторы
+
+### .document
+
+Часто бывает полезно наблюдать за размером всего документа, а не конкретного элемента. Для этого можно добавить модификатор `.document` к `x-resize`:
+
+```html live "x-resize.document"
+<div class="demo">
+    <div x-data="{ width: 0, height: 0 }" x-resize.document="width = $width; height = $height">
+        <i>Измените размер окна браузера, чтобы увидеть, как меняются значения ширины и высоты.</i>
+        <br><br>
+        <p x-text="'Ширина: ' + width + 'px'"></p>
+        <p x-text="'Высота: ' + height + 'px'"></p>
+    </div>
+</div>
+```

@@ -7,6 +7,7 @@ import mask from '@alpinejs/mask';
 import morph from '@alpinejs/morph';
 import sort from "@alpinejs/sort";
 import slug from 'alpinejs-slug';
+import resize from '@alpinejs/resize';
 import persist from '@alpinejs/persist';
 import tash from 'alpinejs-tash';
 import Clipboard from '@ryangjchandler/alpine-clipboard';
@@ -21,6 +22,7 @@ export default (Alpine: Alpine) => {
   Alpine.plugin(morph);
   Alpine.plugin(sort);
   Alpine.plugin(slug);
+  Alpine.plugin(resize);
   Alpine.plugin(persist);
   Alpine.plugin(tash);
   Alpine.plugin(Clipboard)
