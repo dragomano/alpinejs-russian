@@ -25,11 +25,7 @@
 
 @layer components {
     .example-container {
-        @apply text-white !important;
-    }
-
-    [data-theme="light"] .example-container > * {
-        @apply text-black;
+        @apply rounded-lg text-white bg-gray-800 !important;
     }
 
     .example-container button {
