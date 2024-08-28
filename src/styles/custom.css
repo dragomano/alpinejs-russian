@@ -25,9 +25,7 @@
 
 @layer components {
     .example-container {
-        h3, span, div {
-            @apply text-white !important;
-        }
+        @apply text-white !important;
     }
 
     .example-container button {
