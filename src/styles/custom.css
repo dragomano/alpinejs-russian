@@ -25,7 +25,7 @@
 
 @layer components {
     .example-container {
-        @apply text-white !important;
+        @apply rounded-lg text-white bg-gray-800 !important;
     }
 
     .example-container button {
