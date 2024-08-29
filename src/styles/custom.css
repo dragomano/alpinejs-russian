@@ -63,4 +63,8 @@
     [x-sort] {
         @apply cursor-pointer;
     }
+
+    [class*="astro-"][role="tab"] {
+        @apply whitespace-nowrap;
+    }
 }
