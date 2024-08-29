@@ -9,7 +9,7 @@ const source = entry.data.origin ? entry.data.origin : 'https://alpinejs.dev/' +
 {
   editUrl && (
     <>
-      <a href={source} class='sl-flex'>
+      <a href={source} target="_blank" class='sl-flex'>
         <Icon name='external' size='1.2em' /> Оригинальная документация
       </a>
       <Default {...Astro.props} />
