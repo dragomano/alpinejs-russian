@@ -19,6 +19,9 @@ export default {
   theme: {
     extend: {
       colors: { accent, gray },
+      fontSize: {
+        xxs: ['.625rem', '.75rem']
+      },
     },
   },
   plugins: [starlightPlugin()],
