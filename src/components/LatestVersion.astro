@@ -1,0 +1,19 @@
+<script>
+    import Alpine from "alpinejs";
+
+    Alpine.data('latestVersion', () => ({
+        version: '&nbsp;',
+
+        init() {
+            fetch('https://api.github.com/repos/alpinejs/alpine/releases/latest')
+                .then(res => res.json())
+                .then(data => {
+                    let publishedAt = (new Date(data.published_at))?.toLocaleDateString();
+
+                    this.version = `${data.tag_name} от ${publishedAt}`;
+                });
+        }
+    }));
+</script>
+
+<p class="text-accent-600 text-xxs font-medium ml-4" x-data="latestVersion" x-html="version">&nbsp;</p>

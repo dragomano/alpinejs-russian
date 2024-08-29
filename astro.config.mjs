@@ -52,6 +52,7 @@ export default defineConfig({
         LastUpdated: './src/components/LastUpdated.astro',
         Pagination: './src/components/Pagination.astro',
         SocialIcons: './src/components/SocialIcons.astro',
+        Header: './src/components/Header.astro',
       },
       customCss: ['./src/styles/custom.css'],
       expressiveCode: {
