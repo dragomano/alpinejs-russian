@@ -225,7 +225,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
           ...
         </div>
         ```
-        ```js "Alpine.data"
+        ```js wrap "Alpine.data"
         Alpine.data('dropdown', () => ({
           open: false,
 
@@ -242,7 +242,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
           Уведомлять
         </button>
         ```
-        ```js "Alpine.store"
+        ```js wrap "Alpine.store"
         Alpine.store('notifications', {
           items: [],
 
@@ -257,7 +257,7 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         ```html wrap "x-bind" "Alpine.bind"
         <button x-bind="SomeButton"></button>
         ```
-        ```js "Alpine.bind"
+        ```js wrap "Alpine.bind"
         Alpine.bind('SomeButton', () => ({
           type: 'button',
 
