@@ -21,7 +21,7 @@ import Option from '@components/Option.astro';
 
 Вы также можете передавать объекты в `x-for`.
 
-```html live "x-for"
+```html wrap live "x-for"
 <ul x-data="{ car: { make: 'Внедорожник', model: 'Grand Cherokee', color: 'чёрный' } }">
   <template x-for="(value, index) in car">
     <li><span x-text="index"></span>: <span x-text="value"></span></li>

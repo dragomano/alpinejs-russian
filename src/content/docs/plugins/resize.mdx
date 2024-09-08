@@ -63,7 +63,7 @@ Alpine.start();
 
 Вот простой пример использования `x-resize` для отображения ширины и высоты элемента при изменении его размера:
 
-```html live "x-resize"
+```html wrap live "x-resize"
 <div
   x-data="{ width: 0, height: 0 }"
   x-resize="width = $width; height = $height"
@@ -81,7 +81,7 @@ Alpine.start();
 
 Часто бывает полезно наблюдать за размером всего документа, а не конкретного элемента. Для этого можно добавить модификатор `.document` к `x-resize`:
 
-```html live "x-resize.document"
+```html wrap live "x-resize.document"
 <div class="demo">
     <div x-data="{ width: 0, height: 0 }" x-resize.document="width = $width; height = $height">
         <i>Измените размер окна браузера, чтобы увидеть, как меняются значения ширины и высоты.</i>
