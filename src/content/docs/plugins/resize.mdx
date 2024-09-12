@@ -68,7 +68,7 @@ Alpine.start();
   x-data="{ width: 0, height: 0 }"
   x-resize="width = $width; height = $height"
 >
-  <i>Измените размер окна браузера, чтобы увидеть, как меняются значения ширины и высоты.</i>
+  <i>Измените размер окна браузера, чтобы увидеть, как меняются значения ниже.</i>
   <br><br>
   <p x-text="'Ширина: ' + width + 'px'"></p>
   <p x-text="'Высота: ' + height + 'px'"></p>
@@ -82,12 +82,10 @@ Alpine.start();
 Часто бывает полезно наблюдать за размером всего документа, а не конкретного элемента. Для этого можно добавить модификатор `.document` к `x-resize`:
 
 ```html wrap live "x-resize.document"
-<div class="demo">
-    <div x-data="{ width: 0, height: 0 }" x-resize.document="width = $width; height = $height">
-        <i>Измените размер окна браузера, чтобы увидеть, как меняются значения ширины и высоты.</i>
-        <br><br>
-        <p x-text="'Ширина: ' + width + 'px'"></p>
-        <p x-text="'Высота: ' + height + 'px'"></p>
-    </div>
+<div x-data="{ width: 0, height: 0 }" x-resize.document="width = $width; height = $height">
+    <i>Измените размер окна браузера, чтобы увидеть, как меняются значения ниже.</i>
+    <br><br>
+    <p x-text="'Ширина: ' + width + 'px'"></p>
+    <p x-text="'Высота: ' + height + 'px'"></p>
 </div>
 ```
