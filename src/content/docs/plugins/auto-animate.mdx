@@ -1,0 +1,131 @@
+---
+title: AutoAnimate
+description: Добавляем плавные переходы с помощью AlpineJS и AutoAnimate
+origin: https://github.com/marcreichel/alpine-auto-animate
+banner:
+  content: |
+    Этот плагин не является официальным и добавлен в эту документацию переводчиком.
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers';
+
+Плагин AutoAnimate является обёрткой для [одноимённой библиотеки](https://github.com/formkit/auto-animate), позволяющей добавлять плавные переходы в ваше веб-приложение.
+
+## Установка
+
+Вы можете использовать этот плагин, включив его из тега `<script>` или установив с помощью менеджера пакетов.
+
+### Через CDN
+
+Вы можете подключить CDN-сборку этого плагина с помощью тега `<script>`, только подключать нужно ДО основного JS-файла Alpine.
+
+<Tabs>
+  <TabItem label="jsDelivr CDN">
+    ```html wrap
+    <!-- AutoAnimate Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@marcreichel/alpine-auto-animate@latest/dist/alpine-auto-animate.min.js"></script>
+
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+    ```
+  </TabItem>
+  <TabItem label="unpkg CDN">
+    ```html wrap
+    <!-- AutoAnimate Plugin -->
+    <script defer src="https://unpkg.com/@marcreichel/alpine-auto-animate@latest/dist/alpine-auto-animate.min.js"></script>
+
+    <!-- Alpine Core -->
+    <script defer src="https://unpkg.com/alpinejs@3/dist/cdn.min.js"></script>
+    ```
+  </TabItem>
+</Tabs>
+
+### Через менеджер пакетов
+
+Вы можете установить AutoAnimate для использования внутри вашей сборки следующим образом:
+
+<PackageManagers pkg="@marcreichel/alpine-auto-animate" icons={false} />
+
+Затем инициализируйте его в своей сборке:
+
+```js {2, 4}
+import Alpine from 'alpinejs';
+import AutoAnimate from '@marcreichel/alpine-auto-animate';
+
+Alpine.plugin(AutoAnimate);
+Alpine.start();
+```
+
+## Использование
+
+Добавьте директиву `x-auto-animate` к любому элементу, к которому вы хотите применить анимацию (включая их прямые дочерние элементы). Например, вместе с плагином [Sort](../sort) это выглядит так:
+
+```html live "x-auto-animate"
+<div x-data>
+  <ul x-sort x-auto-animate.1s>
+      <li x-sort:item>кошка</li>
+      <li x-sort:item>мышка</li>
+      <li x-sort:item>собака</li>
+    </ul>
+</div>
+```
+
+### Продолжительность
+
+Чтобы настроить продолжительность анимации, добавьте модификатор следующим образом:
+
+```html "x-auto-animate"
+<div x-data>
+  <ul x-auto-animate.1000ms>
+      <li>енот</li>
+      <li>суслик</li>
+      <li>бобёр</li>
+    </ul>
+</div>
+```
+
+### Замедление
+
+Чтобы настроить функцию замедления, добавьте её в качестве модификатора:
+
+```html "x-auto-animate"
+<div x-data>
+  <ul x-auto-animate.linear>
+      <li>енот</li>
+      <li>суслик</li>
+      <li>бобёр</li>
+    </ul>
+</div>
+```
+
+### Переключение анимации
+
+В некоторых ситуациях может потребоваться отключить анимацию и включить её позже.
+
+Для этого вы можете указать булево значение в директиве, как показано ниже:
+
+```html "x-auto-animate"
+<div x-data="{ enabled: true }">
+    <ul x-auto-animate="enabled">
+        <!-- ... -->
+    </ul>
+    <button @click="enabled = !enabled" type="button">
+        Переключить анимацию
+    </button>
+</div>
+```
+
+## Глобальная конфигурация
+
+При установке через npm можно использовать метод `AutoAnimate.configure` для предоставления конфигурации:
+
+```js
+import AutoAnimate from '@marcreichel/alpine-auto-animate';
+
+Alpine.plugin(AutoAnimate.configure({
+    duration: 1000,
+    easing: 'linear',
+    disrespectUserMotionPreference: true,
+}));
+```
