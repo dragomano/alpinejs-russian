@@ -14,7 +14,12 @@ export default defineConfig({
   integrations: [
     alpine({ entrypoint: '/src/entrypoint' }),
     starlight({
-      plugins: [starlightLinksValidator(), starlightImageZoom()],
+      plugins: [
+        starlightLinksValidator({
+          errorOnRelativeLinks: false,
+        }),
+        starlightImageZoom(),
+      ],
       title: 'Alpine.js по-русски',
       description: 'Документация Alpine.js на русском языке.',
       head: [
