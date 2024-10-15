@@ -27,6 +27,10 @@ import Option from '@components/Option.astro';
 <input type="text" :placeholder="placeholder" />
 ```
 
+:::caution
+Несмотря на отсутствие в приведённом выше фрагменте, `x-bind` не может быть использована, если ни у одного из родительских элементов не указана директива [`x-data`](/directives/data)
+:::
+
 ## Привязка классов
 
 `x-bind` чаще всего используется для установки определённых классов для элемента в зависимости от состояния Alpine.
@@ -160,7 +164,7 @@ import Option from '@components/Option.astro';
 Ключи объектов могут быть любыми, которые обычно пишутся в Alpine в качестве имени атрибута. Сюда входят директивы и модификаторы Alpine, а также обычные атрибуты HTML. Значения объектов представляют собой либо обычные строки, либо, в случае динамических директив Alpine, обратные вызовы, которые должны быть вычислены Alpine.
 
 ```html live "dropdown"
-<div x-data="dropdown()">
+<div x-data="dropdown">
   <button x-bind="trigger">Открыть</button>
   <div x-bind="dialogue">Содержимое</div>
 </div>
