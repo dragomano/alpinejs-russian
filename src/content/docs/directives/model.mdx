@@ -194,8 +194,10 @@ import Option from '@components/Option.astro';
 По умолчанию любые данные, хранящиеся в свойстве через `x-model`, сохраняются в виде строки. Чтобы заставить Alpine сохранить значение как число JavaScript, добавьте модификатор `.number`.
 
 ```html live "number"
-<input type="text" x-model.number="age" />
-<span x-text="typeof age"></span>
+<div x-data="{ age: 10 }">
+  <input type="text" x-model.number="age" />
+  <span x-text="typeof age"></span>
+</div>
 ```
 
 ### `.boolean`
