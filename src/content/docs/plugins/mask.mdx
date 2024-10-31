@@ -7,6 +7,9 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Плагин Mask позволяет автоматически форматировать поле ввода текста по мере его набора пользователем.
 
@@ -138,3 +141,36 @@ Alpine.start();
 ```html live
 <input x-data x-mask:dynamic="$money($input, '.', ',', 4)" placeholder="0.0001" />
 ```
+
+<Box icon="question-mark">
+## Проверка знаний
+
+1. С помощью какого модификатора задаётся динамическая маска?
+
+    <MultipleChoice>
+      <Option>
+        `.dinamic`
+      </Option>
+      <Option>
+        `.extra`
+      </Option>
+      <Option isCorrect>
+        `.dynamic`
+      </Option>
+    </MultipleChoice>
+
+2. Как указать сумму с запятой вместо точки?
+
+    <MultipleChoice>
+      <Option>
+        `$summa($value, ',')`
+      </Option>
+      <Option isCorrect>
+        `$money($input, ',')`
+      </Option>
+      <Option>
+        `$money(',', $input)`
+      </Option>
+    </MultipleChoice>
+
+</Box>

@@ -7,6 +7,9 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Плагин Morph позволяет «Преобразовать» элемент на странице в предоставленный HTML-шаблон, при этом сохраняется любое состояние браузера или Alpine внутри «морфированного» элемента.
 
@@ -234,3 +237,36 @@ Alpine.morph(el, newHtml, {
 Теперь, когда у элементов `<li>` есть «ключи», Morph сопоставит их в обоих деревьях и переместит соответствующим образом.
 
 Вы можете настроить то, что Morph считает «ключом», с помощью опции конфигурации `key:`. [Подробнее об этом здесь](#хуки-жизненного-цикла)
+
+<Box icon="question-mark">
+## Проверка знаний
+
+1. Как внедрить перехватчики жизненного цикла с помощью функции `Alpine.morph()`?
+
+    <MultipleChoice>
+      <Option>
+        Перечислить нужные хуки внутри параметра `newHtml`
+      </Option>
+      <Option>
+        Никак. Эта функция нужна для других целей.
+      </Option>
+      <Option isCorrect>
+        Использовать необязательный параметр `options`
+      </Option>
+    </MultipleChoice>
+
+2. Какой хук вызывается перед добавлением нового элемента?
+
+    <MultipleChoice>
+      <Option>
+        `mounted`
+      </Option>
+      <Option>
+        `updating`
+      </Option>
+      <Option isCorrect>
+        `adding`
+      </Option>
+    </MultipleChoice>
+
+</Box>

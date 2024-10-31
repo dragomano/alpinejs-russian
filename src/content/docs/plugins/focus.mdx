@@ -7,6 +7,9 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Плагин Focus позволяет управлять фокусом на странице.
 
@@ -297,3 +300,36 @@ Focus предлагает специальный API для захвата фо
 ```
 
 Обратите внимание, что для каждой кнопки необходимо добавить метод `.within()`, чтобы `$focus` знал, что нужно обращаться к другому элементу (`div`, оборачивающему кнопки).
+
+<Box icon="question-mark">
+## Проверка знаний
+
+1. Как отключить автоматическую фокусировку элемента при захвате фокуса?
+
+    <MultipleChoice>
+      <Option isCorrect>
+        Добавить модификатор `.noautofocus`
+      </Option>
+      <Option>
+        Добавить модификатор `.disablefocus`
+      </Option>
+      <Option>
+        Добавить модификатор `.nofocus`
+      </Option>
+    </MultipleChoice>
+
+2. Как передать фокус следующему фокусируемому элементу?
+
+    <MultipleChoice>
+      <Option isCorrect>
+        `$focus.next()`
+      </Option>
+      <Option>
+        `x-focus.next`
+      </Option>
+      <Option>
+        `$focus.getNext()`
+      </Option>
+    </MultipleChoice>
+
+</Box>

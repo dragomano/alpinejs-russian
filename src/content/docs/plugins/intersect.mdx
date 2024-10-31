@@ -7,6 +7,9 @@ sidebar:
 
 import { LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Плагин Intersect представляет собой удобную обёртку для [Intersection Observer](https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API), которая позволяет легко реагировать на попадание элемента в область просмотра.
 
@@ -174,3 +177,36 @@ Alpine.start();
 // в области просмотра более чем на 100 пикселей.
 <div x-intersect.margin.-100px="visible = true">...</div>
 ```
+
+<Box icon="question-mark">
+## Проверка знаний
+
+1. В каких случаях лучше использовать `x-intersect:enter`?
+
+    <MultipleChoice>
+      <Option>
+        Когда элемент покидает область просмотра.
+      </Option>
+      <Option isCorrect>
+        Без разницы — `x-intersect:enter` и `x-intersect` работают одинаково.
+      </Option>
+      <Option>
+        Правильных ответов нет
+      </Option>
+    </MultipleChoice>
+
+2. Какой модификатор применяют в случаях, когда нужно показать весь элемент целиком?
+
+    <MultipleChoice>
+      <Option isCorrect>
+        `.full`
+      </Option>
+      <Option>
+        `.whole`
+      </Option>
+      <Option>
+        `.all`
+      </Option>
+    </MultipleChoice>
+
+</Box>

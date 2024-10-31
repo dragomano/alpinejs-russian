@@ -7,6 +7,9 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
+import Box from '@components/Box.astro';
+import MultipleChoice from '@components/MultipleChoice.astro';
+import Option from '@components/Option.astro';
 
 Плагин Anchor позволяет легко привязать позиционирование элемента к другому элементу на странице.
 
@@ -154,3 +157,36 @@ Alpine.start();
   </div>
 </div>
 ```
+
+<Box icon="question-mark">
+## Проверка знаний
+
+1. С помощью какой директивы задействуется этот плагин?
+
+    <MultipleChoice>
+      <Option>
+        `x-data`
+      </Option>
+      <Option isCorrect>
+        `x-anchor`
+      </Option>
+      <Option>
+        `x-anchous`
+      </Option>
+    </MultipleChoice>
+
+2. Как добавить смещение к элементу с помощью этого плагина?
+
+    <MultipleChoice>
+      <Option>
+        Добавить один из модификаторов `.top`, `.left`, '.right', `.bottom'
+      </Option>
+      <Option>
+        Добавить модификатор `.position.x` с указанием числового значения вместо `x`
+      </Option>
+      <Option isCorrect>
+        Добавить модификатор `.offset.x` с указанием числового значения вместо `x`
+      </Option>
+    </MultipleChoice>
+
+</Box>
