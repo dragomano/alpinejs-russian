@@ -7,6 +7,7 @@ import liveCode from 'astro-live-code';
 import alpine from '@astrojs/alpinejs';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import catppuccin from "starlight-theme-catppuccin";
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +20,7 @@ export default defineConfig({
           errorOnRelativeLinks: false,
         }),
         starlightImageZoom(),
+        catppuccin({ dark: "macchiato-sky", light: "latte-sky" })
       ],
       title: 'Alpine.js по-русски',
       description: 'Документация Alpine.js на русском языке.',
