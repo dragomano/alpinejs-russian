@@ -104,9 +104,6 @@ importers:
       starlight-showcases:
         specifier: ^0.2.0
         version: 0.2.0(@astrojs/starlight@0.28.4(astro@4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4)))(astro@4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4))
-      starlight-theme-catppuccin:
-        specifier: ^1.0.3
-        version: 1.0.3(@astrojs/starlight@0.28.4(astro@4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4)))(astro@4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4))
       tailwindcss:
         specifier: ^3.4.14
         version: 3.4.14
@@ -2211,12 +2208,6 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@astrojs/starlight': '>=0.23.0'
-
-  starlight-theme-catppuccin@1.0.3:
-    resolution: {integrity: sha512-QnFut3qqm5o2YmeN5okAFxlH+9b0SirMpQJOdCFeafTzoaIkgySH1Q1oFnVVk+qL4jKxQXqX+muJ8fTL0k+FmA==}
-    peerDependencies:
-      '@astrojs/starlight': ^0.28.0
-      astro: ^4.0.0
 
   stdin-discarder@0.2.2:
     resolution: {integrity: sha512-UhDfHmA92YAlNnCfhmq0VeNL5bDbiZGg7sZ2IvPsXubGkiNa9EC+tUTsjBRsYUAz87btI6/1wf4XoVvQ3uRnmQ==}
@@ -5224,11 +5215,6 @@ snapshots:
       '@astrojs/starlight': 0.28.4(astro@4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4))
     transitivePeerDependencies:
       - astro
-
-  starlight-theme-catppuccin@1.0.3(@astrojs/starlight@0.28.4(astro@4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4)))(astro@4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4)):
-    dependencies:
-      '@astrojs/starlight': 0.28.4(astro@4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4))
-      astro: 4.16.7(@types/node@18.19.62)(rollup@4.24.3)(typescript@5.5.4)
 
   stdin-discarder@0.2.2: {}
 
