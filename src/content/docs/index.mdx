@@ -43,13 +43,27 @@ Alpine — это коллекция из **15 атрибутов**, **6 сво�
 import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
 
 <Tabs>
-  <TabItem label="15 атрибутов">
+  <TabItem label="18 атрибутов">
     <CardGrid stagger>
       <Card title="<a href=/directives/data>x-data</a>">
         Объявляйте новый компонент Alpine и его данные для блока HTML:
         ```html wrap "x-data"
         <div x-data="{ open: false }">
             ...
+        </div>
+        ```
+      </Card>
+      <Card title="<a href=/directives/init>x-init</a>">
+        Запускайте код, когда элемент инициализируется с помощью Alpine:
+        ```html wrap "x-init"
+        <div x-init="date = new Date()"></div>
+        ```
+      </Card>
+      <Card title="<a href=/directives/show>x-show</a>">
+        Переключайте видимость элемента:
+        ```html wrap "x-show"
+        <div x-show="open">
+          ...
         </div>
         ```
       </Card>
@@ -94,19 +108,12 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="<a href=/directives/show>x-show</a>">
-        Переключайте видимость элемента:
-        ```html wrap "x-show"
-        <div x-show="open">
-          ...
-        </div>
-        ```
-      </Card>
-      <Card title="<a href=/directives/transition>x-transition</a>">
-        Перемещайте элемент внутрь и наружу с помощью переходов CSS:
-        ```html wrap "x-transition"
-        <div x-show="open" x-transition>
-          ...
+      <Card title="<a href=/directives/modelable>x-modelable</a>">
+        Создавайте двустороннюю привязку данных для пользовательских компонентов:
+        ```html wrap "x-modelable"
+        <div x-data="{ value: '' }">
+          <input x-modelable="value" type="text">
+          <p>Value: <span x-text="value"></span></p>
         </div>
         ```
       </Card>
@@ -118,24 +125,26 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </template>
         ```
       </Card>
-      <Card title="<a href=/directives/if>x-if</a>">
-        Добавляйте/удаляйте блок HTML по условию со страницы целиком:
-        ```html wrap "x-if"
-        <template x-if="open">
-          <div>...</div>
-        </template>
-        ```
-      </Card>
-      <Card title="<a href=/directives/init>x-init</a>">
-        Запускайте код, когда элемент инициализируется с помощью Alpine:
-        ```html wrap "x-init"
-        <div x-init="date = new Date()"></div>
+      <Card title="<a href=/directives/transition>x-transition</a>">
+        Перемещайте элемент внутрь и наружу с помощью переходов CSS:
+        ```html wrap "x-transition"
+        <div x-show="open" x-transition>
+          ...
+        </div>
         ```
       </Card>
       <Card title="<a href=/directives/effect>x-effect</a>">
         Выполняйте скрипт каждый раз, когда меняется одна из его зависимостей:
         ```html wrap "x-effect"
         <div x-effect="console.log('count: '+count)"></div>
+        ```
+      </Card>
+      <Card title="<a href=/directives/ignore>x-ignore</a>">
+        Предотвращайте инициализацию блока HTML с помощью Alpine:
+        ```html wrap "x-ignore"
+        <div x-ignore>
+          ...
+        </div>
         ```
       </Card>
       <Card title="<a href=/directives/ref>x-ref</a>">
@@ -155,36 +164,64 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         </div>
         ```
       </Card>
-      <Card title="<a href=/directives/ignore>x-ignore</a>">
-        Предотвращайте инициализацию блока HTML с помощью Alpine:
-        ```html wrap "x-ignore"
-        <div x-ignore>
-          ...
+      <Card title="<a href=/directives/teleport>x-teleport</a>">
+        Перемещайте содержимое компонента в другое место в DOM, сохраняя его реактивность:
+        ```html wrap "x-teleport"
+        <div x-data="{ show: false }">
+          <button x-on:click="show = !show">
+            Переключить
+          </button>
+          <template x-if="show">
+            <div x-teleport="#target">
+              Это будет телепортировано!
+            </div>
+          </template>
+        </div>
+        <div id="target"></div>
+        ```
+      </Card>
+      <Card title="<a href=/directives/if>x-if</a>">
+        Добавляйте/удаляйте блок HTML по условию со страницы целиком:
+        ```html wrap "x-if"
+        <template x-if="open">
+          <div>...</div>
+        </template>
+        ```
+      </Card>
+      <Card title="<a href=/directives/id>x-id</a>">
+        Генерируйте уникальные идентификаторы для элементов:
+        ```html wrap "x-id"
+        <div x-id="['text-input']">
+          <label x-bind:for="$id('text-input')">Имя</label>
+          <!-- for="text-input-1" -->
+
+          <input x-bind:id="$id('text-input')" />
+          <!-- id="text-input-1" -->
         </div>
         ```
       </Card>
     </CardGrid>
   </TabItem>
-  <TabItem label="6 свойств">
-    <CardGrid>
-      <Card title="<a href=/magics/store>$store</a>">
-        Получайте доступ к глобальному хранилищу, зарегистрированному с помощью `Alpine.store(...)`:
-        ```html wrap "$store"
-        <h1 x-text="$store.site.title"></h1>
-        ```
-      </Card>
+  <TabItem label="9 свойств">
+    <CardGrid stagger>
       <Card title="<a href=/magics/el>$el</a>">
         Ссылайтесь на текущий элемент DOM:
         ```html wrap "$el"
         <div x-init="new Pikaday($el)"></div>
         ```
       </Card>
-      <Card title="<a href=/magics/dispatch>$dispatch</a>">
-        Отправляйте пользовательское событие браузера из текущего элемента:
-        ```html wrap "$dispatch"
-        <div x-on:notify="...">
-          <button x-on:click="$dispatch('notify')">...</button>
+      <Card title="<a href=/magics/refs>$refs</a>">
+        Ссылайтесь на элемент по ключу (задается с помощью `x-ref`):
+        ```html wrap "$refs"
+        <div x-init="$refs.button.remove()">
+          <button x-ref="button">Удалите меня</button>
         </div>
+        ```
+      </Card>
+      <Card title="<a href=/magics/store>$store</a>">
+        Получайте доступ к глобальному хранилищу, зарегистрированному с помощью `Alpine.store(...)`:
+        ```html wrap "$store"
+        <h1 x-text="$store.site.title"></h1>
         ```
       </Card>
       <Card title="<a href=/magics/watch>$watch</a>">
@@ -195,11 +232,11 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
         })">...</div>
         ```
       </Card>
-      <Card title="<a href=/magics/refs>$refs</a>">
-        Ссылайтесь на элемент по ключу (задается с помощью `x-ref`):
-        ```html wrap "$refs"
-        <div x-init="$refs.button.remove()">
-          <button x-ref="button">Удалите меня</button>
+      <Card title="<a href=/magics/dispatch>$dispatch</a>">
+        Отправляйте пользовательское событие браузера из текущего элемента:
+        ```html wrap "$dispatch"
+        <div x-on:notify="...">
+          <button x-on:click="$dispatch('notify')">...</button>
         </div>
         ```
       </Card>
@@ -212,6 +249,32 @@ import { Tabs, TabItem, Card, CardGrid } from '@astrojs/starlight/components';
             console.log('count: ' + $el.textContent)
           })"
         >...</div>
+        ```
+      </Card>
+      <Card title="<a href=/magics/root>$root</a>">
+        Получайте доступ к ближайшему элементу в дереве DOM, содержащему `x-data`:
+        ```html wrap "$root"
+        <div x-data data-message="Привет, мир!">
+          <button x-on:click="alert($root.dataset.message)">Привет!</button>
+        </div>
+        ```
+      </Card>
+      <Card title="<a href=/magics/data>$data</a>">
+        Получайте доступ к реактивным данным компонента для использования в шаблонах и методах:
+        ```html wrap "$data"
+        <div x-data="{ count: 0 }">
+          <button x-on:click="count++">Увеличить</button>
+          <p>Счётчик: <span x-text="$data.count"></span></p>
+        </div>
+        ```
+      </Card>
+      <Card title="<a href=/magics/id>$id</a>">
+        Генерируйте уникальный идентификатор для каждого экземпляра компонента:
+        ```html wrap "$id"
+        <div x-data="{ id: $id('text-input') }">
+          <label x-bind:for="id">Какой-то текст... </label> <!-- "text-input-1" -->
+          <input type="text" x-bind:id="id"> <!-- "text-input-1" -->
+        </div>
         ```
       </Card>
     </CardGrid>
