@@ -79,7 +79,7 @@ Focus предлагает специальный API для захвата фо
     <div :class="open && 'opacity-50'">
         <button x-on:click="open = true">Открыть диалог</button>
     </div>
-    <div x-show="open" x-trap="open" class="mt-4 space-y-4 p-4 border bg-yellow-100" x-on:keyup.escape.window="open = false">
+    <div x-show="open" x-trap="open" class="mt-4 space-y-4 p-4 border bg-gray-600" x-on:keyup.escape.window="open = false">
         <strong>
             <div>Фокус теперь «заперт» внутри этого диалогового окна, то есть вы можете щёлкать/фокусировать элементы только внутри этого диалогового окна. Если вы нажмете Tab несколько раз, фокус останется в этом диалоговом окне.</div>
         </strong>
@@ -212,7 +212,7 @@ Focus предлагает специальный API для захвата фо
     />
     <div x-show="open">
         <div class="mb-4 text-bold">Результаты поиска</div>
-        <p class="mb-4 text-gray-600 text-sm">Обратите внимание, что при закрытии этого выпадающего списка фокус не возвращается на вход.</p>
+        <p class="mb-4 text-gray-600 text-sm">Обратите внимание, что при закрытии этого выпадающего списка фокус не возвращается на ввод.</p>
         <button x-on:click="open = false">Закрыть диалог</button>
     </div>
 </div>
