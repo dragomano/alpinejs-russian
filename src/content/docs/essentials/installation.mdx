@@ -49,7 +49,11 @@ export const getLatestVersion = async () => {
 }
 
 export const version = await getLatestVersion()
-export const requiredCode = `<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@${version}/dist/cdn.min.js"></script>`;
+export const requiredCode = `
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/alpinejs@${version}/dist/cdn.min.js"
+></script>`;
 
 <Code code={requiredCode} wrap lang="html" mark={version} />
 
@@ -65,7 +69,7 @@ export const requiredCode = `<script defer src="https://cdn.jsdelivr.net/npm/alp
 
 <Steps>
 
-1. Запустите следующую команду, чтобы установить его.
+1. Запустите следующую команду для установки:
 
     <PackageManagers pkg="alpinejs" icons={false} />
 
