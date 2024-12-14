@@ -29,4 +29,27 @@ export default (Alpine: Alpine) => {
   Alpine.plugin(Clipboard);
   Alpine.plugin(validate);
   Alpine.plugin(AutoAnimate);
+  Alpine.data('latestVersion', () => ({
+    version: '&nbsp;',
+    url: '',
+
+    async init() {
+      let result = await fetch('https://api.github.com/repos/alpinejs/alpine/releases/latest'),
+        data = await result.json();
+
+      let publishedAt = (new Date(data.published_at))?.toLocaleDateString();
+
+      this.url = data.html_url;
+      this.version = `${data.tag_name} от ${publishedAt}`;
+    },
+
+    value: {
+      'x-html'() {
+        return this.version;
+      },
+      ':href'() {
+        return this.url;
+      }
+    }
+  }));
 };
