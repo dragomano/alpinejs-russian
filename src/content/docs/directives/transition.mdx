@@ -138,7 +138,7 @@ Alpine уже из коробки предоставляет надёжную у
 | `:enter-end`   | Добавляется через один кадр после вставки элемента (одновременно с удалением `enter-start`), удаляется по завершении перехода/анимации.       |
 | `:leave`       | Применяется на протяжении всей фазы выхода.                                                                                                   |
 | `:leave-start` | Добавляется сразу при срабатывании перехода выхода, удаляется через один кадр.                                                                |
-| `:leave-end`   | Добавляется один кадр после срабатывания перехода выхода (одновременно с удалением `leave-start`), удаляется по завершении перехода/анимации. |
+| `:leave-end`   | Добавляется через один кадр после срабатывания перехода выхода (одновременно с удалением `leave-start`), удаляется по завершении перехода/анимации. |
 
 <Box icon="question-mark">
 ## Проверка знаний
@@ -147,13 +147,13 @@ Alpine уже из коробки предоставляет надёжную у
 
     <MultipleChoice>
       <Option>
-         `x-transition.time.10s`
+        `x-transition.time.10s`
       </Option>
       <Option isCorrect>
-         `x-transition.duration.50ms`
+        `x-transition.duration.50ms`
       </Option>
       <Option>
-         `x-transition.origin.fast`
+        `x-transition.origin.fast`
       </Option>
     </MultipleChoice>
 
@@ -161,13 +161,13 @@ Alpine уже из коробки предоставляет надёжную у
 
     <MultipleChoice>
       <Option isCorrect>
-         `x-transition:leave`
+        `x-transition:leave`
       </Option>
       <Option>
-         `x-transition:exit`
+        `x-transition:exit`
       </Option>
       <Option>
-         `x-transition:enter`
+        `x-transition:enter`
       </Option>
     </MultipleChoice>
 
