@@ -2,19 +2,27 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import starlightImageZoom from 'starlight-image-zoom';
-import tailwind from '@astrojs/tailwind';
 import liveCode from 'astro-live-code';
 import alpine from '@astrojs/alpinejs';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import starlightGiscus from 'starlight-giscus';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://alpinejs.dragomano.ru',
+
   integrations: [
     alpine({ entrypoint: '/src/entrypoint' }),
     starlight({
       plugins: [
+        starlightGiscus({
+          repo: 'dragomano/alpinejs-russian',
+          repoId: 'R_kgDOKwwvAA',
+          category: 'Q&A',
+          categoryId: 'DIC_kwDOKwwvAM4Cb9ss'
+        }),
         starlightLinksValidator({
           errorOnRelativeLinks: false,
         }),
@@ -55,7 +63,6 @@ export default defineConfig({
       },
       components: {
         LastUpdated: './src/components/LastUpdated.astro',
-        Pagination: './src/components/Pagination.astro',
         SocialIcons: './src/components/SocialIcons.astro',
         Header: './src/components/Header.astro',
       },
@@ -138,10 +145,8 @@ export default defineConfig({
     liveCode({
       layout: '@components/LiveCode.astro',
     }),
-    tailwind({
-      applyBaseStyles: false,
-    }),
   ],
+
   markdown: {
     rehypePlugins: [
       rehypeHeadingIds,
@@ -153,5 +158,9 @@ export default defineConfig({
         },
       ],
     ],
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

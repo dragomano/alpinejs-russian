@@ -1,4 +1,4 @@
-import starlightPlugin from '@astrojs/starlight-tailwind';
+//import starlightPlugin from '@astrojs/starlight-tailwind';
 
 // Generated color palettes
 const accent = {
@@ -30,5 +30,5 @@ export default {
       },
     },
   },
-  plugins: [starlightPlugin()],
+  //plugins: [starlightPlugin()],
 };
