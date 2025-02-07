@@ -39,6 +39,7 @@ const { icon } = Astro.props;
     border: 1px solid var(--sl-color-green);
     background-color: var(--sl-color-green-low);
   }
+
   @supports (mask: var(--box-icon-url) no-repeat center bottom / 100%) or
     (-webkit-mask: var(--box-icon-url) no-repeat center bottom / 100%) {
     .highlight-box::before {
@@ -54,5 +55,11 @@ const { icon } = Astro.props;
 
   :global(ol) {
     padding-left: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .highlight-box {
+        --box-icon-url: none !important;
+    }
   }
 </style>

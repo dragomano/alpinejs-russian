@@ -1,5 +1,22 @@
-<a
-  class="text-gray-750 dark:text-white text-xxs font-medium ml-4 no-underline"
-  x-data="latestVersion"
-  x-bind="value"
->&nbsp;</a>
+<a class="version" x-data="latestVersion" x-bind="value">&nbsp;</a>
+
+<style>
+:global(.title-wrapper) {
+  flex-direction: column;
+}
+
+.version {
+    color: white;
+    font-size: 0.625rem;
+    line-height: 0.75rem;
+    font-weight: 500;
+    margin-left: 1rem;
+    text-decoration: none;
+}
+
+:root[data-theme='light'] {
+  .version {
+      color: rgb(51, 65, 85);
+  }
+}
+</style>

@@ -1,13 +1,11 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
-import starlightImageZoom from 'starlight-image-zoom';
 import liveCode from 'astro-live-code';
 import alpine from '@astrojs/alpinejs';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import starlightGiscus from 'starlight-giscus';
-import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,7 +24,6 @@ export default defineConfig({
         starlightLinksValidator({
           errorOnRelativeLinks: false,
         }),
-        starlightImageZoom(),
       ],
       title: 'Alpine.js по-русски',
       description: 'Документация Alpine.js на русском языке.',
@@ -37,6 +34,13 @@ export default defineConfig({
             name: 'google-site-verification',
             content: 'fq1A8llkn1XRVaPfBInN-TPoDtGsEUQmvEr3QVrEsyI',
           },
+        },
+        {
+          "tag": "link",
+          "attrs": {
+            "rel": "stylesheet",
+            "href": "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
+          }
         },
         {
           tag: 'script',
@@ -158,9 +162,5 @@ export default defineConfig({
         },
       ],
     ],
-  },
-
-  vite: {
-    plugins: [tailwindcss()],
   },
 });

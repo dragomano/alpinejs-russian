@@ -1,10 +1,38 @@
-@import "tailwindcss";
-@config "../../tailwind.config.mjs";
-
 :root {
     select {
         width: auto;
     }
+}
+
+/* Dark mode colors. */
+:root {
+    --sl-color-accent-low: #ffffff;
+    --sl-color-accent: #3447ff;
+    --sl-color-accent-high: #0172ad;
+    --sl-color-white: #ffffff;
+    --sl-color-gray-1: #eceef2;
+    --sl-color-gray-2: #c0c2c7;
+    --sl-color-gray-3: #888b96;
+    --sl-color-gray-4: #545861;
+    --sl-color-gray-5: #353841;
+    --sl-color-gray-6: #24272f;
+    --sl-color-black: #17181c;
+}
+
+/* Light mode colors. */
+:root[data-theme='light'] {
+    --sl-color-accent-low: #ffffff;
+    --sl-color-accent: #0172ad;
+    --sl-color-accent-high: #182775;
+    --sl-color-white: #17181c;
+    --sl-color-gray-1: #24272f;
+    --sl-color-gray-2: #353841;
+    --sl-color-gray-3: #545861;
+    --sl-color-gray-4: #888b96;
+    --sl-color-gray-5: #c0c2c7;
+    --sl-color-gray-6: #eceef2;
+    --sl-color-gray-7: #f5f6f8;
+    --sl-color-black: #ffffff;
 }
 
 /* Style the Markdown heading links. */
@@ -22,55 +50,27 @@
     }
 }
 
-@layer utilities {
-    .text-xxs {
-        font-size: 0.625rem;
-        line-height: 0.75rem;
-    }
+.pico button span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgb(30 64 175);
+    background-color: rgb(191 219 254);
+    border-radius: 9999px;
 }
 
-@layer components {
-    .example-container {
-        @apply rounded-lg text-white bg-gray-800;
-    }
+[x-sort] {
+    cursor: pointer;
+}
 
-    .example-container button {
-        @apply inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-hidden focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 cursor-pointer;
-    }
+[class*="astro-"][role="tab"] {
+    white-space: nowrap;
+}
 
-    .example-container .red_button {
-        @apply bg-red-500 dark:bg-red-700;
-    }
-
-    .example-container button span {
-        @apply inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full;
-    }
-
-    .example-container input {
-        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
-    }
-
-    .example-container input[x-model="search"] {
-        @apply block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
-    }
-
-    .example-container select {
-        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
-    }
-
-    .example-container input[type="range"] {
-        @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700;
-    }
-
-    .example-container textarea {
-        @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
-    }
-
-    [x-sort] {
-        @apply cursor-pointer;
-    }
-
-    [class*="astro-"][role="tab"] {
-        @apply whitespace-nowrap;
-    }
+button.submit {
+    border: 1px solid rgb(55, 65, 81);
 }
