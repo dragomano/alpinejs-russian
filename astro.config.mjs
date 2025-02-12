@@ -35,13 +35,13 @@ export default defineConfig({
             content: 'fq1A8llkn1XRVaPfBInN-TPoDtGsEUQmvEr3QVrEsyI',
           },
         },
-        {
+/*         {
           "tag": "link",
           "attrs": {
             "rel": "stylesheet",
             "href": "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css"
           }
-        },
+        }, */
         {
           tag: 'script',
           content: `(function (c, l, a, r, i, t, y) {
@@ -70,7 +70,7 @@ export default defineConfig({
         SocialIcons: './src/components/SocialIcons.astro',
         Header: './src/components/Header.astro',
       },
-      customCss: ['./src/styles/custom.css'],
+      customCss: ['./src/styles/custom.scss'],
       expressiveCode: {
         themes: ['dracula', 'slack-ochin'],
         styleOverrides: {
