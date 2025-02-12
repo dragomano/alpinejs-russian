@@ -34,7 +34,7 @@ export default (Alpine: Alpine) => {
     url: '',
 
     async init() {
-      let result = await fetch('https://api.github.com/repos/alpinejs/alpine/releases/latest'),
+      let result = await fetch('https://raw.githubusercontent.com/dragomano/alpinejs-russian/main/latest-release.json'),
         data = await result.json();
 
       let publishedAt = (new Date(data.published_at))?.toLocaleDateString();
