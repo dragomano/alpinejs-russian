@@ -1,0 +1,36 @@
+name: Update Latest Alpine.js Version
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch latest release from GitHub API
+        run: |
+          curl -s -H "Authorization: token ${{ secrets.GH_API_TOKEN }}" \
+          https://api.github.com/repos/alpinejs/alpine/releases/latest \
+          | jq '{ tag_name, published_at, html_url }' > latest-release.json
+
+      - name: Check for changes
+        run: |
+          git diff --quiet latest-release.json || echo "Changes detected"
+
+      - name: Commit and push changes if needed
+        run: |
+          if ! git diff --quiet latest-release.json; then
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git add latest-release.json
+            git commit -m "Update latest release info"
+            git push
+          else
+            echo "No changes, skipping commit"
+          fi
