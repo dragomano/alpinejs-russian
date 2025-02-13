@@ -31,19 +31,19 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 Теперь предположим, что вы хотите иметь те же два элемента ввода, но на этот раз для каждого из них нужны элементы `<label>`.
 
-Это создает проблему, поскольку теперь необходимо иметь возможность дважды ссылаться на один и тот же идентификатор. Один для атрибута `<label>` `for`, а другой для `id` на входе.
+Это создаёт проблему, поскольку теперь необходимо иметь возможность ссылаться на один и тот же идентификатор дважды. Один для атрибута `<label>` `for`, а другой для `id` на входе.
 
-Вот способ, которым вы могли бы это сделать, и он полностью действителен:
+Вот способ, которым вы могли бы это сделать, и он полностью рабочий:
 
 ```html ":id" ":for"
 <div x-data="{ id: $id('text-input') }">
-    <label :for="id"> <!-- "text-input-1" -->
-    <input type="text" :id="id"> <!-- "text-input-1" -->
+  <label :for="id"> <!-- "text-input-1" -->
+  <input type="text" :id="id"> <!-- "text-input-1" -->
 </div>
 
 <div x-data="{ id: $id('text-input') }">
-    <label :for="id"> <!-- "text-input-2" -->
-    <input type="text" :id="id"> <!-- "text-input-2" -->
+  <label :for="id"> <!-- "text-input-2" -->
+  <input type="text" :id="id"> <!-- "text-input-2" -->
 </div>
 ```
 
@@ -53,13 +53,13 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 ```html "x-id"
 <div x-id="['text-input']">
-    <label :for="$id('text-input')"> <!-- "text-input-1" -->
-    <input type="text" :id="$id('text-input')"> <!-- "text-input-1" -->
+  <label :for="$id('text-input')"> <!-- "text-input-1" -->
+  <input type="text" :id="$id('text-input')"> <!-- "text-input-1" -->
 </div>
 
 <div x-id="['text-input']">
-    <label :for="$id('text-input')"> <!-- "text-input-2" -->
-    <input type="text" :id="$id('text-input')"> <!-- "text-input-2" -->
+  <label :for="$id('text-input')"> <!-- "text-input-2" -->
+  <input type="text" :id="$id('text-input')"> <!-- "text-input-2" -->
 </div>
 ```
 
@@ -71,13 +71,13 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 ```html
 <div x-id="['text-input']">
-    <label :for="$id('text-input')"> <!-- "text-input-1" -->
-    <input type="text" :id="$id('text-input')"> <!-- "text-input-1" -->
+  <label :for="$id('text-input')"> <!-- "text-input-1" -->
+  <input type="text" :id="$id('text-input')"> <!-- "text-input-1" -->
 
-    <div x-id="['text-input']">
-        <label :for="$id('text-input')"> <!-- "text-input-2" -->
-        <input type="text" :id="$id('text-input')"> <!-- "text-input-2" -->
-    </div>
+  <div x-id="['text-input']">
+    <label :for="$id('text-input')"> <!-- "text-input-2" -->
+    <input type="text" :id="$id('text-input')"> <!-- "text-input-2" -->
+  </div>
 </div>
 ```
 
@@ -87,7 +87,7 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 Для этого `$id()` принимает необязательный второй параметр, который будет добавлен в качестве суффикса в конце сгенерированного идентификатора.
 
-Типичным примером этой необходимости является что-то вроде компонента списка, который использует атрибут `aria-activedescendant`, чтобы сообщить вспомогательным технологиям, какой элемент в списке является «активным»:
+Типичный пример этой ситуации — компонент списка, который использует атрибут `aria-activedescendant` для того, чтобы сообщить вспомогательным технологиям, какой элемент в списке считается «активным»:
 
 ```html wrap "item.id"
 <ul x-id="['list-item']" :aria-activedescendant="$id('list-item', activeItem.id)">
@@ -113,28 +113,28 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
     <MultipleChoice>
       <Option isCorrect>
-         ```html wrap
+        ```html wrap
         <div x-id="['text-input']">
             <label :for="$id('text-input')">
             <input type="text" :id="$id('text-input')">
         </div>
-         ```
+        ```
       </Option>
       <Option>
-         ```html wrap
+        ```html wrap
         <div x-data="{ id: 'text-input' }">
             <label :for="id">
             <input type="text" :id="id">
         </div>
-         ```
+        ```
       </Option>
       <Option isCorrect>
-         ```html wrap
+        ```html wrap
         <div x-data="{ id: $id('text-input') }">
             <label :for="id">
             <input type="text" :id="id">
         </div>
-         ```
+        ```
       </Option>
     </MultipleChoice>
 
