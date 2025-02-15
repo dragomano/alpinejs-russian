@@ -2,7 +2,7 @@
 import { Icon } from '@astrojs/starlight/components';
 import Default from '@astrojs/starlight/components/LastUpdated.astro';
 
-const { entry, editUrl, slug } = Astro.props;
+const { entry, editUrl, slug } = Astro.locals.starlightRoute;
 const source = entry.data.origin ? entry.data.origin : 'https://alpinejs.dev/' + slug;
 ---
 
@@ -12,7 +12,7 @@ const source = entry.data.origin ? entry.data.origin : 'https://alpinejs.dev/' +
       <a href={source} target="_blank" class='sl-flex'>
         <Icon name='external' size='1.2em' /> Оригинальная документация
       </a>
-      <Default {...Astro.props} />
+      <Default />
     </>
   )
 }

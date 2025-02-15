@@ -1,6 +1,5 @@
 ---
 import config from 'virtual:starlight/user-config';
-import type { Props } from '../props';
 import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
 import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
@@ -16,18 +15,18 @@ const shouldRenderSearch =
 
 <div class="header sl-flex">
   <div class="title-wrapper sl-flex flex-col">
-    <SiteTitle {...Astro.props} />
+    <SiteTitle />
     <LatestVersion />
   </div>
   <div class="sl-flex">
-    {shouldRenderSearch && <Search {...Astro.props} />}
+    {shouldRenderSearch && <Search />}
   </div>
-  <div class="sl-hidden md:sl-flex right-group">
+  <div class="sl-hidden md:sl-flex print:hidden right-group">
     <div class="sl-flex social-icons">
-      <SocialIcons {...Astro.props} />
+      <SocialIcons />
     </div>
-    <ThemeSelect {...Astro.props} />
-    <LanguageSelect {...Astro.props} />
+    <ThemeSelect />
+    <LanguageSelect />
   </div>
 </div>
 
@@ -41,7 +40,11 @@ const shouldRenderSearch =
 
   .title-wrapper {
     /* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
-    overflow: hidden;
+    overflow: clip;
+    /* Avoid clipping focus ring around link inside title wrapper. */
+    padding: 0.25rem;
+    margin: -0.25rem;
+    min-width: 0;
   }
 
   .right-group,
@@ -74,14 +77,15 @@ const shouldRenderSearch =
       display: grid;
       grid-template-columns:
     /* 1 (site title): runs up until the main content column’s left edge or the width of the title, whichever is the largest  */
-        minmax(calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
-        auto
-    )
-    /* 2 (search box): all free space that is available. */
-    1fr
-    /* 3 (right items): use the space that these need. */
-    auto;
-      align-content: center;
+        minmax(
+          calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
+          auto
+        )
+        /* 2 (search box): all free space that is available. */
+        1fr
+        /* 3 (right items): use the space that these need. */
+        auto;
+        align-content: center;
     }
   }
 </style>
