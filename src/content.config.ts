@@ -8,6 +8,7 @@ export const collections = {
 		schema: docsSchema({
 			extend: z.object({
 				origin: z.string().url().optional(),
+				giscus: z.boolean().optional().default(true),
 			}),
 		})
 	}),
