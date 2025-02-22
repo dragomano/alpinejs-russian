@@ -12,10 +12,7 @@ sidebar:
 ```html live "x-modelable"
 <div x-data="{ number: 5 }">
   <div x-data="{ count: 0 }" x-modelable="count" x-model="number">
-    <button @click="count++">Увеличить</button>
-  </div>
-  <div>
-      Число: <span x-text="number"></span>
+    <button @click="count++">Увеличить <span x-text="number"></span></button>
   </div>
 </div>
 ```
