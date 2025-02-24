@@ -3,12 +3,16 @@ title: Обновление с версии v2
 description: Руководство по миграции с Alpine.js v2 на v3
 ---
 
-import { YouTube } from 'astro-embed';
 import { LinkCard, CardGrid, Steps } from '@astrojs/starlight/components';
+import { Video } from 'accessible-astro-components';
 
-Ниже приведено исчерпывающее руководство по основным изменениям в Alpine v3, но если вы предпочитаете что-то более интересное, вы можете просмотреть все изменения, а также новые функции в v3, посмотрев программный доклад Alpine Day 2021 «Будущее Alpine»:
+Ниже приведено исчерпывающее руководство по основным изменениям в Alpine v3, но если вы предпочитаете что-то более интересное, вы можете просмотреть все изменения, а также новые функции в v3, посмотрев доклад Alpine Day 2021 «Будущее Alpine»:
 
-<YouTube id="https://www.youtube.com/embed/WixS4JXMwIQ" />
+<Video
+  src="https://www.youtube.com/embed/WixS4JXMwIQ"
+  title="Caleb Porzio - The Future Of Alpine"
+  ratio="16:9"
+/>
 
 Обновление с Alpine v2 до v3 должно пройти довольно безболезненно. Во многих случаях НИЧЕГО не нужно делать с вашей кодовой базой, чтобы использовать v3. Ниже приведён список критических изменений в порядке убывания вероятности того, что они повлияют на пользователей:
 
