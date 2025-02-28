@@ -204,35 +204,35 @@ Alpine.start();
 ## Пример
 
 ```html live "$validate.submit" "x-validate" wrap
-<form id="form" x-data x-validate @submit="$validate.submit">
-    <p><em>* обязательное поле</em></p>
-    <div>
-        <label for="name">Ваше имя *</label>
-        <input type="text" id="name" name="name" required data-error-msg="Имя обязательно" />
+<form id="form" x-data x-validate @submit="$validate.submit" method="post">
+  <p><em>* обязательное поле</em></p>
+  <div>
+    <label for="name">Ваше имя *</label>
+    <input type="text" id="name" name="name" required data-error-msg="Имя обязательно" />
+  </div>
+  <div>
+    <label for="email">Ваш имейл *</label>
+    <input type="email" id="email" name="email" required data-error-msg="Имейл обязателен" />
+  </div>
+  <div>
+    <label for="wholenumber">Целое число *</label>
+    <input type="wholenumber" id="wholenumber" name="wholenumber" required x-validate.wholenumber data-error-msg="Укажите положительное целое число" />
+  </div>
+  <div id="animals">
+    <h4>Любимые животные *</h4>
+    <div class="flex items-baseline gap-4" data-error-msg="Вы должны выбрать хотя бы одно животное">
+      <label><input type="checkbox" x-validate.group name="animals" id="cat" value="cat">Кошка</label>
+      <label><input type="checkbox" x-validate.group name="animals" id="dog" value="dog">Собака</label>
+      <label><input type="checkbox" x-validate.group name="animals" id="bunny" value="bunny">Кролик</label>
     </div>
-    <div>
-        <label for="email">Ваш имейл *</label>
-        <input type="email" id="email" name="email" required data-error-msg="Имейл обязателен" />
-    </div>
-    <div>
-        <label for="wholenumber">Целое число</label>
-        <input type="wholenumber" id="wholenumber" name="wholenumber" x-validate.wholenumber data-error-msg="Укажите положительное целое число" />
-    </div>
-    <div id="animals">
-        <h4>Любимые животные *</h4>
-        <div class="flex items-baseline gap-4" data-error-msg="Вы должны выбрать хотя бы одно животное">
-          <label><input type="checkbox" x-validate.group name="animals" id="cat" value="cat">Кошка</label>
-          <label><input type="checkbox" x-validate.group name="animals" id="dog" value="dog">Собака</label>
-          <label><input type="checkbox" x-validate.group name="animals" id="bunny" value="bunny">Кролик</label>
-        </div>
-    </div>
-    <div>
-        <input type="submit" value="Отправить">
-    </div>
+  </div>
+  <div>
+    <input type="submit" value="Отправить">
+  </div>
 </form>
 <style>
-    .error-msg {
-        color: red;
-    }
+  .error-msg {
+    color: red;
+  }
 </style>
 ```
