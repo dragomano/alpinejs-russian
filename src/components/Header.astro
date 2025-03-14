@@ -14,11 +14,11 @@ const shouldRenderSearch =
 ---
 
 <div class="header sl-flex">
-  <div class="title-wrapper sl-flex flex-col">
+  <div class="title-wrapper sl-flex">
     <SiteTitle />
     <LatestVersion />
   </div>
-  <div class="sl-flex">
+  <div class="sl-flex print:hidden">
     {shouldRenderSearch && <Search />}
   </div>
   <div class="sl-hidden md:sl-flex print:hidden right-group">
@@ -74,9 +74,9 @@ const shouldRenderSearch =
             var(--sl-content-width)
           ) / 2
       );
-      display: grid;
+      display: grid !important;
       grid-template-columns:
-    /* 1 (site title): runs up until the main content column’s left edge or the width of the title, whichever is the largest  */
+        /* 1 (site title): runs up until the main content column’s left edge or the width of the title, whichever is the largest  */
         minmax(
           calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
           auto

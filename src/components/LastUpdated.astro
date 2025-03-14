@@ -2,8 +2,8 @@
 import { Icon } from '@astrojs/starlight/components';
 import Default from '@astrojs/starlight/components/LastUpdated.astro';
 
-const { entry, editUrl, slug } = Astro.locals.starlightRoute;
-const source = entry.data.origin ? entry.data.origin : 'https://alpinejs.dev/' + slug;
+const { entry, editUrl, id } = Astro.locals.starlightRoute;
+const source = entry.data.origin ? entry.data.origin : 'https://alpinejs.dev/' + id;
 ---
 
 {
