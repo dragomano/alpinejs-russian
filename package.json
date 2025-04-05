@@ -24,6 +24,7 @@
     "@colinaut/alpinejs-plugin-simple-validate": "^1.8.2",
     "@marcreichel/alpine-auto-animate": "^1.1.0",
     "@ryangjchandler/alpine-clipboard": "^2.3.0",
+    "@tailwindcss/vite": "^4.1.2",
     "@types/alpinejs": "^3.13.11",
     "@yohns/picocss": "^2.2.10",
     "alpinejs": "^3.14.9",
@@ -38,6 +39,7 @@
     "starlight-giscus": "^0.6.0",
     "starlight-links-validator": "^0.15.0",
     "starlight-package-managers": "^0.10.0",
-    "starlight-showcases": "^0.3.0"
+    "starlight-showcases": "^0.3.0",
+    "tailwindcss": "^4.1.2"
   }
 }

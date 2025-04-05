@@ -6,6 +6,7 @@ import alpine from '@astrojs/alpinejs';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import starlightGiscus from 'starlight-giscus';
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -63,7 +64,7 @@ export default defineConfig({
         SocialIcons: './src/components/SocialIcons.astro',
         Header: './src/components/Header.astro',
       },
-      customCss: ['./src/styles/custom.scss'],
+      customCss: ['./src/styles/custom.scss', './src/styles/global.css'],
       expressiveCode: {
         themes: ['dracula', 'slack-ochin'],
         styleOverrides: {
@@ -143,7 +144,9 @@ export default defineConfig({
       layout: '@components/LiveCode.astro',
     }),
   ],
-
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
     rehypePlugins: [
       rehypeHeadingIds,
