@@ -1,0 +1,326 @@
+---
+title: Учебный тур
+description: Как освоить Alpine.js за 10 шагов
+origin: https://github.com/dragomano/alpinejs-russian/blob/main/src/content/docs/tutorial.mdx?plain=1
+pagefind: false
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+## Урок 1: Введение в Alpine.js
+
+Alpine.js — это минималистичный JavaScript-фреймворк, предназначенный для добавления интерактивности на веб-страницы. Он позволяет создавать динамические интерфейсы прямо в HTML с помощью декларативных атрибутов, что делает его простым и удобным инструментом.
+
+<Steps>
+
+1. ### Установка и подключение
+
+    Для начала работы достаточно подключить Alpine.js через CDN. Вот базовый пример:
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Alpine.js: Начало</title>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </head>
+    <body>
+        <h1>Добро пожаловать в Alpine.js!</h1>
+    </body>
+    </html>
+    ```
+    Атрибут `defer` обеспечивает загрузку скрипта после разбора HTML.
+
+    Создайте файл `index.html`, поместите в него указанный выше код, и откройте файл в браузере.
+
+    В этот файл мы будем добавлять дальнейшие примеры.
+
+</Steps>
+
+## Урок 2: Основы синтаксиса
+
+Alpine.js использует директивы для управления данными и поведением. Основная директива — `x-data`, которая задает область данных.
+
+<Steps>
+
+1. ### Пример: Приветствие
+
+    ```html live
+    <div x-data="{ message: 'Привет, Alpine!' }">
+        <p x-text="message"></p>
+    </div>
+    ```
+    * `x-data` определяет объект с переменной `message`.
+    * `x-text` отображает значение `message` внутри элемента.
+
+2. ### Работа с вводом
+
+    Директива `x-model` связывает данные с полями ввода:
+
+    ```html live
+    <div x-data="{ name: '' }">
+        <input type="text" x-model="name" placeholder="Введите имя">
+        <p>Привет, <span x-text="name"></span>!</p>
+    </div>
+    ```
+    При вводе текста в поле значение `name` обновляется автоматически.
+
+</Steps>
+
+## Урок 3: Управление видимостью элементов
+
+Alpine.js предоставляет директивы `x-show`, `x-if` и `x-for` для управления отображением элементов.
+
+<Steps>
+
+1. ### Пример с `x-show`
+
+    ```html live
+    <div x-data="{ isVisible: false }">
+        <button @click="isVisible = !isVisible">Переключить</button>
+        <p x-show="isVisible">Скрытый текст!</p>
+    </div>
+    ```
+    * `x-show` скрывает или показывает элемент в зависимости от условия.
+    * `@click` — это сокращение для `x-on:click`.
+
+2. ### Циклы с `x-for`
+
+    ```html live
+    <div x-data="{ items: ['Яблоко', 'Банан', 'Груша'] }">
+        <ul>
+            <template x-for="item in items">
+                <li x-text="item"></li>
+            </template>
+        </ul>
+    </div>
+    ```
+</Steps>
+
+## Урок 4: Обработка событий
+
+Директива `x-on` (или `@`) позволяет привязывать обработчики событий.
+
+<Steps>
+
+1. ### Пример: Счётчик
+
+    ```html live
+    <div x-data="{ count: 0 }">
+        <button @click="count++">
+            Увеличить счётчик
+            <span x-text="count"></span>
+        </button>
+    </div>
+    ```
+    Каждый клик увеличивает значение `count`.
+
+2. ### Модификаторы событий
+
+    Модификатор `.prevent` предотвращает стандартное поведение:
+
+    ```html live
+    <form x-data>
+        <input type="submit" @click.prevent="alert('Отправка формы остановлена')">
+    </form>
+    ```
+</Steps>
+
+## Урок 5: Работа с состоянием
+
+Состояние в Alpine.js хранится в `x-data` и является реактивным — изменения автоматически обновляют DOM.
+
+<Steps>
+
+1. ### Пример: Форма
+
+    ```html live
+    <div x-data="{ email: '', password: '' }">
+        <input type="email" x-model="email" placeholder="Имейл">
+        <input type="password" x-model="password" placeholder="Пароль">
+        <button @click="alert('Имейл: ' + email + ', Пароль: ' + password)">Войти</button>
+    </div>
+    ```
+    Введённые данные доступны через переменные `email` и `password`.
+
+</Steps>
+
+## Урок 6: Компоненты и их изоляция
+
+Alpine.js позволяет создавать переиспользуемые компоненты с изолированным состоянием.
+
+<Steps>
+
+1. ### Пример: Компонент счётчика
+
+    ```html live
+    <div x-data="counter()">
+        <button @click="increment">
+            Увеличить счётчик
+            <span x-text="count"></span>
+        </button>
+    </div>
+    <div x-data="counter()">
+        <button @click="increment">
+            Увеличить другой счётчик
+            <span x-text="count"></span>
+        </button>
+    </div>
+
+    <script>
+    function counter() {
+        return {
+            count: 0,
+            increment() {
+                this.count++;
+            }
+        }
+    }
+    </script>
+    ```
+    Функция `counter` определяет логику компонента, который можно использовать многократно.
+
+</Steps>
+
+## Урок 7: Анимации и переходы
+
+Директива `x-transition` добавляет анимации к элементам.
+
+<Steps>
+
+1. ### Пример: Появление элемента
+
+    ```html live
+    <div x-data="{ show: false }">
+        <button @click="show = !show">Переключить</button>
+        <div x-show="show" x-transition>
+            <p>Я появляюсь плавно!</p>
+        </div>
+    </div>
+    ```
+    Элемент появляется с анимацией прозрачности.
+
+</Steps>
+
+## Урок 8: Работа с AJAX и асинхронными запросами
+
+Директива `x-init` выполняет код при инициализации компонента, что удобно для загрузки данных.
+
+<Steps>
+
+1. ### Пример: Загрузка постов
+
+    ```html live
+    <div x-data="{ posts: [] }" x-init="fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json())
+        .then(data => posts = data.slice(0, 10))">
+        <ul>
+            <template x-for="post in posts">
+                <li x-text="post.title"></li>
+            </template>
+        </ul>
+    </div>
+    ```
+    Данные из API отображаются в списке.
+
+</Steps>
+
+## Урок 9: Расширенные возможности
+
+Alpine.js предлагает дополнительные инструменты, такие как `x-ref` и `x-effect`.
+
+<Steps>
+
+1. ### Пример с `x-ref`
+
+    ```html live
+    <div x-data>
+        <input type="text" x-ref="input" placeholder="Введите текст">
+        <button @click="$refs.input.focus()">Фокус</button>
+    </div>
+    ```
+
+    `$refs` предоставляет доступ к DOM-элементам.
+
+</Steps>
+
+## Урок 10: Практический проект — Список дел
+
+Создайте простое приложение для управления задачами:
+
+    * Задачи должны хранятся в массиве `todos`.
+    * Новые задачи должны добавляться через метод `addTodo`.
+    * Удаление задач должно осуществляться через метод `removeTodo`.
+    * Данные должны сохраняться в `localStorage`.
+
+<Steps>
+
+1. ### Разметка
+
+    ```html
+    <div x-data="todoApp()">
+        <input type="text" x-model="newTodo" @keyup.enter="addTodo" placeholder="Новая задача">
+        <ul>
+            <template x-for="(todo, index) in todos" :key="index">
+                <li>
+                    <input type="checkbox" x-model="todo.completed">
+                    <span x-text="todo.text" :class="{ 'line-through': todo.completed }"></span>
+                    <button @click="removeTodo(index)">Удалить</button>
+                </li>
+            </template>
+        </ul>
+    </div>
+    ```
+
+2. ### JavaScript
+
+    Допишите код, чтобы проект заработал:
+
+    ```html
+    <script>
+    function todoApp() {
+        return {
+            todos: JSON.parse(localStorage.getItem('todos')) || [],
+            newTodo: '',
+            addTodo() {},
+            removeTodo(index) {},
+            saveTodos() {}
+        }
+    }
+    </script>
+    ```
+
+3. ### Решение
+
+    <details name="example-accordion" open="">
+        <summary>Посмотреть</summary>
+        ```html
+        <script>
+        function todoApp() {
+            return {
+                todos: JSON.parse(localStorage.getItem('todos')) || [],
+                newTodo: '',
+                addTodo() {
+                    if (this.newTodo.trim()) {
+                        this.todos.push({ text: this.newTodo, completed: false });
+                        this.newTodo = '';
+                        this.saveTodos();
+                    }
+                },
+                removeTodo(index) {
+                    this.todos.splice(index, 1);
+                    this.saveTodos();
+                },
+                saveTodos() {
+                    localStorage.setItem('todos', JSON.stringify(this.todos));
+                }
+            }
+        }
+        </script>
+        ```
+    </details>
+
+</Steps>
+
+Этот курс охватывает все основные аспекты Alpine.js, от базового синтаксиса до создания полноценного приложения. Попробуйте повторить примеры и экспериментируйте с кодом, чтобы закрепить знания!
