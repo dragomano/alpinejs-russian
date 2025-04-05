@@ -125,6 +125,8 @@ Alpine.js предоставляет директивы `x-show`, `x-if` и `x-f
         <input type="submit" @click.prevent="alert('Отправка формы остановлена')">
     </form>
     ```
+    Поэкспериментируйте с [другими модификаторами](/directives/on/#модификаторы).
+
 </Steps>
 
 ## Урок 5: Работа с состоянием
@@ -143,6 +145,8 @@ Alpine.js предоставляет директивы `x-show`, `x-if` и `x-f
     </div>
     ```
     Введённые данные доступны через переменные `email` и `password`.
+
+    Попробуйте добавить ещё какие-нибудь поля, по аналогии.
 
 </Steps>
 
@@ -199,7 +203,9 @@ Alpine.js позволяет создавать переиспользуемые
         </div>
     </div>
     ```
-    Элемент появляется с анимацией прозрачности.
+    Элемент появляется с анимацией по умолчанию.
+
+    Попробуйте [настроить эффекты анимации с помощью CSS](/directives/transition/#применение-классов-css).
 
 </Steps>
 
@@ -211,10 +217,10 @@ Alpine.js позволяет создавать переиспользуемые
 
 1. ### Пример: Загрузка постов
 
-    ```html live
+    ```html
     <div x-data="{ posts: [] }" x-init="fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
-        .then(data => posts = data.slice(0, 10))">
+        .then(data => posts = data)">
         <ul>
             <template x-for="post in posts">
                 <li x-text="post.title"></li>
@@ -222,7 +228,7 @@ Alpine.js позволяет создавать переиспользуемые
         </ul>
     </div>
     ```
-    Данные из API отображаются в списке.
+    Попробуйте реализовать другие методы API с помощью сервиса [JSONPlaceholder](https://jsonplaceholder.typicode.com/guide/).
 
 </Steps>
 
@@ -240,8 +246,17 @@ Alpine.js предлагает дополнительные инструмент
         <button @click="$refs.input.focus()">Фокус</button>
     </div>
     ```
-
     `$refs` предоставляет доступ к DOM-элементам.
+
+2. ### Пример с `x-effect`
+
+    ```html live
+    <div x-data="{ text: '' }">
+        <input type="text" x-model="text" placeholder="Введите текст">
+        <p x-effect="$el.textContent = text ? 'Вы ввели: ' + text : 'Начните вводить текст'"></p>
+    </div>
+    ```
+    Параграф автоматически обновляется благодаря `x-effect`.
 
 </Steps>
 
