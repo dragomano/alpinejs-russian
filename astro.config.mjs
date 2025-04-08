@@ -80,9 +80,9 @@ export default defineConfig({
         replacesTitle: true,
         alt: 'Логотип AlpineJS',
       },
-      social: {
-        github: 'https://github.com/dragomano/alpinejs-russian',
-      },
+      social: [
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/dragomano/alpinejs-russian' },
+      ],
       editLink: {
         baseUrl: 'https://github.com/dragomano/alpinejs-russian/edit/main/',
       },
