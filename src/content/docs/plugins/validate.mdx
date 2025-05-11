@@ -203,7 +203,7 @@ Alpine.start();
 
 ## Пример
 
-```html live "$validate.submit" "x-validate" wrap
+```html live "$validate.submit" "x-validate" wrap props={{ "client:load": true }}
 <form id="form" x-data x-validate @submit="$validate.submit" method="post">
   <p><em>* обязательное поле</em></p>
   <div>
