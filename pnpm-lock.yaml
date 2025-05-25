@@ -101,6 +101,9 @@ importers:
       starlight-package-managers:
         specifier: ^0.11.0
         version: 0.11.0(@astrojs/starlight@0.34.3(astro@5.8.0(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(sass@1.89.0)(typescript@5.5.4)(yaml@2.7.0)))
+      starlight-scroll-to-top:
+        specifier: ^0.1.1
+        version: 0.1.1(@astrojs/starlight@0.34.3(astro@5.8.0(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(sass@1.89.0)(typescript@5.5.4)(yaml@2.7.0)))
       starlight-showcases:
         specifier: ^0.3.0
         version: 0.3.0(@astrojs/starlight@0.34.3(astro@5.8.0(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(sass@1.89.0)(typescript@5.5.4)(yaml@2.7.0)))(astro@5.8.0(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(sass@1.89.0)(typescript@5.5.4)(yaml@2.7.0))
@@ -2300,6 +2303,12 @@ packages:
     engines: {node: '>=18.17.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.22.0'
+
+  starlight-scroll-to-top@0.1.1:
+    resolution: {integrity: sha512-e/l1Tqwz2U5wyoKPTE46RajLwFaKbS5FZcxvK1GnnbIq6VYixjBISVTcivPvuq5FyzFfYMcbf97e7WWgyrvr0g==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.34'
 
   starlight-showcases@0.3.0:
     resolution: {integrity: sha512-jxKVE5IM0TZgRIni4YK1oKDh6C9pBh94oj2pKuhzg2/Cg1wjCrWy39U3i1bXkh6rL+Ly+ypQBPH3AD9cP6TLXA==}
@@ -5379,6 +5388,10 @@ snapshots:
       - supports-color
 
   starlight-package-managers@0.11.0(@astrojs/starlight@0.34.3(astro@5.8.0(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(sass@1.89.0)(typescript@5.5.4)(yaml@2.7.0))):
+    dependencies:
+      '@astrojs/starlight': 0.34.3(astro@5.8.0(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(sass@1.89.0)(typescript@5.5.4)(yaml@2.7.0))
+
+  starlight-scroll-to-top@0.1.1(@astrojs/starlight@0.34.3(astro@5.8.0(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(sass@1.89.0)(typescript@5.5.4)(yaml@2.7.0))):
     dependencies:
       '@astrojs/starlight': 0.34.3(astro@5.8.0(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(sass@1.89.0)(typescript@5.5.4)(yaml@2.7.0))
 

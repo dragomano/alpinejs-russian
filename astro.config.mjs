@@ -7,6 +7,7 @@ import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import starlightGiscus from 'starlight-giscus';
 import tailwindcss from "@tailwindcss/vite";
+import starlightScrollToTop from 'starlight-scroll-to-top';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,6 +26,10 @@ export default defineConfig({
         starlightLinksValidator({
           errorOnRelativeLinks: false,
         }),
+        starlightScrollToTop({
+          tooltipText: 'Прокрутить вверх',
+          showTooltip: true,
+        })
       ],
       title: 'Alpine.js по-русски',
       description: 'Документация Alpine.js на русском языке.',
