@@ -7,6 +7,10 @@
     select {
         width: auto;
     }
+
+    td:first-child {
+        width: 30%;
+    }
 }
 
 /* Dark mode colors. */
