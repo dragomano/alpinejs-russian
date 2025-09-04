@@ -5,13 +5,14 @@ sidebar:
   order: 1
 ---
 
-Чтобы Alpine мог выполнять простые строки из HTML-атрибутов как выражения JavaScript, например `x-on:click="console.log()"`, ему необходимо использовать утилиты, нарушающие принцип «unsafe-eval» [Политики безопасности содержимого](https://developer.mozilla.org/ru/docs/Web/HTTP/CSP), применяемой некоторыми приложениями для повышения безопасности.
+Чтобы Alpine мог выполнять выражения JavaScript из HTML-атрибутов, таких как `x-on:click="console.log()"`, ему необходимо использовать утилиты, которые нарушают политику безопасности содержимого `unsafe-eval` [Content Security Policy](https://developer.mozilla.org/ru/docs/Web/HTTP/CSP), применяемую некоторыми приложениями в целях безопасности.
+
 
 :::note
-Под капотом Alpine фактически не использует `eval()`, поскольку он медленный и проблематичный. Вместо этого он использует объявления функций, которые намного лучше, но всё же нарушают «unsafe-eval».
+Под капотом Alpine фактически не использует `eval()`, поскольку он медленный и проблематичный. Вместо этого он использует объявления функций, которые намного лучше, но всё же нарушают `unsafe-eval`.
 :::
 
-Чтобы приспособиться к средам, где этот CSP необходим, Alpine предлагает альтернативную сборку, которая не нарушает «unsafe-eval», но имеет более строгий синтаксис.
+Alpine предлагает альтернативную сборку, которая не нарушает `unsafe-eval` и поддерживает большую часть синтаксиса встроенных выражений Alpine.
 
 ## Установка
 
@@ -64,9 +65,9 @@ window.Alpine.start();
 
 ## Пример использования
 
-Чтобы дать представление о том, как может выглядеть использование сборки CSP, вот копируемый HTML-файл с работающим компонентом счётчика, использующим обычную настройку CSP:
+Вот рабочий компонент счётчика с использованием CSP-сборки Alpine. Обратите внимание, что большинство выражений работают точно так же, как в обычном Alpine:
 
-```html live
+```html
 <html>
   <head>
     <meta
@@ -80,79 +81,126 @@ window.Alpine.start();
     ></script>
   </head>
   <body>
-    <div x-data="counter">
-      <button x-on:click="count++"><span x-text="count"></span></button>
+    <div x-data="{ count: 0, message: 'Привет' }">
+        <button x-on:click="count++"><span x-text="count"></span> Увеличить</button>
+        <button x-on:click="count = 0">Сбросить</button>
+        <div>
+          <span x-text="message + ', мир!'"></span>
+          <span x-show="count > 5">Число больше 5!</span>
+        </div>
     </div>
-    <script nonce="a23gbfz9e">
-      document.addEventListener('alpine:init', () => {
-        Alpine.data('counter', () => {
-          return {
-            count: 1,
-            increment() {
-              this.count++;
-            },
-          };
-        });
-      });
-    </script>
   </body>
 </html>
 ```
 
-## Ограничения API
+## Что поддерживается
 
-Поскольку Alpine больше не может интерпретировать строки как обычный JavaScript, ему приходится разбирать и конструировать из них JavaScript-функции вручную.
+CSP-сборка поддерживает большинство выражений JavaScript, которые вы захотите использовать в Alpine:
 
-Из-за этого ограничения для регистрации объектов `x-data` нужно использовать `Alpine.data`, а для обращения к свойствам и методам — ссылаться на них только через ключ.
+### Объекты и массивы
+```html
+<!-- ✅ Работают -->
+<div x-data="{ user: { name: 'Вася', age: 30 }, items: [1, 2, 3] }">
+    <span x-text="user.name"></span>
+    <span x-text="items[0]"></span>
+</div>
+```
 
-Например, такой встроенный компонент не будет работать:
+### Базовые операции
+```html
+<!-- ✅ Работают -->
+<div x-data="{ count: 5, name: 'Alpine' }">
+    <span x-text="count + 10"></span>
+    <span x-text="count > 3"></span>
+    <span x-text="count === 5 ? 'Да' : 'Нет'"></span>
+    <span x-text="'Привет, ' + name"></span>
+    <div x-show="!loading && count > 0"></div>
+</div>
+```
+
+### Присваивания и обновления
+```html
+<!-- ✅ Работают -->
+<div x-data="{ count: 0, user: { name: '' } }">
+    <button x-on:click="count++">Увеличить</button>
+    <button x-on:click="count = 0">Сбросить</button>
+    <input x-model="user.name">
+</div>
+```
+
+### Вызовы методов
+```html
+<!-- ✅ Работают -->
+<div x-data="{ items: ['a', 'b'], getMessage: () => 'Привет' }">
+    <span x-text="getMessage()"></span>
+    <button x-on:click="items.push('c')">Добавить пункт</button>
+</div>
+```
+
+### Глобальные переменные и функции
+```html
+<!-- ✅ Работают -->
+<div x-data="{ count: 42 }">
+    <button x-on:click="console.log('Число:', count)">Показать число</button>
+    <span x-text="Math.max(count, 100)"></span>
+    <span x-text="parseInt('123') + count"></span>
+    <span x-text="JSON.stringify({ value: count })"></span>
+</div>
+```
+
+## Что не поддерживается
+
+Некоторые расширенные возможности JavaScript не поддерживаются:
 
 ```html
-<!-- Плохо -->
-<div x-data="{ count: 1 }">
-  <button @click="count++">Увеличить</button>
-  <span x-text="count"></span>
+<!-- ❌ Не работают -->
+<div x-data>
+    <!-- Стрелочные функции -->
+    <button x-on:click="() => console.log('hi')">Плохо</button>
+
+    <!-- Деструктуризация -->
+    <div x-text="{ name } = user">Плохо</div>
+
+    <!-- Шаблонные строки -->
+    <div x-text="`Привет, ${name}`">Плохо</div>
+
+    <!-- Оператор spread -->
+    <div x-data="{ ...defaults }">Плохо</div>
 </div>
 ```
 
-Однако, если разбить выражения на внешние API, то для сборки CSP будет справедливо следующее:
+## Когда выносить логику
 
-```html "increment"
-<!-- Хорошо -->
-<div x-data="counter">
-  <button @click="increment">Увеличить</button>
-  <span x-text="count"></span>
-</div>
+Хотя CSP-сборка поддерживает простые встроенные выражения, сложную логику лучше выносить в отдельные функции или компоненты через Alpine.data() для лучшей организации:
+
+```html wrap
+<!-- Вместо этого -->
+<div x-data="{ users: [] }" x-show="users.filter(u => u.active && u.role === 'admin').length > 0">
 ```
 
-```js "increment"
-Alpine.data('counter', () => ({
-  count: 1,
+```html wrap
+<!-- Делайте так -->
+<div x-data="userManager" x-show="hasActiveAdmins">
 
-  increment() {
-    this.count++;
-  },
-}));
+<script nonce="...">
+    Alpine.data('userManager', () => ({
+        users: [],
+
+        get hasActiveAdmins() {
+            return this.users.filter(u => u.active && u.role === 'admin').length > 0
+        }
+    }))
+</script>
 ```
 
-Сборка CSP поддерживает доступ к вложенным свойствам (аксессорам свойств) с использованием точечной нотации.
+Такой подход делает ваш код более читаемым, тестируемым и сопровождаемым, особенно когда речь идет о сложных приложениях.
 
-```html "increment"
-<!-- Это тоже работает -->
-<div x-data="counter">
-    <button @click="foo.increment">Увеличить</button>
-    <span x-text="foo.count"></span>
-</div>
+## Заголовки CSP
+
+Вот пример заголовка CSP, который совместим со сборкой Alpine.js для CSP:
+
+```text wrap
+Content-Security-Policy: default-src 'self'; script-src 'nonce-[random]' 'strict-dynamic';
 ```
 
-```js "increment"
-Alpine.data('counter', () => ({
-    foo: {
-        count: 1,
-
-        increment() {
-            this.count++
-        },
-    },
-}))
-```
+Ключевой момент — это удаление директивы `unsafe-eval` из вашей директивы `script-src`, при этом сохраняя возможность выполнения ваших скриптов, основанных на одноразовых значениях (`nonce`).
