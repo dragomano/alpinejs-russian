@@ -29,6 +29,7 @@ export default defineConfig({
         starlightScrollToTop({
           tooltipText: 'Прокрутить вверх',
           showTooltip: true,
+          showOnHomepage: true
         })
       ],
       title: 'Alpine.js по-русски',
