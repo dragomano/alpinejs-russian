@@ -67,6 +67,7 @@ export default defineConfig({
       components: {
         LastUpdated: './src/components/LastUpdated.astro',
         SocialIcons: './src/components/SocialIcons.astro',
+        ThemeSelect: './src/components/DarkMode.astro',
         Header: './src/components/Header.astro',
       },
       customCss: ['./src/styles/custom.scss', './src/styles/global.css'],

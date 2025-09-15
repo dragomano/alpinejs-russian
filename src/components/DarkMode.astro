@@ -1,0 +1,214 @@
+---
+/**
+ * Dark Mode Toggle Component
+ *
+ * @description A fully accessible dark mode toggle with auto/light/dark modes
+ */
+
+interface Props {
+  /**
+   * Additional classes to apply to the button
+   */
+  class?: string
+  /**
+   * Accessible label for the toggle button
+   * @default "Переключить тему"
+   */
+  label?: string
+  /**
+   * Children elements for slots
+   */
+  children?: any
+  /**
+   * HTML attributes to spread on the dark mode toggle
+   */
+  [key: string]: string | number | boolean | undefined | any
+}
+
+const { class: className, label = 'Переключить тему', ...rest } = Astro.props
+---
+
+<button
+  class:list={['darkmode-toggle', className]}
+  aria-pressed="false"
+  aria-label={label}
+  transition:persist
+  {...rest}
+>
+  <span class="icon icon-light">
+    <slot name="light">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M13 3a1 1 0 1 0-2 0v1a1 1 0 1 0 2 0V3zM5.707 4.293a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414-1.414l-1-1zm14 0a1 1 0 0 0-1.414 0l-1 1a1 1 0 0 0 1.414 1.414l1-1a1 1 0 0 0 0-1.414zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm-9 4a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2H3zm17 0a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2h-1zM6.707 18.707a1 1 0 0 0-1.414-1.414l-1 1a1 1 0 0 0 1.414 1.414l1-1zm12-1.414a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414-1.414l-1-1zM13 20a1 1 0 1 0-2 0v1a1 1 0 1 0 2 0v-1z"
+          fill="currentColor"></path>
+      </svg>
+    </slot>
+  </span>
+  <span class="icon icon-dark">
+    <slot name="dark">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M9.353 3C5.849 4.408 3 7.463 3 11.47A9.53 9.53 0 0 0 12.53 21c4.007 0 7.062-2.849 8.47-6.353C8.17 17.065 8.14 8.14 9.353 3z"
+        ></path>
+      </svg>
+    </slot>
+  </span>
+</button>
+
+<script is:inline>
+  if (!window.darkModeInitialized) {
+    window.darkModeInitialized = true
+
+    const root = document.documentElement
+    let storedTheme = localStorage.getItem('starlight-theme')
+
+    const applyTheme = (theme, store = true) => {
+      const darkModeToggles = document.querySelectorAll('.darkmode-toggle')
+      const isDarkTheme = theme === 'dark'
+
+      root.setAttribute('data-theme', theme)
+      root.style.colorScheme = theme
+
+      darkModeToggles.forEach((toggle) => {
+        toggle.setAttribute('aria-pressed', isDarkTheme.toString())
+
+        const lightIcon = toggle.querySelector('.icon-light')
+        const darkIcon = toggle.querySelector('.icon-dark')
+
+        if (lightIcon && darkIcon) {
+          lightIcon.style.display = isDarkTheme ? 'flex' : 'none'
+          darkIcon.style.display = isDarkTheme ? 'none' : 'flex'
+        }
+      })
+
+      if (store) {
+        localStorage.setItem('starlight-theme', theme)
+      }
+    }
+
+    const updateGiscusTheme = (newTheme) => {
+      if (!globalThis.giscusConfig) {
+        const giscusFrame = document.querySelector('iframe.giscus-frame')
+
+        if (giscusFrame) {
+          giscusFrame.contentWindow?.postMessage(
+            {
+              giscus: {
+                setConfig: {
+                  theme: newTheme
+                }
+              }
+            },
+            '*'
+          );
+        } else {
+          console.warn('DarkMode: giscusFrame not found');
+        }
+
+        return;
+      }
+    }
+
+    const applySystemTheme = () => {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+      applyTheme(prefersDark ? 'dark' : 'light', false)
+    }
+
+    const initializeTheme = () => {
+      if (storedTheme) {
+        applyTheme(storedTheme)
+        updateGiscusTheme(storedTheme)
+
+        return
+      }
+
+      applySystemTheme()
+    }
+
+    initializeTheme()
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.darkmode-toggle')) {
+        const currentTheme = root.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        applyTheme(newTheme);
+        updateGiscusTheme(newTheme);
+      }
+    });
+
+
+    document.addEventListener('astro:after-swap', () => {
+      storedTheme = localStorage.getItem('starlight-theme')
+
+      initializeTheme()
+    })
+  }
+</script>
+
+<style>
+  :where(.darkmode-toggle) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid;
+    border-radius: 0.5rem;
+    background: transparent;
+    padding-inline: 0.5rem;
+    padding-block: 0.5rem;
+  }
+
+  :where(.darkmode-toggle:hover),
+  :where(.darkmode-toggle:focus-visible) {
+    box-shadow: 0 0 0 0.25rem;
+  }
+
+  :where(.darkmode-toggle:focus-visible) {
+    outline: none;
+  }
+
+  :where(.icon) {
+    display: flex;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+  }
+
+  :where(.icon svg),
+  :where(.icon) :global(svg) {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  :where(.darkmode-toggle .icon-dark) {
+    display: flex;
+  }
+
+  :where(.darkmode-toggle .icon-light) {
+    display: none;
+  }
+
+  [data-theme="dark"] .darkmode-toggle .icon-dark {
+    display: none;
+  }
+
+  [data-theme="dark"] .darkmode-toggle .icon-light {
+    display: flex;
+  }
+</style>
