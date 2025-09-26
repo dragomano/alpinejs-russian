@@ -26,6 +26,7 @@
     --sl-color-gray-5: #353841;
     --sl-color-gray-6: #24272f;
     --sl-color-black: #17181c;
+    --theme-shade-subtle: rgba(0, 0, 0, 0.2);
 }
 
 /* Light mode colors. */
@@ -42,6 +43,7 @@
     --sl-color-gray-6: #eceef2;
     --sl-color-gray-7: #f5f6f8;
     --sl-color-black: #ffffff;
+    --theme-shade-subtle: rgba(0, 0, 0, 0.1);
 }
 
 /* Style the Markdown heading links. */
@@ -86,4 +88,16 @@ button.submit {
 
 .hidden {
     display: none;
+}
+
+/* Custom overrides for Box.astro */
+.highlight-box {
+    border-color: var(--box-border-color, var(--sl-color-orange));
+    background-color: var(--box-bg-color, var(--sl-color-orange-low));
+    color: var(--box-text-color, var(--sl-color-orange-high));
+}
+
+.highlight-box.check-list {
+    border-color: var(--box-checklist-border-color, var(--sl-color-green));
+    background-color: var(--box-checklist-bg-color, var(--sl-color-green-low));
 }

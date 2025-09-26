@@ -7,7 +7,7 @@
 >
   <form onsubmit="event.preventDefault()">
     <ol class="opt-list not-content"><slot /></ol>
-    <div class="footer">
+    <div class="pico footer">
       <button class="submit" type="submit" disabled>
         Отправить
       </button>
@@ -41,14 +41,13 @@
   .submit,
   .answer {
     padding: 0.8rem;
-    border-radius: 1.5rem;
     line-height: 1.4;
   }
 
   .submit {
     cursor: pointer;
     color: var(--sl-color-accent);
-    background-color: white;
+    background-color: var(--sl-color-bg-card);
   }
 
   .submit:focus {
@@ -61,11 +60,11 @@
     outline: none;
   }
 
-  .submit:hover {
-    background: var(--sl-color-text-accent);
-    color: var(--sl-color-black);
+/*   .submit:hover {
+    background: var(--sl-color-bg-card);
+    color: var(--sl-color-white);
     border-color: transparent;
-  }
+  } */
 
   .submit:disabled,
   .submit:active {
@@ -88,13 +87,13 @@
   }
 
   .correct {
-    color: var(--sl-color-green-low);
+    color: black;
     background-color: var(--sl-color-green);
     animation: tada 1s 0;
   }
 
   .wrong {
-    color: var(--sl-color-red-low);
+    color: white;
     background-color: var(--sl-color-red);
     animation: nope 0.3s 0;
   }
