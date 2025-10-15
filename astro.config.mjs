@@ -18,6 +18,7 @@ export default defineConfig({
     starlight({
       plugins: [
         starlightGiscus({
+          element: 'button.darkmode-toggle',
           repo: 'dragomano/alpinejs-russian',
           repoId: 'R_kgDOKwwvAA',
           category: 'Q&A',
