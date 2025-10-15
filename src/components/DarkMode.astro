@@ -102,25 +102,19 @@ const { class: className, label = 'Переключить тему', ...rest } =
     }
 
     const updateGiscusTheme = (newTheme) => {
-      if (!globalThis.giscusConfig) {
-        const giscusFrame = document.querySelector('iframe.giscus-frame')
+      const giscusFrame = document.querySelector('iframe.giscus-frame')
 
-        if (giscusFrame) {
-          giscusFrame.contentWindow?.postMessage(
-            {
-              giscus: {
-                setConfig: {
-                  theme: newTheme
-                }
-              }
+      if (giscusFrame) {
+        giscusFrame.contentWindow?.postMessage(
+          {
+            giscus: {
+              setConfig: {
+                theme: newTheme,
+              },
             },
-            '*'
-          );
-        } else {
-          console.warn('DarkMode: giscusFrame not found');
-        }
-
-        return;
+          },
+          '*',
+        )
       }
     }
 
