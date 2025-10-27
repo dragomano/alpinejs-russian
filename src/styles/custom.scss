@@ -90,6 +90,10 @@ button.submit {
     display: none;
 }
 
+.red_button {
+    background: red !important;
+}
+
 /* Custom overrides for Box.astro */
 .highlight-box {
     border-color: var(--box-border-color, var(--sl-color-orange));
