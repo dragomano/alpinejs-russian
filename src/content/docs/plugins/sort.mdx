@@ -65,11 +65,11 @@ Alpine.start();
 
 ```html live "x-sort"
 <div x-data>
-    <ul x-sort>
-        <li x-sort:item>кошка</li>
-        <li x-sort:item>мышка</li>
-        <li x-sort:item>собака</li>
-    </ul>
+  <ul x-sort>
+    <li x-sort:item>кошка</li>
+    <li x-sort:item>мышка</li>
+    <li x-sort:item>собака</li>
+  </ul>
 </div>
 ```
 
@@ -79,11 +79,11 @@ Alpine.start();
 
 ```html live "x-sort:item"
 <div x-data>
-    <ul x-sort="alert($item + ' - ' + $position)">
-        <li x-sort:item="1">кошка</li>
-        <li x-sort:item="2">мышка</li>
-        <li x-sort:item="3">собака</li>
-    </ul>
+  <ul x-sort="alert($item + ' - ' + $position)">
+    <li x-sort:item="1">кошка</li>
+    <li x-sort:item="2">мышка</li>
+    <li x-sort:item="3">собака</li>
+  </ul>
 </div>
 ```
 
@@ -93,11 +93,11 @@ Alpine.start();
 
 ```html {1}
 <div x-data="{ handle: (item, position) => { ... } }">
-    <ul x-sort="handle">
-        <li x-sort:item="1">лиса</li>
-        <li x-sort:item="2">волк</li>
-        <li x-sort:item="3">медведь</li>
-    </ul>
+  <ul x-sort="handle">
+    <li x-sort:item="1">лиса</li>
+    <li x-sort:item="2">волк</li>
+    <li x-sort:item="3">медведь</li>
+  </ul>
 </div>
 ```
 
@@ -109,16 +109,16 @@ Alpine.start();
 
 ```html live "x-sort.group"
 <div x-data>
-    <ul x-sort x-sort:group="todos">
-        <li x-sort:item="1">кошка</li>
-        <li x-sort:item="2">мышка</li>
-        <li x-sort:item="3">собака</li>
-    </ul>
-    <ol x-sort x-sort:group="todos">
-        <li x-sort:item="1">енот</li>
-        <li x-sort:item="2">ласка</li>
-        <li x-sort:item="3">хорёк</li>
-    </ol>
+  <ul x-sort x-sort:group="todos">
+    <li x-sort:item="1">кошка</li>
+    <li x-sort:item="2">мышка</li>
+    <li x-sort:item="3">собака</li>
+  </ul>
+  <ol x-sort x-sort:group="todos">
+    <li x-sort:item="1">енот</li>
+    <li x-sort:item="2">ласка</li>
+    <li x-sort:item="3">хорёк</li>
+  </ol>
 </div>
 ```
 
@@ -134,21 +134,52 @@ Alpine.start();
 
 ```html live "x-sort:handle"
 <div x-data>
-    <ul x-sort class="list-none">
-        <li x-sort:item>
-            <span x-sort:handle> 🦊 </span>лиса
-        </li>
-        <li x-sort:item>
-            <span x-sort:handle> 🐺 </span>волк
-        </li>
-        <li x-sort:item>
-            <span x-sort:handle> 🐻 </span>медведь
-        </li>
-    </ul>
+  <ul x-sort class="list-none">
+    <li x-sort:item>
+      <span x-sort:handle> 🦊 </span>лиса
+    </li>
+    <li x-sort:item>
+      <span x-sort:handle> 🐺 </span>волк
+    </li>
+    <li x-sort:item>
+      <span x-sort:handle> 🐻 </span>медведь
+    </li>
+  </ul>
 </div>
 ```
 
 Как видно из приведённого выше примера, мордочки животных можно перетаскивать, а их названия — нет.
+
+## Игнорирование элементов
+
+Иногда требуется предотвратить запуск операции перетаскивания для определённых элементов внутри сортируемого элемента. Это особенно полезно, когда у вас есть интерактивные элементы, такие как кнопки, выпадающие списки или ссылки, которые пользователь должен иметь возможность нажимать, не вызывая случайного перетаскивания сортируемого элемента.
+
+Вы можете использовать директиву `x-sort:ignore`, чтобы пометить элементы, которые не должны инициировать перетаскивание:
+
+```html live "x-sort:ignore"
+<div x-data>
+  <ul x-sort>
+      <li x-sort:item>
+          <!-- ... -->
+          <button x-sort:ignore>Редактировать</button>
+      </li>
+      <li x-sort:item>
+          <!-- ... -->
+          <button x-sort:ignore>Редактировать</button>
+      </li>
+      <li x-sort:item>
+          <!-- ... -->
+          <button x-sort:ignore>Редактировать</button>
+      </li>
+  </ul>
+</div>
+```
+
+В приведённом выше примере пользователи могут нажимать и перетаскивать сам элемент, но нажатие на кнопку «Редактировать» не инициирует операцию перетаскивания.
+
+:::note
+Элементы с директивой `x-sort:ignore` продолжают работать в обычном режиме (кнопки можно нажимать, поля ввода можно фокусировать и т. д.) — они лишь исключаются из операций перетаскивания.
+:::
 
 ## Призрачные элементы
 
@@ -160,11 +191,11 @@ Alpine.start();
 
 ```html live "x-sort.ghost"
 <div x-data>
-    <ul x-sort.ghost>
-        <li x-sort:item>бурундук</li>
-        <li x-sort:item>капибара</li>
-        <li x-sort:item>муравьед</li>
-    </ul>
+  <ul x-sort.ghost>
+    <li x-sort:item>бурундук</li>
+    <li x-sort:item>капибара</li>
+    <li x-sort:item>муравьед</li>
+  </ul>
 </div>
 ```
 
@@ -177,17 +208,17 @@ Alpine.start();
 ```html live {2-4}
 <style>
 .sortable-ghost {
-    opacity: .5 !important;
-    color: lime;
+  opacity: .5 !important;
+  color: lime;
 }
 </style>
 
 <div x-data>
-    <ul x-sort.ghost>
-        <li x-sort:item>гиена</li>
-        <li x-sort:item>шакал</li>
-        <li x-sort:item>койот</li>
-    </ul>
+  <ul x-sort.ghost>
+    <li x-sort:item>гиена</li>
+    <li x-sort:item>шакал</li>
+    <li x-sort:item>койот</li>
+  </ul>
 </div>
 ```
 
@@ -201,7 +232,7 @@ Alpine.start();
 
 ```html
 <div id="sort-warning">
-    Функциональность страницы при сортировке ограничена
+  Функциональность страницы при сортировке ограничена
 </div>
 ```
 
@@ -209,11 +240,11 @@ Alpine.start();
 
 ```css "body.sorting"
 #sort-warning {
-    display: none;
+  display: none;
 }
 
 body.sorting #sort-warning {
-    display: block;
+  display: block;
 }
 ```
 
@@ -225,9 +256,9 @@ body.sorting #sort-warning {
 
 ```html
 <div x-sort>
-    <div x-sort:item class="hover:border">страус</div>
-    <div x-sort:item class="hover:border">курица</div>
-    <div x-sort:item class="hover:border">павлин</div>
+  <div x-sort:item class="hover:border">страус</div>
+  <div x-sort:item class="hover:border">курица</div>
+  <div x-sort:item class="hover:border">павлин</div>
 </div>
 ```
 
@@ -235,11 +266,11 @@ body.sorting #sort-warning {
 
 ```html live
 <div x-data>
-    <ul x-sort class="flex flex-col items-start">
-        <li x-sort:item class="hover:border border-black">страус</li>
-        <li x-sort:item class="hover:border border-black">курица</li>
-        <li x-sort:item class="hover:border border-black">павлин</li>
-    </ul>
+  <ul x-sort class="flex flex-col items-start">
+    <li x-sort:item class="hover:border border-black">страус</li>
+    <li x-sort:item class="hover:border border-black">курица</li>
+    <li x-sort:item class="hover:border border-black">павлин</li>
+  </ul>
 </div>
 ```
 
@@ -250,9 +281,9 @@ body.sorting #sort-warning {
 
 ```html
 <div x-sort>
-    <div x-sort:item class="[body:not(.sorting)_&]:hover:border">страус</div>
-    <div x-sort:item class="[body:not(.sorting)_&]:hover:border">курица</div>
-    <div x-sort:item class="[body:not(.sorting)_&]:hover:border">павлин</div>
+  <div x-sort:item class="[body:not(.sorting)_&]:hover:border">страус</div>
+  <div x-sort:item class="[body:not(.sorting)_&]:hover:border">курица</div>
+  <div x-sort:item class="[body:not(.sorting)_&]:hover:border">павлин</div>
 </div>
 ```
 
@@ -260,11 +291,11 @@ body.sorting #sort-warning {
 
 ```html live
 <div x-data>
-    <ul x-sort class="flex flex-col items-start">
-        <li x-sort:item class="[body:not(.sorting)_&]:hover:border border-black">индюк</li>
-        <li x-sort:item class="[body:not(.sorting)_&]:hover:border border-black">гусь</li>
-        <li x-sort:item class="[body:not(.sorting)_&]:hover:border border-black">утка</li>
-    </ul>
+  <ul x-sort class="flex flex-col items-start">
+    <li x-sort:item class="[body:not(.sorting)_&]:hover:border border-black">индюк</li>
+    <li x-sort:item class="[body:not(.sorting)_&]:hover:border border-black">гусь</li>
+    <li x-sort:item class="[body:not(.sorting)_&]:hover:border border-black">утка</li>
+  </ul>
 </div>
 ```
 
@@ -274,21 +305,21 @@ Alpine выбирает разумные настройки по умолчан�
 
 ```html live "x-sort:config"
 <div x-data>
-    <ul x-sort x-sort:config="{ filter: '.no-drag', ghostClass: 'text-yellow-500' }">
-        <li x-sort:item>суррикат</li>
-        <li x-sort:item class="no-drag">норка (не перетаскивается)</li>
-        <li x-sort:item>белка</li>
-    </ul>
+  <ul x-sort x-sort:config="{ filter: '.no-drag', ghostClass: 'text-yellow-500' }">
+    <li x-sort:item>суррикат</li>
+    <li x-sort:item class="no-drag">норка (не перетаскивается)</li>
+    <li x-sort:item>белка</li>
+  </ul>
 </div>
 ```
 
 ```html live "animation: 0"
 <div x-data>
-    <ul x-sort x-sort:config="{ animation: 0 }">
-        <li x-sort:item>суррикат</li>
-        <li x-sort:item>норка</li>
-        <li x-sort:item>белка</li>
-    </ul>
+  <ul x-sort x-sort:config="{ animation: 0 }">
+    <li x-sort:item>суррикат</li>
+    <li x-sort:item>норка</li>
+    <li x-sort:item>белка</li>
+  </ul>
 </div>
 ```
 
