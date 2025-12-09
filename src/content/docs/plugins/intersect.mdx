@@ -23,7 +23,7 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 <Tabs>
   <TabItem label="jsDelivr CDN">
-    ```html
+    ```html wrap
     <!-- Intersect Plugin -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3/dist/cdn.min.js"></script>
 
@@ -32,7 +32,7 @@ import { Box, MultipleChoice, Option } from '@components/index';
     ```
   </TabItem>
   <TabItem label="unpkg CDN">
-    ```html
+    ```html wrap
     <!-- Intersect Plugin -->
     <script defer src="https://unpkg.com/@alpinejs/intersect@latest/dist/cdn.min.js"></script>
 
@@ -166,7 +166,7 @@ Alpine.start();
 ```html ".margin" wrap
 // Выгрузить, когда элемент оказывается в пределах 10%
 // от верхней границы области просмотра или в
-// пределах 25px от трех других границ
+// пределах 25px от трёх других границ
 <div x-intersect:leave.margin.10%.25px.25.25px="loaded = false">...</div>
 ```
 
