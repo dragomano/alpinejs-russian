@@ -22,7 +22,7 @@ import { PackageManagers } from 'starlight-package-managers';
 
 <Tabs>
   <TabItem label="jsDelivr CDN">
-    ```html
+    ```html wrap
     <!-- Persist Plugin -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3/dist/cdn.min.js"></script>
 
@@ -31,7 +31,7 @@ import { PackageManagers } from 'starlight-package-managers';
     ```
   </TabItem>
   <TabItem label="unpkg CDN">
-    ```html
+    ```html wrap
     <!-- Persist Plugin -->
     <script defer src="https://unpkg.com/@alpinejs/persist@latest/dist/cdn.min.js"></script>
 
@@ -61,7 +61,7 @@ Alpine.start();
 
 Основным API для использования этого плагина является магический метод `$persist`.
 
-Вы можете обернуть любое значение внутри `x-data` с помощью `$persist`, как показано ниже, чтобы сохранить его значение при загрузке страницы:
+Можно обернуть любое значение внутри `x-data` с помощью `$persist`, как показано ниже, чтобы сохранить его значение при загрузке страницы:
 
 ```html live "$persist"
 <div x-data="{ count: $persist(0) }">
@@ -71,7 +71,7 @@ Alpine.start();
 
 В приведённом выше примере, поскольку мы обернули `0` в `$persist()`, Alpine теперь будет перехватывать изменения, внесённые в `count`, и сохранять их при всех загрузках страницы.
 
-Вы можете попробовать сделать это самостоятельно, увеличив значение «count» в приведённом выше примере, затем обновить эту страницу и заметить, что «count» сохраняет свое состояние и не сбрасывается в «0».
+Вы можете попробовать сделать это самостоятельно, увеличив значение `count` в приведённом выше примере, затем обновить эту страницу и заметить, что `count` сохраняет свое состояние и не сбрасывается в `0`.
 
 ## Как это работает?
 
@@ -81,11 +81,11 @@ Alpine.start();
 
 Вы можете наблюдать это поведение, открыв средство просмотра localStorage в [инструменте разработчика](https://developer.chrome.com/docs/devtools/storage/localstorage/) вашего браузера:
 
-![Инструменты разработчика Chrome, показывающие представление localStorage со счетчиком, равным 0](https://alpinejs.dev/img/persist_devtools.png)
+![Инструменты разработчика Chrome, показывающие представление localStorage со счётчиком, равным 0](https://alpinejs.dev/img/persist_devtools.png)
 
-Вы заметите, что, просто посетив эту страницу, Alpine уже установил значение «count» в localStorage. Вы также заметите, что к имени свойства «count» добавляется префикс «_x_» как способ размещения этих значений в пространстве имён, чтобы Alpine не конфликтовал с другими инструментами, использующими localStorage.
+Вы заметите, что, просто посетив эту страницу, Alpine уже установил значение `count` в localStorage. Вы также заметите, что к имени свойства `count` добавляется префикс `_x_` как способ размещения этих значений в пространстве имён, чтобы Alpine не конфликтовал с другими инструментами, использующими localStorage.
 
-Теперь измените «count» в следующем примере и обратите внимание на изменения, внесенные Alpine в localStorage:
+Теперь измените `count` в следующем примере и обратите внимание на изменения, внесенные Alpine в localStorage:
 
 ```html live "$persist"
 <div x-data="{ count: $persist(0) }">
@@ -123,11 +123,11 @@ Alpine.start();
 </div>
 ```
 
-Теперь Alpine сохранит и получит указанное выше значение «count», используя ключ «other-count».
+Теперь Alpine сохранит и получит указанное выше значение `count`, используя ключ «other-count».
 
 Вот вид Chrome Devtools, который вы можете увидеть сами:
 
-![Инструменты разработчика Chrome, показывающие представление localStorage со счетчиком, равным 0](https://alpinejs.dev/img/persist_custom_key_devtools.png)
+![Инструменты разработчика Chrome, показывающие представление localStorage со счётчиком, равным `0`](https://alpinejs.dev/img/persist_custom_key_devtools.png)
 
 ## Использование пользовательского хранилища
 
