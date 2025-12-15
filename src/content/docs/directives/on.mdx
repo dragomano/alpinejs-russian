@@ -125,6 +125,7 @@ Alpine позволяет легко прослушивать события `ke
 ```html live wrap "click" "shift" "mousemove" "mouseout"
 <div x-data="{ message: '' }">
   <button type="button"
+    x-data="{ message: 'выбрать' }"
     @click="message = 'выбрано'"
     @click.shift="message = 'добавлено в выбранные'"
     @mousemove.shift="message = 'добавить к выбору'"
