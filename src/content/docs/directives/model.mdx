@@ -187,6 +187,60 @@ import { Box, MultipleChoice, Option } from '@components/index';
 </div>
 ```
 
+### `.change`
+
+`.change` синхронизирует данные только тогда, когда поле ввода теряет фокус и его значение изменилось (нативное событие `change`). Это функционально эквивалентно `.lazy`.
+
+```html live "change"
+<div x-data="{ username: 'Вася' }">
+  <input type="text" x-model.change="username">
+  <span x-text="username"></span>
+</div>
+```
+
+### `.blur`
+
+`.blur` синхронизирует данные, когда поле ввода теряет фокус, независимо от того, изменилось ли значение.
+
+```html live
+<div x-data="{ email: 'some@test.com' }">
+  <input type="email" x-model.blur="email">
+  <span x-text="email"></span>
+</div>
+```
+
+### `.enter`
+
+`.enter` синхронизирует данные, когда пользователь нажимает клавишу Enter. Это полезно для полей поиска, где вы хотите запустить действие только тогда, когда пользователь явно отправляет данные.
+
+```html live
+<div x-data="{ search: '' }">
+  <input type="search" x-model.enter="search">
+  <span x-text="search"></span>
+</div>
+```
+
+:::note
+`.enter` не предотвращает поведение по умолчанию. Если поле ввода находится внутри формы, форма всё равно будет отправлена.
+:::
+
+### Комбинирование модификаторов событий
+
+Модификаторы `.change`, `.blur` и `.enter` могут быть объединены для синхронизации по нескольким событиям. Это полезно, когда вы хотите дать пользователям гибкость в том, как они отправляют данные.
+
+```html live wrap
+<div class="demo">
+    <div x-data="{ search: '' }">
+        <!-- Синхронизация при потере фокуса ИЛИ нажатии Enter -->
+        <input type="text" x-model.blur.enter="search" placeholder="Нажмите Enter или кликните за пределами элемента">
+        <!-- Синхронизация при изменении, потере фокуса ИЛИ нажатии Enter -->
+        <input type="text" x-model.change.blur.enter="search">
+
+        <div class="pt-4">Поиск: <span x-text="search"></span></div>
+    </div>
+</div>
+```
+
 ### `.number`
 
 По умолчанию любые данные, хранящиеся в свойстве через `x-model`, сохраняются в виде строки. Чтобы заставить Alpine сохранить значение как число JavaScript, добавьте модификатор `.number`.
