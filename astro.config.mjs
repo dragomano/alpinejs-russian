@@ -153,6 +153,7 @@ export default defineConfig({
     }),
   ],
   vite: {
+    css: { preprocessorOptions: { scss: { quietDeps: true } } },
     plugins: [tailwindcss()],
   },
   markdown: {
