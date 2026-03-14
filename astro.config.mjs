@@ -153,8 +153,17 @@ export default defineConfig({
     }),
   ],
   vite: {
-    css: { preprocessorOptions: { scss: { quietDeps: true } } },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          quietDeps: true,
+        },
+      },
+    },
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ['astro/virtual-modules/prefetch.js'],
+    },
   },
   markdown: {
     rehypePlugins: [

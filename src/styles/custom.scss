@@ -1,4 +1,4 @@
-@use "node_modules/@yohns/picocss/scss/pico" with (
+@use "@yohns/picocss/scss/pico" with (
     $parent-selector: ".pico",
     $theme-color: "azure"
 );
