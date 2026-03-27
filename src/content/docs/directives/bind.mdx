@@ -12,8 +12,8 @@ import { Box, MultipleChoice, Option } from '@components/index';
 Например, вот компонент, в котором мы будем использовать `x-bind` для установки значения _placeholder_ для текстового поля.
 
 ```html live "x-bind"
-<div x-data="{ placeholder: 'Введите текст...' }">
-  <input type="text" x-bind:placeholder="placeholder" />
+<div x-data="{ placeholderText: 'Введите текст...' }">
+  <input type="text" x-bind:placeholder="placeholderText" />
 </div>
 ```
 
@@ -22,7 +22,7 @@ import { Box, MultipleChoice, Option } from '@components/index';
 Если `x-bind:` слишком многословен, то можно воспользоваться сокращением: `:`. Например, здесь представлен тот же элемент _input_, что и выше, но переделанный для использования сокращённого синтаксиса.
 
 ```html ":placeholder"
-<input type="text" :placeholder="placeholder" />
+<input type="text" :placeholder="placeholderText" />
 ```
 
 :::caution
