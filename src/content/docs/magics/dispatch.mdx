@@ -31,13 +31,13 @@ import { Box, MultipleChoice, Option } from '@components/index';
     Обратите внимание: из-за [всплытия событий](https://learn.javascript.ru/bubbling-and-capturing), когда вам нужно перехватывать события, отправляемые с узлов, находящихся в одной и той же иерархии вложенности, вам нужно будет использовать модификатор [`.window`](/directives/on#window):
 
     ```html "$dispatch"
-    <!-- 🚫 Не работает -->
+    <!-- 🚫 Не сработает -->
     <div x-data>
       <span @notify="..."></span>
       <button @click="$dispatch('notify')">Уведомить</button>
     </div>
 
-    <!-- ✅ Будет работать (благодаря .window) -->
+    <!-- ✅ Сработает (благодаря .window) -->
     <div x-data>
       <span @notify.window="..."></span>
       <button @click="$dispatch('notify')">Уведомить</button>
@@ -46,7 +46,7 @@ import { Box, MultipleChoice, Option } from '@components/index';
 :::
 
 :::caution
-    Первый пример не будет работать, потому что при отправке `notify` оно будет распространяться на своего общего предка, `div`, а не на `<span>`. Второй пример будет работать, потому что одноуровневый элемент прослушивает `notify` на уровне `window`, до которого в конечном итоге всплывёт пользовательское событие.
+    Первый пример не будет работать, потому что при отправке события `notify` оно будет распространяться на своего общего предка, `div`, а не на `<span>`. Второй пример будет работать, потому что одноуровневый элемент прослушивает `notify` на уровне `window`, до которого в конечном итоге всплывёт пользовательское событие.
 :::
 
 ## Отправка другим компонентам
@@ -81,6 +81,60 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 Это открывает возможности для создания пользовательских компонентов ввода, значение которых можно установить с помощью `x-model`.
 
+## Отменяемые события
+
+Вы можете использовать значение, возвращаемое методом `$dispatch`, чтобы проверить, было ли событие отменено. Это полезно, когда нужно предотвратить стандартное поведение какого-либо действия.
+
+```html live "$dispatch" wrap
+<div x-data="{ open: false, canceled: false }" x-on:open.prevent>
+  <button @click="canceled = !$dispatch('open'); if (!canceled) open = true">
+    Нажми на меня
+  </button>
+  <!-- При нажатии кнопки отправляется событие,
+  и содержимое будет показано только в том случае,
+  если результат истинен (т. е. выполнение
+  не было прервано ни одним обработчиком). -->
+
+  <p x-show="canceled">Открытие было отменено обработчиком события.</p>
+
+  <div x-show="open">
+    <h1>Привет</h1>
+  </div>
+</div>
+```
+
+Это может пригодиться, если вы хотите предотвратить открытие или закрытие модального окна (или чего-то подобного) с помощью обработчиков событий.
+
+## Переопределение опций
+
+Вы можете использовать третий параметр `$dispatch`, чтобы переопределить стандартные настройки события. Например, можно установить значение `bubbles` в `false`:
+
+```html live "$dispatch" wrap
+<!-- 🚫 Не сработает, так как событие прослушивается на родительском элементе -->
+<div x-data="{ title: 'Привет' }" x-on:update-title="title = $event.detail">
+  <p x-text="title"></p>
+
+  <button @click="$dispatch('update-title', 'Привет, мир!', {bubbles: false})">
+    Нажми на меня
+  </button>
+</div>
+```
+```html live "$dispatch" wrap
+<!-- ✅ Сработает, так как событие прослушивается на том же самом элементе -->
+<div x-data="{ title: 'Привет' }">
+  <p x-text="title"></p>
+
+  <button
+    x-on:update-title="title = $event.detail"
+    @click="$dispatch('update-title', 'Привет, мир!', {bubbles: false})"
+  >
+    Нажми на меня
+  </button>
+</div>
+```
+
+Это полезно, когда нужно предотвратить «всплытие» (bubbling) события к родительским элементам.
+
 <Box icon="question-mark">
 ## Проверка знаний
 
@@ -88,28 +142,28 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
     <MultipleChoice>
       <Option>
-         ```html wrap
+        ```html wrap
         <div x-data>
           <span @notify.once="..."></span>
           <button @click="$dispatch('notify')">Уведомить</button>
         </div>
-         ```
+        ```
       </Option>
       <Option>
-         ```html wrap
+        ```html wrap
         <div x-data>
           <span @notify="..."></span>
           <button @click="$dispatch('notify')">Уведомить</button>
         </div>
-         ```
+        ```
       </Option>
       <Option isCorrect>
-         ```html wrap
+        ```html wrap
         <div x-data>
           <span @notify.window="..."></span>
           <button @click="$dispatch('notify')">Уведомить</button>
         </div>
-         ```
+        ```
       </Option>
     </MultipleChoice>
 
