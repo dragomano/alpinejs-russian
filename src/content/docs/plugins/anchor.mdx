@@ -75,7 +75,11 @@ Alpine.start();
   <div class="flex justify-center">
     <button x-ref="button" x-on:click="open = !open">Переключить</button>
   </div>
-  <div x-show="open" x-anchor="$refs.button" class="bg-white rounded p-2 border shadow z-10">
+  <div
+    x-show="open"
+    x-anchor="$refs.button"
+    class="bg-white rounded p-2 border shadow z-10"
+  >
     Содержимое
   </div>
 </div>
@@ -97,11 +101,41 @@ Alpine.start();
   <div class="flex justify-center">
     <button x-ref="button" x-on:click="open = !open">Переключить</button>
   </div>
-  <div x-show="open" x-anchor.bottom-start="$refs.button" class="bg-white rounded p-2 border shadow z-10">
+  <div
+    x-show="open"
+    x-anchor.bottom-start="$refs.button"
+    class="bg-white rounded p-2 border shadow z-10"
+  >
     Содержимое
   </div>
 </div>
 ```
+
+### Фиксированное позиционирование
+
+По умолчанию директива `x-anchor` устанавливает элементу `position: absolute`. В большинстве случаев этого достаточно, однако возникают проблемы, если элемент, к которому выполняется привязка, находится внутри контейнера со свойствами `overflow: hidden`, `overflow: clip` или `overflow: auto`. В таких случаях элемент обрезается вместе с родительским контейнером.
+
+Чтобы использовать стратегию фиксированного позиционирования, добавьте модификатор `.fixed`:
+
+```html live ".fixed" wrap
+<div x-data="{ open: false }" class="overflow-hidden">
+    <div class="flex justify-center">
+        <button x-ref="button" @click="open = !open">Переключить</button>
+    </div>
+
+    <div
+      x-show="open"
+      x-anchor.fixed="$refs.button"
+      class="bg-white rounded p-4 border shadow z-10"
+    >
+        Содержимое
+    </div>
+</div>
+```
+
+:::note[Важное замечание]
+Если у любого из предков элемента есть свойства `transform`, `filter`, `perspective`, `backdrop-filter`, `will-change` или `contain`, то для потомков с `position: fixed` создаётся новый содержащий блок (согласно спецификации CSS). В этом случае модификатор `.fixed` начинает вести себя как `position: absolute` относительно этого предка и не может выйти за пределы `overflow: hidden`. Если кажется, что `.fixed` ничего не меняет — проверьте, нет ли у какого-нибудь родительского элемента CSS-трансформации.
+:::
 
 ## Смещение
 
@@ -112,7 +146,11 @@ Alpine.start();
   <div class="flex justify-center">
     <button x-ref="button" x-on:click="open = !open">Переключить</button>
   </div>
-  <div x-show="open" x-anchor.offset.10="$refs.button" class="bg-white rounded p-2 border shadow z-10">
+  <div
+    x-show="open"
+    x-anchor.offset.10="$refs.button"
+    class="bg-white rounded p-2 border shadow z-10"
+  >
     Содержимое
   </div>
 </div>
@@ -130,7 +168,11 @@ Alpine.start();
     <button x-ref="button" @click="open = ! open">Переключить</button>
   </div>
 
-  <div x-show="open" x-anchor.noflip="$refs.button" class="bg-white rounded p-4 border shadow z-10">
+  <div
+    x-show="open"
+    x-anchor.noflip="$refs.button"
+    class="bg-white rounded p-4 border shadow z-10"
+  >
     Содержимое выпадающего списка
   </div>
 </div>
@@ -157,6 +199,20 @@ Alpine.start();
 </div>
 ```
 
+:::note
+**Комбинирование `.no-style` с `.fixed`:** если вы отказываетесь от внутренней стилизации Alpine и при этом хотите использовать фиксированное позиционирование, не забудьте самостоятельно задать `position: 'fixed'`. Значения `$anchor.x` и `$anchor.y` возвращаются в координатном пространстве той стратегии, которая в данный момент активна — абсолютные координаты отсчитываются относительно offset parent (ближайшего позиционированного предка), а фиксированные — относительно viewport. Поэтому при использовании неправильного значения `position` ваш элемент окажется не в том месте.
+
+```html
+<div
+    x-show="open"
+    x-anchor.no-style.fixed="$refs.button"
+    x-bind:style="{ position: 'fixed', top: $anchor.y+'px', left: $anchor.x+'px' }"
+>
+    Содержимое
+</div>
+```
+:::
+
 ## Привязка к идентификатору
 
 До сих пор все примеры были связаны с привязкой к другим элементам с помощью refs Alpine.
@@ -168,7 +224,11 @@ Alpine.start();
   <div class="flex justify-center">
     <button id="trigger" x-on:click="open = !open">Переключить</button>
   </div>
-  <div x-show="open" x-anchor.top.offset.25="document.getElementById('trigger')" class="bg-white rounded p-2 border shadow z-10">
+  <div
+    x-show="open"
+    x-anchor.top.offset.25="document.getElementById('trigger')"
+    class="bg-white rounded p-2 border shadow z-10"
+  >
     Содержимое
   </div>
 </div>
@@ -191,7 +251,35 @@ Alpine.start();
       </Option>
     </MultipleChoice>
 
-2. Как добавить смещение к элементу с помощью этого плагина?
+2. Как использовать фиксированное позиционирование?
+
+    ```html
+    <div x-data="{ open: false }" style="overflow: hidden">
+        <button x-ref="button" @click="open = !open">Переключить</button>
+
+        <div
+          x-show="open"
+          x-anchor="$refs.button"
+          style="background: cyan"
+        >
+            Содержимое
+        </div>
+    </div>
+    ```
+
+    <MultipleChoice>
+      <Option>
+        Заменить `overflow: hidden` на `overflow: auto`
+      </Option>
+      <Option isCorrect>
+        Добавить модификатор `.fixed` к `x-anchor`
+      </Option>
+      <Option>
+        Зафиксировать нужные значения отступов внутри `style=""`
+      </Option>
+    </MultipleChoice>
+
+3. Как добавить смещение к элементу с помощью этого плагина?
 
     <MultipleChoice>
       <Option>
