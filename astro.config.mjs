@@ -105,42 +105,30 @@ export default defineConfig({
         },
         {
           label: 'Основы',
-          autogenerate: {
-            directory: 'essentials',
-          },
+          items: [{ autogenerate: { directory: 'essentials' } }],
         },
         {
           label: 'Директивы',
-          autogenerate: {
-            directory: 'directives',
-          },
+          items: [{ autogenerate: { directory: 'directives' } }],
         },
         {
           label: 'Магические свойства',
           collapsed: true,
-          autogenerate: {
-            directory: 'magics',
-          },
+          items: [{ autogenerate: { directory: 'magics' } }],
         },
         {
           label: 'Глобальные методы',
-          autogenerate: {
-            directory: 'globals',
-          },
+          items: [{ autogenerate: { directory: 'globals' } }],
         },
         {
           label: 'Плагины',
           collapsed: true,
-          autogenerate: {
-            directory: 'plugins',
-          },
+          items: [{ autogenerate: { directory: 'plugins' } }],
         },
         {
           label: 'Дополнительно',
           collapsed: true,
-          autogenerate: {
-            directory: 'advanced',
-          },
+          items: [{ autogenerate: { directory: 'advanced' } }],
         },
         {
           label: 'Обучающие статьи и ролики',
