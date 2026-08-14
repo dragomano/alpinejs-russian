@@ -3,24 +3,13 @@ allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - astro@6.4.5 || 7.0.2
+  - astro@6.4.5 || 7.0.2 || 7.2.2
   - '@astrojs/starlight@0.40.0 || 0.41.0'
-  - '@expressive-code/core@0.43.1'
-  - '@expressive-code/plugin-frames@0.43.1'
-  - '@expressive-code/plugin-shiki@0.43.1'
-  - '@expressive-code/plugin-text-markers@0.43.1'
+  - '@expressive-code/*'
   - astro-expressive-code@0.43.1
   - expressive-code@0.43.1
   - rehype-expressive-code@0.43.1
   - '@astrojs/markdown-satteri@0.3.0 || 0.3.2'
   - starlight-giscus@1.1.0
-  - '@alpinejs/anchor@3.16.0'
-  - '@alpinejs/collapse@3.16.0'
-  - '@alpinejs/focus@3.16.0'
-  - '@alpinejs/intersect@3.16.0'
-  - '@alpinejs/mask@3.16.0'
-  - '@alpinejs/morph@3.16.0'
-  - '@alpinejs/persist@3.16.0'
-  - '@alpinejs/resize@3.16.0'
-  - '@alpinejs/sort@3.16.0'
+  - '@alpinejs/*'
   - alpinejs@3.16.0
