@@ -12,4 +12,4 @@ minimumReleaseAgeExclude:
   - '@astrojs/markdown-satteri@0.3.0 || 0.3.2'
   - starlight-giscus@1.1.0
   - '@alpinejs/*'
-  - alpinejs@3.16.0
+  - alpinejs@3.16.0 || 3.16.2
