@@ -1,6 +1,6 @@
 ---
 title: Tash
-description: Используем интерполяцию React, Vue или Angular с помощью Alpine JS
+description: Используем интерполяцию в стиле React, Vue или Angular с помощью Alpine.js
 origin: https://github.com/markmead/alpinejs-tash
 banner:
   content: |
@@ -10,7 +10,7 @@ banner:
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers';
 
-Если вы привыкли к способам записи переменных в React, Vue или Angular, то этот плагин поможет использовать более привычный синтаксис при отображении `{переменных}` Alpine JS 🚀.
+Если вы привыкли к способам записи переменных в React, Vue или Angular, то этот плагин поможет использовать более привычный синтаксис при отображении `{переменных}` в Alpine.js 🚀.
 
 ## Установка
 
@@ -22,9 +22,9 @@ import { PackageManagers } from 'starlight-package-managers';
 
 <Tabs>
   <TabItem label="jsDelivr CDN">
-    ```html
+    ```html wrap
     <!-- Tash Plugin -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs-tash@latest/dist/tash.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs-tash@latest/dist/cdn.min.js"></script>
 
     <!-- Alpine Core -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
@@ -33,7 +33,7 @@ import { PackageManagers } from 'starlight-package-managers';
   <TabItem label="unpkg CDN">
     ```html
     <!-- Tash Plugin -->
-    <script defer src="https://unpkg.com/alpinejs-tash@latest/dist/tash.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs-tash@latest/dist/cdn.min.js"></script>
 
     <!-- Alpine Core -->
     <script defer src="https://unpkg.com/alpinejs@3/dist/cdn.min.js"></script>
@@ -57,34 +57,133 @@ Alpine.plugin(tash);
 Alpine.start();
 ```
 
+Если вам нужен синтаксис в стиле Vue или Angular (фигурные скобки `{{ }}`), передайте плагину опцию `delimiters` при регистрации — см. раздел [Разделители](#разделители).
+
 ## Использование
 
-### Стиль React
+Добавьте `x-tash` к элементу и используйте `{ключ}` где угодно внутри него. Ключи определяются автоматически — список можно не указывать.
+
+### Базовое использование
 
 ```html live "x-tash"
 <div x-data="{ name: 'Вася', age: 50, company: 'GitHub' }">
-  <p x-tash="name, age, company">
+  <p x-tash>
     Привет, я {name}! Мне {age} лет и я работаю в {company}!
   </p>
 </div>
 ```
 
-### Стиль Vue
+В качестве ключа работает любое допустимое выражение Alpine, включая вложенные пути, индексы массивов и геттеры:
+
+```html
+<p x-tash>{user.name} имеет {user.orders.length} заказов на сумму {orderTotal}</p>
+```
+
+### Явное перечисление ключей
+
+Передача списка ключей через запятую ограничивает рендеринг только этими ключами и оставляет все остальные `{...}` в шаблоне без изменений. Это синтаксис v1, и он по-прежнему работает:
 
 ```html live "x-tash"
 <div x-data="{ name: 'Вася', age: 50, company: 'GitHub' }">
-  <p x-tash.vue="name, age, company">
+  <p x-tash="name, age">
+    Привет, {name}, тебе {age}. А это останется как есть: {company}
+  </p>
+</div>
+```
+
+Используйте его, когда в разметке есть литеральные фигурные скобки, которые не нужно трогать. В остальных случаях оставляйте `x-tash` пустым — плагин найдёт ключи сам.
+
+### Атрибуты
+
+Плейсхолдеры интерполируются и в атрибутах:
+
+```html live "x-tash"
+<div x-data="{ label: 'Закрыть', theme: 'dark' }">
+  <button x-tash title="{label}" data-theme="{theme}">×</button>
+</div>
+```
+
+Собственные атрибуты Alpine — всё, что начинается с `x-`, `@` или `:` — пропускаются, потому что Alpine и так вычисляет их как выражения. Для них используйте `:title="label"`, а не `title="{label}"`.
+
+### Циклы и условия
+
+Плейсхолдеры внутри `x-for` и `x-if` работают и разрешаются относительно того scope, в котором находятся:
+
+```html
+<ul x-tash x-data="{ rows: [{ label: 'a', n: 1 }] }">
+  <template x-for="row in rows">
+    <li title="row {row.label}">{row.label} = {row.n}</li>
+  </template>
+</ul>
+```
+
+Контент, добавленный после инициализации, подхватывается по мере появления, поэтому позже добавленные строки тоже отрисуются. Можно повесить `x-tash` и на элемент внутри цикла, если хотите ограничить область видимости:
+
+```html
+<template x-for="item in items">
+  <li x-tash>Элемент: {item}</li>
+</template>
+```
+
+### Разделители
+
+Пара по умолчанию — `{` и `}`. Измените её глобально, когда она конфликтует с серверным шаблонизатором — Blade, Twig, Jinja и Handlebars используют `{{ }}`:
+
+```js
+import Alpine from 'alpinejs';
+import tash from 'alpinejs-tash';
+
+Alpine.plugin(tash({ delimiters: ['[[', ']]'] }));
+```
+
+```html
+<p x-tash>Привет, [[name]]! {{ name }} от Blade останется нетронутым.</p>
+```
+
+Пробелы внутри разделителей всегда необязательны, поэтому `[[name]]` и `[[ name ]]` равнозначны. Чтобы использовать стиль Vue или Angular, задайте пару `['{{', '}}']`:
+
+```js
+import Alpine from 'alpinejs';
+import tash from 'alpinejs-tash';
+
+Alpine.plugin(tash({ delimiters: ['{{', '}}'] }));
+```
+
+```html
+<div x-data="{ name: 'Вася', age: 50, company: 'GitHub' }">
+  <p x-tash>
     Привет, я {{ name }}! Мне {{ age }} лет и я работаю в {{ company }}!
   </p>
 </div>
 ```
 
-### Стиль Angular
+При подключении через CDN задайте конфиг до запуска скрипта плагина:
 
-```html live "x-tash"
-<div x-data="{ name: 'Вася', age: 50, company: 'GitHub' }">
-  <p x-tash.angular="name, age, company">
-    Привет, я {{name}}! Мне {{age}} лет и я работаю в {{company}}!
-  </p>
-</div>
+```html
+<script>
+  window.tashConfig = { delimiters: ['{{', '}}'] };
+</script>
+
+<script defer src="https://unpkg.com/alpinejs-tash@latest/dist/cdn.min.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3/dist/cdn.min.js"></script>
 ```
+
+## Как рендерятся значения
+
+| Значение             | Отображается как               |
+| -------------------- | ------------------------------ |
+| `'Вася'`             | `Вася`                         |
+| `50`                 | `50`                           |
+| `null` / `undefined` | _(пустая строка)_              |
+| `{ a: 1 }`           | `{"a":1}`                      |
+| `'<b>жирный</b>'`    | `<b>жирный</b>` как видимый текст |
+
+Значения записываются как **текст**, а не разбираются как HTML. Значение, содержащее разметку, отображается на странице символами, поэтому пользовательские данные не могут внедрить элементы. Если вам действительно нужно отрендерить HTML, используйте `x-html` — и только для контента, которому вы доверяете.
+
+## Примечания и ограничения
+
+- **Каждый узел привязывается один раз.** Tash захватывает исходный текст узла при первом обнаружении, а затем записывает результат обратно в тот же узел. Ручное добавление нового текста `{ключ}` в DOM не будет обработано, но всё, что вставляет Alpine (`x-for`, `x-if`), — будет.
+- **Обновления сохраняют DOM.** Перезаписываются только совпавшие узлы, поэтому дочерние элементы сохраняют свою идентичность: поле ввода не теряет значение, фокус не пропадает, обработчики событий выживают, а вложенные компоненты `x-data` не пересоздаются.
+- **Неразрешимый ключ влияет только на свой плейсхолдер.** Ключи вычисляются независимо, поэтому `{config}` без `config` в scope останется на странице как литеральный текст, а остальные плейсхолдеры отрисуются. Alpine выведет обычную ошибку выражения. Если литеральный `{...}` в тексте вызывает этот шум, перечислите настоящие ключи явно.
+- **Вложенные элементы `x-tash` владеют своим поддеревом** и пропускаются родителем, поэтому плейсхолдер не рендерится дважды.
+- **Содержимое `<script>` и `<style>` никогда не интерполируется.**
