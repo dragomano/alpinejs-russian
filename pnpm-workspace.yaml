@@ -3,13 +3,15 @@ allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - astro@6.4.5 || 7.0.2 || 7.2.2 || 7.2.6
+  - astro@6.4.5 || 7.0.2 || 7.2.2 || 7.2.6 || 7.2.10
   - '@astrojs/starlight@0.40.0 || 0.41.0 || 0.41.8'
   - '@expressive-code/*'
   - astro-expressive-code@0.43.1
   - expressive-code@0.43.1
   - rehype-expressive-code@0.43.1
-  - '@astrojs/markdown-satteri@0.3.0 || 0.3.2 || 0.3.8'
+  - '@astrojs/markdown-satteri@0.3.0 || 0.3.2 || 0.3.8 || 0.4.0'
   - starlight-giscus@1.1.0
   - '@alpinejs/*'
-  - alpinejs@3.16.0 || 3.16.2 || 3.16.3 || 3.17.0
+  - alpinejs@3.16.0 || 3.16.2 || 3.16.3 || 3.17.0 || 3.17.1
+  - '@astrojs/internal-helpers@0.11.0'
+  - '@astrojs/markdown-remark@7.3.0'
