@@ -3,8 +3,9 @@ import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import liveCode from 'astro-live-code';
 import alpine from '@astrojs/alpinejs';
-import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import { unified, rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import { liveCodeRemark } from 'astro-live-code';
 import starlightGiscus from 'starlight-giscus';
 import tailwindcss from "@tailwindcss/vite";
 import starlightScrollToTop from 'starlight-scroll-to-top';
@@ -161,15 +162,18 @@ export default defineConfig({
     },
   },
   markdown: {
-    rehypePlugins: [
-      rehypeHeadingIds,
-      [
-        rehypeAutolinkHeadings,
-        {
-          // Wrap the heading text in a link.
-          behavior: 'wrap',
-        },
+    processor: unified({
+      remarkPlugins: [[liveCodeRemark, { layout: '@components/LiveCode.astro' }]],
+      rehypePlugins: [
+        rehypeHeadingIds,
+        [
+          rehypeAutolinkHeadings,
+          {
+            // Wrap the heading text in a link.
+            behavior: 'wrap',
+          },
+        ],
       ],
-    ],
+    }),
   },
 });

@@ -1,0 +1,20 @@
+diff --git a/src/lib/index.js b/src/lib/index.js
+index 5f065c73cae0a548f9f3fdd2e6493e9c712d4019..047d3b1d54dd2945bc0fedb7b657186f9abcacaf 100644
+--- a/src/lib/index.js
++++ b/src/lib/index.js
+@@ -18,9 +18,6 @@ export default function liveCode(options = {}) {
+     hooks: {
+       'astro:config:setup': ({ updateConfig }) => {
+         updateConfig({
+-          markdown: {
+-            remarkPlugins: [[remark, options]],
+-          },
+           vite: {
+             plugins: [vite(options)],
+           },
+@@ -29,3 +26,5 @@ export default function liveCode(options = {}) {
+     },
+   }
+ }
++
++export { remark as liveCodeRemark }
