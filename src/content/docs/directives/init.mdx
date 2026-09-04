@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 Директива `x-init` позволяет вам подключиться к фазе инициализации любого элемента в Alpine.
 
@@ -94,49 +94,49 @@ Alpine.data('dropdown', () => ({
 </div>
 ```
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Как выполнить какой-то код в Alpine только после отрисовки элемента?
+<Quiz id="init-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option isCorrect>
-         ```html wrap
-         <div x-init="$nextTick(() => { ... })"></div>
-         ```
-      </Option>
-      <Option>
-         ```html wrap
-         <div x-init="$useEffect(() => { ... })"></div>
-         ```
-      </Option>
-      <Option>
-         ```html wrap
-         <div x-init="$onMount(() => { ... })"></div>
-         ```
-      </Option>
-    </MultipleChoice>
+Как выполнить какой-то код в Alpine только после отрисовки элемента?
 
-2. Какая из строчек отобразится в консоли?
+- [x] <span class="sr-only">Вызов $nextTick</span>
+  ```html wrap
+  <div x-init="$nextTick(() => { ... })"></div>
+  ```
+  > `$nextTick` откладывает колбэк до момента, когда Alpine закончит отрисовку DOM.
+- [ ] <span class="sr-only">Вызов $useEffect</span>
+  ```html wrap
+  <div x-init="$useEffect(() => { ... })"></div>
+  ```
+  > `useEffect` — это хук React, магического свойства `$useEffect` в Alpine нет.
+- [ ] <span class="sr-only">Вызов $onMount</span>
+  ```html wrap
+  <div x-init="$onMount(() => { ... })"></div>
+  ```
+  > Свойства `$onMount` в Alpine не существует, аналог `mount` из Vue — это `$nextTick`.
 
-    ```html wrap
-    <span x-init="console.log('Строчка 2')"></span>
+</Quiz>
 
-    <div x-data>
-      <span x-init="console.log('Строчка 1')"></span>
-    </div>
-    ```
+<Quiz id="init-q2" title="Вопрос 2">
 
-    <MultipleChoice>
-      <Option>
-         Только 1
-      </Option>
-      <Option isCorrect>
-         Обе
-      </Option>
-      <Option>
-         Только 2
-      </Option>
-    </MultipleChoice>
+Какая из строчек отобразится в консоли?
 
-</Box>
+```html wrap
+<span x-init="console.log('Строчка 2')"></span>
+
+<div x-data>
+  <span x-init="console.log('Строчка 1')"></span>
+</div>
+```
+
+- [ ] Только 1
+  > Вложенный `x-init` действительно сработает, но он не единственный на странице.
+- [x] Обе
+  > `x-init` работает и внутри `x-data`, и за его пределами, поэтому выведутся обе строчки.
+- [ ] Только 2
+  > Автономный `x-init` не отменяет работу директивы внутри компонента.
+
+</Quiz>
+
+<QuizResults />

@@ -6,8 +6,8 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 import { PackageManagers } from 'starlight-package-managers';
-import { Box, MultipleChoice, Option } from '@components/index';
 
 Плагин Mask позволяет автоматически форматировать поле ввода текста по мере его набора пользователем.
 
@@ -140,35 +140,32 @@ Alpine.start();
 <input x-data x-mask:dynamic="$money($input, '.', ',', 4)" placeholder="0.0001" />
 ```
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. С помощью какого модификатора задаётся динамическая маска?
+<Quiz id="mask-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        `.dinamic`
-      </Option>
-      <Option>
-        `.extra`
-      </Option>
-      <Option isCorrect>
-        `.dynamic`
-      </Option>
-    </MultipleChoice>
+С помощью какого модификатора задаётся динамическая маска?
 
-2. Как указать сумму с запятой вместо точки?
+- [ ] `.dinamic`
+  > Это опечатка: в названии модификатора после `d` идёт `y` — `dynamic`.
+- [ ] `.extra`
+  > Модификатора `.extra` у директивы `x-mask` не существует.
+- [x] `.dynamic`
+  > `x-mask:dynamic` генерирует маску «на лету» на основе пользовательского ввода `$input`.
 
-    <MultipleChoice>
-      <Option>
-        `$summa($value, ',')`
-      </Option>
-      <Option isCorrect>
-        `$money($input, ',')`
-      </Option>
-      <Option>
-        `$money(',', $input)`
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="mask-q2" title="Вопрос 2">
+
+Как указать сумму с запятой вместо точки?
+
+- [ ] `$summa($value, ',')`
+  > Магической функции `$summa()` в Alpine нет, как и переменной `$value`.
+- [x] `$money($input, ',')`
+  > Второй необязательный аргумент `$money()` задаёт десятичный разделитель.
+- [ ] `$money(',', $input)`
+  > Аргументы перепутаны: первым в `$money()` всегда передаётся `$input`.
+
+</Quiz>
+
+<QuizResults />

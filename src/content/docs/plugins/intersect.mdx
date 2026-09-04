@@ -6,8 +6,8 @@ sidebar:
 ---
 
 import { LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 import { PackageManagers } from 'starlight-package-managers';
-import { Box, MultipleChoice, Option } from '@components/index';
 
 Плагин Intersect представляет собой удобную обёртку для [Intersection Observer](https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API), которая позволяет легко реагировать на попадание элемента в область просмотра.
 
@@ -212,35 +212,32 @@ Alpine.start();
 <div x-intersect.parent="shown = true">...</div>
 ```
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. В каких случаях лучше использовать `x-intersect:enter`?
+<Quiz id="intersect-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        Когда элемент покидает область просмотра.
-      </Option>
-      <Option isCorrect>
-        Без разницы — `x-intersect:enter` и `x-intersect` работают одинаково.
-      </Option>
-      <Option>
-        Правильных ответов нет
-      </Option>
-    </MultipleChoice>
+В каких случаях лучше использовать `x-intersect:enter`?
 
-2. Какой модификатор применяют в случаях, когда нужно показать весь элемент целиком?
+- [ ] Когда элемент покидает область просмотра.
+  > За выход элемента из области просмотра отвечает суффикс `:leave`.
+- [x] Без разницы — `x-intersect:enter` и `x-intersect` работают одинаково.
+  > Суффикс `:enter` — это псевдоним `x-intersect`, он нужен только для наглядности.
+- [ ] Правильных ответов нет
+  > Один из вариантов всё-таки верен: `:enter` действительно является псевдонимом `x-intersect`.
 
-    <MultipleChoice>
-      <Option isCorrect>
-        `.full`
-      </Option>
-      <Option>
-        `.whole`
-      </Option>
-      <Option>
-        `.all`
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="intersect-q2" title="Вопрос 2">
+
+Какой модификатор применяют в случаях, когда нужно показать весь элемент целиком?
+
+- [x] `.full`
+  > `.full` вычисляет выражение, когда порог пересечения превышает `0.99`, то есть виден весь элемент.
+- [ ] `.whole`
+  > Модификатора `.whole` в плагине Intersect нет.
+- [ ] `.all`
+  > Модификатора `.all` в плагине Intersect нет — за полную видимость отвечает `.full`.
+
+</Quiz>
+
+<QuizResults />

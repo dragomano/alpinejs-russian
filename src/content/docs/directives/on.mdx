@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 `x-on` позволяет вам легко запускать код для отправленных событий DOM.
 
@@ -348,47 +348,50 @@ Alpine предлагает ряд модификаторов директив �
 
 <LinkCard title="Подробнее о фазе захвата и всплытия событий" href="https://developer.mozilla.org/ru/docs/Web/API/EventTarget/addEventListener#usecapture" />
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Как перехватить нажатие пробела?
+<Quiz id="on-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        ```html wrap
-        <input type="text" @keydown.probel="..." />
-        ```
-      </Option>
-      <Option>
-        ```html wrap
-        <input type="text" @keyup.spaceDown="..." />
-        ```
-      </Option>
-      <Option isCorrect>
-        ```html wrap
-        <input type="text" @keyup.space="..." />
-        ```
-      </Option>
-    </MultipleChoice>
+Как перехватить нажатие пробела?
 
-2. Какой из вариантов кода подойдет для прослушивания события `ohMyGosh`?
+- [ ] <span class="sr-only">Поле с модификатором keydown.probel</span>
+  ```html wrap
+  <input type="text" @keydown.probel="..." />
+  ```
+  > Alpine ждёт английские имена клавиш, модификатора `probel` не существует.
+- [ ] <span class="sr-only">Поле с модификатором keyup.spaceDown</span>
+  ```html wrap
+  <input type="text" @keyup.spaceDown="..." />
+  ```
+  > Такого модификатора нет: имя клавиши пишется просто как `space`.
+- [x] <span class="sr-only">Поле с модификатором keyup.space</span>
+  ```html wrap
+  <input type="text" @keyup.space="..." />
+  ```
+  > Имена клавиш записываются в kebab-case, и для пробела это `space`.
 
-    <MultipleChoice>
-      <Option>
-        ```html wrap
-        <div @oh-my-gosh.capture="...">...</div>
-        ```
-      </Option>
-      <Option isCorrect>
-        ```html wrap
-        <div @oh-my-gosh.camel="...">...</div>
-        ```
-      </Option>
-      <Option>
-        ```html wrap
-        <div @ohMyGosh.dash="...">...</div>
-        ```
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="on-q2" title="Вопрос 2">
+
+Какой из вариантов кода подойдет для прослушивания события `ohMyGosh`?
+
+- [ ] <span class="sr-only">Слушатель с модификатором capture</span>
+  ```html wrap
+  <div @oh-my-gosh.capture="...">...</div>
+  ```
+  > `.capture` меняет только фазу обработки, имя события останется `oh-my-gosh`.
+- [x] <span class="sr-only">Слушатель с модификатором camel</span>
+  ```html wrap
+  <div @oh-my-gosh.camel="...">...</div>
+  ```
+  > `.camel` превращает `oh-my-gosh` в `ohMyGosh` — именно это имя и отправляется.
+- [ ] <span class="sr-only">Слушатель с модификатором dash</span>
+  ```html wrap
+  <div @ohMyGosh.dash="...">...</div>
+  ```
+  > Модификатора `.dash` нет, а имена атрибутов HTML браузер приводит к нижнему регистру.
+
+</Quiz>
+
+<QuizResults />

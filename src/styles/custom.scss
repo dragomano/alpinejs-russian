@@ -82,10 +82,6 @@
     white-space: nowrap;
 }
 
-button.submit {
-    border: 1px solid rgb(55, 65, 81);
-}
-
 .hidden {
     display: none;
 }
@@ -94,14 +90,36 @@ button.submit {
     background: red !important;
 }
 
-/* Custom overrides for Box.astro */
-.highlight-box {
-    border-color: var(--box-border-color, var(--sl-color-orange));
-    background-color: var(--box-bg-color, var(--sl-color-orange-low));
-    color: var(--box-text-color, var(--sl-color-orange-high));
+/* Quiz hacks */
+.sl-markdown-content sl-quiz:first-of-type {
+    position: relative;
 }
 
-.highlight-box.check-list {
-    border-color: var(--box-checklist-border-color, var(--sl-color-green));
-    background-color: var(--box-checklist-bg-color, var(--sl-color-green-low));
+.sl-markdown-content sl-quiz:first-of-type::before {
+    content: '';
+    position: absolute;
+    top: -3.75rem;
+    inset-inline-end: 1rem;
+    width: 7rem;
+    height: 7.2rem;
+    background: url('/owl.webp') no-repeat center center / contain;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .sl-markdown-content sl-quiz:first-of-type {
+        margin-block-start: 1.5rem;
+    }
+
+    .sl-markdown-content sl-quiz:first-of-type::before {
+        content: none;
+    }
+}
+
+.sl-quiz-answer label {
+    min-width: 0;
+}
+
+.sl-quiz-answer label .expressive-code {
+    margin: 0;
 }

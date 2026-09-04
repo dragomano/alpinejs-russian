@@ -6,8 +6,8 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 import { PackageManagers } from 'starlight-package-managers';
-import { Box, MultipleChoice, Option } from '@components/index';
 
 Плагин Anchor позволяет легко привязать позиционирование элемента к другому элементу на странице.
 
@@ -234,63 +234,59 @@ Alpine.start();
 </div>
 ```
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. С помощью какой директивы задействуется этот плагин?
+<Quiz id="anchor-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        `x-data`
-      </Option>
-      <Option isCorrect>
-        `x-anchor`
-      </Option>
-      <Option>
-        `x-anchous`
-      </Option>
-    </MultipleChoice>
+С помощью какой директивы задействуется этот плагин?
 
-2. Как использовать фиксированное позиционирование?
+- [ ] `x-data`
+  > `x-data` объявляет состояние компонента и к позиционированию отношения не имеет.
+- [x] `x-anchor`
+  > Именно `x-anchor` привязывает позицию элемента к другому элементу на странице.
+- [ ] `x-anchous`
+  > Такой директивы не существует — это опечатка в названии `x-anchor`.
 
-    ```html
-    <div x-data="{ open: false }" style="overflow: hidden">
-        <button x-ref="button" @click="open = !open">Переключить</button>
+</Quiz>
 
-        <div
-          x-show="open"
-          x-anchor="$refs.button"
-          style="background: cyan"
-        >
-            Содержимое
-        </div>
+<Quiz id="anchor-q2" title="Вопрос 2">
+
+Как использовать фиксированное позиционирование?
+
+```html
+<div x-data="{ open: false }" style="overflow: hidden">
+    <button x-ref="button" @click="open = !open">Переключить</button>
+
+    <div
+      x-show="open"
+      x-anchor="$refs.button"
+      style="background: cyan"
+    >
+        Содержимое
     </div>
-    ```
+</div>
+```
 
-    <MultipleChoice>
-      <Option>
-        Заменить `overflow: hidden` на `overflow: auto`
-      </Option>
-      <Option isCorrect>
-        Добавить модификатор `.fixed` к `x-anchor`
-      </Option>
-      <Option>
-        Зафиксировать нужные значения отступов внутри `style=""`
-      </Option>
-    </MultipleChoice>
+- [ ] Заменить `overflow: hidden` на `overflow: auto`
+  > С `overflow: auto` привязанный элемент всё так же обрезается контейнером.
+- [x] Добавить модификатор `.fixed` к `x-anchor`
+  > Модификатор `.fixed` переключает стратегию на `position: fixed`, и элемент перестаёт обрезаться родителем.
+- [ ] Зафиксировать нужные значения отступов внутри `style=""`
+  > Отступы вручную не заменяют стратегию позиционирования и разъедутся при прокрутке.
 
-3. Как добавить смещение к элементу с помощью этого плагина?
+</Quiz>
 
-    <MultipleChoice>
-      <Option>
-        Добавить один из модификаторов `.top`, `.left`, '.right', `.bottom'
-      </Option>
-      <Option>
-        Добавить модификатор `.position.x` с указанием числового значения вместо `x`
-      </Option>
-      <Option isCorrect>
-        Добавить модификатор `.offset.x` с указанием числового значения вместо `x`
-      </Option>
-    </MultipleChoice>
+<Quiz id="anchor-q3" title="Вопрос 3">
 
-</Box>
+Как добавить смещение к элементу с помощью этого плагина?
+
+- [ ] Добавить один из модификаторов `.top`, `.left`, `.right`, `.bottom`
+  > Эти модификаторы задают сторону привязки, а не отступ от опорного элемента.
+- [ ] Добавить модификатор `.position.x` с указанием числового значения вместо `x`
+  > Модификатора `.position` у `x-anchor` нет.
+- [x] Добавить модификатор `.offset.x` с указанием числового значения вместо `x`
+  > Смещение задаётся через `.offset` с числом пикселей, например `x-anchor.offset.10`.
+
+</Quiz>
+
+<QuizResults />

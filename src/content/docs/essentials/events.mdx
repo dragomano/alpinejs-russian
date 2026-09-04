@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 Alpine позволяет легко прослушивать события браузера и реагировать на них.
 
@@ -102,79 +102,84 @@ Alpine позволяет легко прослушивать события б�
 
 <LinkCard title="Подробнее об <strong>x-on</strong>" href="/directives/on" />
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Какой из указанных вариантов синтаксиса неверен?
+<Quiz id="events-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        ```html wrap
-        <div x-data>
-          <button x-on:click="alert('нажато')">Нажми меня</button>
-        </div>
-        ```
-      </Option>
-      <Option isCorrect>
-        ```html wrap
-        <div x-data>
-          <button onClick="alert('нажато')">Нажми меня</button>
-        </div>
-        ```
-      </Option>
-      <Option>
-        ```html wrap
-        <div x-data>
-          <button @click="alert('нажато')">Нажми меня</button>
-        </div>
-        ```
-      </Option>
-    </MultipleChoice>
+Какой из указанных вариантов синтаксиса неверен?
 
-2. Как получить доступ к объекту события?
+- [ ] <span class="sr-only">Полная запись директивы x-on:click</span>
+  ```html wrap
+  <div x-data>
+    <button x-on:click="alert('нажато')">Нажми меня</button>
+  </div>
+  ```
+  > `x-on:click` — полная и вполне корректная форма записи слушателя события.
+- [x] <span class="sr-only">Атрибут onClick в стиле JSX</span>
+  ```html wrap
+  <div x-data>
+    <button onClick="alert('нажато')">Нажми меня</button>
+  </div>
+  ```
+  > `onClick` — синтаксис JSX, Alpine такой атрибут не обрабатывает.
+- [ ] <span class="sr-only">Сокращённая запись @click</span>
+  ```html wrap
+  <div x-data>
+    <button @click="alert('нажато')">Нажми меня</button>
+  </div>
+  ```
+  > `@click` — сокращение для `x-on:click`, работает точно так же.
 
-    <MultipleChoice>
-      <Option>
-         ```html wrap
-         <button @click="$target.remove()">Удалить меня</button>
-         ```
-      </Option>
-      <Option>
-         ```html wrap
-         <button @click="$object.remove()">Удалить меня</button>
-         ```
-      </Option>
-      <Option isCorrect>
-         ```html wrap
-         <button @click="$event.target.remove()">Удалить меня</button>
-         ```
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-3. Как прослушивать пользовательские события?
+<Quiz id="events-q2" title="Вопрос 2">
 
-    <MultipleChoice>
-      <Option isCorrect>
-         ```html wrap
-        <div x-data @foo="alert('Событие foo было отправлено')">
-          <button @click="$dispatch('foo')">Отправить</button>
-        </div>
-         ```
-      </Option>
-      <Option>
-         ```html wrap
-        <div x-data @foo="alert('Событие foo было отправлено')">
-          <button @click="$customEvent('foo')">Отправить</button>
-        </div>
-         ```
-      </Option>
-      <Option>
-         ```html wrap
-        <div x-data @foo="alert('Событие foo было отправлено')">
-          <button @click="$event('foo')">Отправить</button>
-        </div>
-         ```
-      </Option>
-    </MultipleChoice>
+Как получить доступ к объекту события?
 
-</Box>
+- [ ] <span class="sr-only">Магическое свойство $target</span>
+  ```html wrap
+  <button @click="$target.remove()">Удалить меня</button>
+  ```
+  > Магического свойства `$target` в Alpine нет.
+- [ ] <span class="sr-only">Магическое свойство $object</span>
+  ```html wrap
+  <button @click="$object.remove()">Удалить меня</button>
+  ```
+  > `$object` тоже не существует — такой магии Alpine не предоставляет.
+- [x] <span class="sr-only">Магическое свойство $event и его target</span>
+  ```html wrap
+  <button @click="$event.target.remove()">Удалить меня</button>
+  ```
+  > `$event` — это нативный объект события браузера, а `$event.target` — элемент, на котором оно произошло.
+
+</Quiz>
+
+<Quiz id="events-q3" title="Вопрос 3">
+
+Как прослушивать пользовательские события?
+
+- [x] <span class="sr-only">Отправка события хелпером $dispatch</span>
+  ```html wrap
+  <div x-data @foo="alert('Событие foo было отправлено')">
+    <button @click="$dispatch('foo')">Отправить</button>
+  </div>
+  ```
+  > Событие отправляется хелпером `$dispatch`, а слушатель `@foo` его перехватывает.
+- [ ] <span class="sr-only">Вызов $customEvent</span>
+  ```html wrap
+  <div x-data @foo="alert('Событие foo было отправлено')">
+    <button @click="$customEvent('foo')">Отправить</button>
+  </div>
+  ```
+  > Магической функции `$customEvent` в Alpine не существует.
+- [ ] <span class="sr-only">Вызов $event как функции</span>
+  ```html wrap
+  <div x-data @foo="alert('Событие foo было отправлено')">
+    <button @click="$event('foo')">Отправить</button>
+  </div>
+  ```
+  > `$event` — объект текущего события, а не функция для его отправки.
+
+</Quiz>
+
+<QuizResults />

@@ -7,7 +7,7 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components'
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 Директива `x-teleport` позволяет перенести часть шаблона Alpine целиком в другую часть DOM на странице.
 
@@ -93,21 +93,19 @@ Alpine делает это путём поиска слушателей собы
 
 После включения обоих модальных окон они создаются как дочерние, но будут отображаться на странице как родственные элементы, а не друг в друге.
 
-<Box icon="question-mark">
 ## Проверка знаний
+
+<Quiz id="teleport-q1">
 
 Что нужно передавать в качестве значения директивы `x-teleport`?
 
-    <MultipleChoice>
-      <Option>
-         Только идентификатор элемента
-      </Option>
-      <Option>
-         Якорь ссылки
-      </Option>
-      <Option isCorrect>
-         Любой CSS-селектор
-      </Option>
-    </MultipleChoice>
+- [ ] Только идентификатор элемента
+  > Идентификатор — лишь один из возможных вариантов селектора.
+- [ ] Якорь ссылки
+  > Якоря к `x-teleport` отношения не имеют: значение уходит в `document.querySelector`.
+- [x] Любой CSS-селектор
+  > Значение передаётся в `document.querySelector`, поэтому подойдёт любой валидный CSS-селектор.
 
-</Box>
+</Quiz>
+
+<QuizResults />

@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 Alpine предлагает несколько полезных директив для управления DOM на веб-странице.
 
@@ -241,41 +241,38 @@ Alpine позволяет легко управлять HTML-содержимы�
 
 <LinkCard title="Подробнее об <strong>x-html</strong>" href="/directives/html" />
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Что отобразится на странице с помощью указанной разметки?
+<Quiz id="templating-q1" title="Вопрос 1">
 
-    ```html wrap
-    <div x-data>
-      <span x-text="1 + 2"></span>
-    </div>
-    ```
+Что отобразится на странице с помощью указанной разметки?
 
-    <MultipleChoice>
-      <Option>
-        1 + 2
-      </Option>
-      <Option>
-        12
-      </Option>
-      <Option isCorrect>
-        3
-      </Option>
-    </MultipleChoice>
+```html wrap
+<div x-data>
+  <span x-text="1 + 2"></span>
+</div>
+```
 
-2. Какой из этих хелперов переходов не существует?
+- [ ] 1 + 2
+  > Значение `x-text` — это выражение JavaScript, а не литеральный текст.
+- [ ] 12
+  > Слагаемые — числа, поэтому они складываются, а не склеиваются как строки.
+- [x] 3
+  > Alpine вычисляет выражение `1 + 2` и подставляет результат в `<span>`.
 
-    <MultipleChoice>
-      <Option>
-        `x-transition.opacity`
-      </Option>
-      <Option isCorrect>
-        `x-transition.break`
-      </Option>
-      <Option>
-        `x-transition.scale`
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="templating-q2" title="Вопрос 2">
+
+Какой из этих хелперов переходов не существует?
+
+- [ ] `x-transition.opacity`
+  > Модификатор `.opacity` существует и оставляет в переходе только изменение прозрачности.
+- [x] `x-transition.break`
+  > Такого модификатора у `x-transition` нет.
+- [ ] `x-transition.scale`
+  > Модификатор `.scale` существует и оставляет в переходе только масштабирование.
+
+</Quiz>
+
+<QuizResults />

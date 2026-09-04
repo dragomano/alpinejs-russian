@@ -4,7 +4,7 @@ description: Знакомство с основами Alpine.js
 ---
 
 import { LinkCard, Steps } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 <Steps>
 
@@ -252,78 +252,80 @@ return this.items.filter((i) => i.startsWith(this.search));
 
 <LinkCard title="Подробнее об <strong>x-for</strong>" href="/directives/for"/>
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Самая важная директива в Alpine.js...
+<Quiz id="start-here-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        `x-show`
-      </Option>
-      <Option isCorrect>
-        `x-data`
-      </Option>
-      <Option>
-        `x-model`
-      </Option>
-    </MultipleChoice>
+Самая важная директива в Alpine.js...
 
-2. Нажатие на какую из кнопок приведёт к переключению спойлера?
+- [ ] `x-show`
+  > `x-show` только переключает видимость элемента и сам по себе никакого состояния не создаёт.
+- [x] `x-data`
+  > `x-data` объявляет область видимости компонента, внутри которой работают все остальные директивы.
+- [ ] `x-model`
+  > `x-model` связывает поле ввода с данными, но сами данные объявляет всё равно `x-data`.
 
-    ```html wrap
-    <div x-data="{ open: false }">
-      // код кнопки
+</Quiz>
 
-      <div x-show="open" @click.outside="open = false">Содержимое...</div>
-    </div>
-    ```
+<Quiz id="start-here-q2" title="Вопрос 2">
 
-    <MultipleChoice>
-      <Option isCorrect>
-         ```html wrap
-         <button @click="open = !open">Переключить</button>
-         ```
-      </Option>
-      <Option>
-         ```html wrap
-         <button @click="open = false">Переключить</button>
-         ```
-      </Option>
-      <Option>
-         ```html wrap
-         <button>Переключить</button>
-         ```
-      </Option>
-    </MultipleChoice>
+Нажатие на какую из кнопок приведёт к переключению спойлера?
 
-3. Синтаксис геттеров внутри объекта `x-data` выглядит как...
+```html wrap
+<div x-data="{ open: false }">
+  // код кнопки
 
-    <MultipleChoice>
-      <Option>
-        ```js wrap
-        const funcName = () => {
-          // ...
-        }
-        ```
-      </Option>
-      <Option>
-        ```js wrap
-        function funcName() {
-          // ...
-        }
-        ```
-      </Option>
-      <Option isCorrect>
-        ```js wrap
-        get funcName() {
-          // ...
-        }
-        ```
-      </Option>
-    </MultipleChoice>
+  <div x-show="open" @click.outside="open = false">Содержимое...</div>
+</div>
+```
 
-</Box>
+- [x] <span class="sr-only">Кнопка с инвертированием open</span>
+  ```html wrap
+  <button @click="open = !open">Переключить</button>
+  ```
+  > Инвертирование `open` и открывает, и закрывает спойлер одним и тем же кликом.
+- [ ] <span class="sr-only">Кнопка, присваивающая open значение false</span>
+  ```html wrap
+  <button @click="open = false">Переключить</button>
+  ```
+  > Такая кнопка умеет только закрывать спойлер: `open` всегда получает `false`.
+- [ ] <span class="sr-only">Кнопка без обработчика события</span>
+  ```html wrap
+  <button>Переключить</button>
+  ```
+  > Без `@click` нажатие ничего не меняет — обработчик события обязателен.
+
+</Quiz>
+
+<Quiz id="start-here-q3" title="Вопрос 3">
+
+Синтаксис геттеров внутри объекта `x-data` выглядит как...
+
+- [ ] <span class="sr-only">Стрелочная функция</span>
+  ```js wrap
+  const funcName = () => {
+    // ...
+  }
+  ```
+  > Это стрелочная функция: в шаблоне её пришлось бы вызывать со скобками — `funcName()`.
+- [ ] <span class="sr-only">Обычная функция</span>
+  ```js wrap
+  function funcName() {
+    // ...
+  }
+  ```
+  > Обычный метод объекта, его тоже нужно вызывать: `funcName()`.
+- [x] <span class="sr-only">Геттер с ключевым словом get</span>
+  ```js wrap
+  get funcName() {
+    // ...
+  }
+  ```
+  > Геттер объявляется с ключевым словом `get`, а в шаблоне читается как обычное свойство.
+
+</Quiz>
+
+<QuizResults />
 
 ## Итоги
 

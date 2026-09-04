@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { LinkCard, Steps } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 У Alpine есть несколько различных методов подключения к различным частям жизненного цикла. Пройдемся по наиболее полезным для ознакомления:
 
@@ -104,35 +104,36 @@ Alpine позволяет выполнять код при изменении ф
 
 </Steps>
 
-<Box icon="question-mark">
 ## Проверка знаний
+
+<Quiz id="lifecycle-q1">
 
 Какой из указанных вариантов синтаксиса неверен?
 
-    <MultipleChoice>
-      <Option>
-        ```html wrap
-        <button x-init="console.log('...')"></button>
-        ```
-      </Option>
-      <Option isCorrect>
-        ```js wrap
-        Alpine.init('dropdown', () => ({
-          mount() {
-            // ...
-          },
-        }));
-        ```
-      </Option>
-      <Option>
-        ```js wrap
-        Alpine.data('dropdown', () => ({
-          init() {
-            // ...
-          },
-        }));
-        ```
-      </Option>
-    </MultipleChoice>
+- [ ] <span class="sr-only">Директива x-init на кнопке</span>
+  ```html wrap
+  <button x-init="console.log('...')"></button>
+  ```
+  > `x-init` можно добавить к любому элементу — код выполнится при его инициализации.
+- [x] <span class="sr-only">Вызов Alpine.init с методом mount</span>
+  ```js wrap
+  Alpine.init('dropdown', () => ({
+    mount() {
+      // ...
+    },
+  }));
+  ```
+  > Данные регистрируются через `Alpine.data()`, а хук инициализации называется `init()`, а не `mount()`.
+- [ ] <span class="sr-only">Вызов Alpine.data с методом init</span>
+  ```js wrap
+  Alpine.data('dropdown', () => ({
+    init() {
+      // ...
+    },
+  }));
+  ```
+  > Alpine сам вызовет метод `init()` из объекта данных, зарегистрированного через `Alpine.data()`.
 
-</Box>
+</Quiz>
+
+<QuizResults />

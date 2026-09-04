@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 `$dispatch` — полезное сокращение для диспетчеризации событий браузера.
 
@@ -135,36 +135,37 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 Это полезно, когда нужно предотвратить «всплытие» (bubbling) события к родительским элементам.
 
-<Box icon="question-mark">
 ## Проверка знаний
+
+<Quiz id="dispatch-q1">
 
 Правильный вариант использования событий в этом коде...
 
-    <MultipleChoice>
-      <Option>
-        ```html wrap
-        <div x-data>
-          <span @notify.once="..."></span>
-          <button @click="$dispatch('notify')">Уведомить</button>
-        </div>
-        ```
-      </Option>
-      <Option>
-        ```html wrap
-        <div x-data>
-          <span @notify="..."></span>
-          <button @click="$dispatch('notify')">Уведомить</button>
-        </div>
-        ```
-      </Option>
-      <Option isCorrect>
-        ```html wrap
-        <div x-data>
-          <span @notify.window="..."></span>
-          <button @click="$dispatch('notify')">Уведомить</button>
-        </div>
-        ```
-      </Option>
-    </MultipleChoice>
+- [ ] <span class="sr-only">Слушатель с модификатором once</span>
+  ```html wrap
+  <div x-data>
+    <span @notify.once="..."></span>
+    <button @click="$dispatch('notify')">Уведомить</button>
+  </div>
+  ```
+  > `.once` лишь ограничивает обработчик одним срабатыванием, а до соседнего элемента событие всё равно не дойдёт.
+- [ ] <span class="sr-only">Слушатель без модификаторов</span>
+  ```html wrap
+  <div x-data>
+    <span @notify="..."></span>
+    <button @click="$dispatch('notify')">Уведомить</button>
+  </div>
+  ```
+  > Событие всплывает от кнопки к общему предку `div` и на соседний `span` не попадает.
+- [x] <span class="sr-only">Слушатель с модификатором window</span>
+  ```html wrap
+  <div x-data>
+    <span @notify.window="..."></span>
+    <button @click="$dispatch('notify')">Уведомить</button>
+  </div>
+  ```
+  > Пользовательское событие в итоге всплывает до `window`, где его и перехватывает модификатор `.window`.
 
-</Box>
+</Quiz>
+
+<QuizResults />

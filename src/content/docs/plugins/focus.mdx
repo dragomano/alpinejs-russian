@@ -6,8 +6,8 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 import { PackageManagers } from 'starlight-package-managers';
-import { Box, MultipleChoice, Option } from '@components/index';
 
 Плагин Focus позволяет управлять фокусом на странице.
 
@@ -299,35 +299,32 @@ Focus предлагает специальный API для захвата фо
 
 Имейте в виду, что для каждой кнопки нужно добавить метод `.within()`, чтобы `$focus` знал, что ему нужно работать с другим элементом (например, с `div`, который содержит кнопки).
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Как отключить автоматическую фокусировку элемента при захвате фокуса?
+<Quiz id="focus-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option isCorrect>
-        Добавить модификатор `.noautofocus`
-      </Option>
-      <Option>
-        Добавить модификатор `.disablefocus`
-      </Option>
-      <Option>
-        Добавить модификатор `.nofocus`
-      </Option>
-    </MultipleChoice>
+Как отключить автоматическую фокусировку элемента при захвате фокуса?
 
-2. Как передать фокус следующему фокусируемому элементу?
+- [x] Добавить модификатор `.noautofocus`
+  > `x-trap.noautofocus` захватывает фокус внутри элемента, но ничего не фокусирует сразу.
+- [ ] Добавить модификатор `.disablefocus`
+  > Такого модификатора у плагина Focus нет.
+- [ ] Добавить модификатор `.nofocus`
+  > Имя придумано — нужный модификатор называется `.noautofocus`.
 
-    <MultipleChoice>
-      <Option isCorrect>
-        `$focus.next()`
-      </Option>
-      <Option>
-        `x-focus.next`
-      </Option>
-      <Option>
-        `$focus.getNext()`
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="focus-q2" title="Вопрос 2">
+
+Как передать фокус следующему фокусируемому элементу?
+
+- [x] `$focus.next()`
+  > Магия `$focus` передаёт фокус следующему элементу методом `next()`.
+- [ ] `x-focus.next`
+  > Директивы `x-focus` не существует — плагин даёт директиву `x-trap` и магию `$focus`.
+- [ ] `$focus.getNext()`
+  > Такого метода у `$focus` нет.
+
+</Quiz>
+
+<QuizResults />

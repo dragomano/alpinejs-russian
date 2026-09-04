@@ -8,6 +8,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import starlightGiscus from 'starlight-giscus';
 import tailwindcss from "@tailwindcss/vite";
 import starlightScrollToTop from 'starlight-scroll-to-top';
+import starlightQuiz from 'starlight-quiz';
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,7 +32,13 @@ export default defineConfig({
           tooltipText: 'Прокрутить вверх',
           showTooltip: true,
           showOnHomepage: true
-        })
+        }),
+        starlightQuiz({
+          progressTracker: false,
+          quizDefaults: {
+            shuffle: true,
+          }
+        }),
       ],
       title: 'Alpine.js по-русски',
       description: 'Документация Alpine.js на русском языке.',

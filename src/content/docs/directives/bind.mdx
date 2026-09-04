@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 `x-bind` позволяет устанавливать HTML-атрибуты элементов на основе результата работы JavaScript-выражений.
 
@@ -198,53 +198,58 @@ import { Box, MultipleChoice, Option } from '@components/index';
 Если «привязываемая» или «применяемая» директива — `x-for`, вы должны вернуть нормальную строку выражения из обратного вызова. Например: `['x-for']() { return 'item in items' }`
 :::
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Как передать элементу `input` значение атрибута `required`?
+<Quiz id="bind-q1" title="Вопрос 1">
 
-    ```html wrap
-    <div x-data="{ required: true }">
-      <input type="text" />
-    </div>
-    ```
+Как передать элементу `input` значение атрибута `required`?
 
-    <MultipleChoice>
-      <Option>
-         ```html wrap
-         <input type="text" required="required" />
-         ```
-      </Option>
-      <Option isCorrect>
-         ```html wrap
-         <input type="text" :required="required" />
-         ```
-      </Option>
-      <Option isCorrect>
-         ```html wrap
-         <input type="text" x-bind:required="required" />
-         ```
-      </Option>
-    </MultipleChoice>
+```html wrap
+<div x-data="{ required: true }">
+  <input type="text" />
+</div>
+```
 
-2. Какой из блоков станет красным?
+_Выберите все подходящие варианты._
 
-    <MultipleChoice>
-      <Option>
-         ```html wrap
-         <div x-data :style="{ color: 'red' }">&nbsp;</div>
-         ```
-      </Option>
-      <Option isCorrect>
-         ```html wrap
-         <div x-data :style="{ background: 'red' }">&nbsp;</div>
-         ```
-      </Option>
-      <Option>
-         ```html wrap
-         <div x-data :class="{ 'red': true }">&nbsp;</div>
-         ```
-      </Option>
-    </MultipleChoice>
+- [ ] <span class="sr-only">Статический атрибут required</span>
+  ```html wrap
+  <input type="text" required="required" />
+  ```
+  > Это обычный статический атрибут: со свойством `required` из `x-data` он никак не связан.
+- [x] <span class="sr-only">Сокращённая привязка через двоеточие</span>
+  ```html wrap
+  <input type="text" :required="required" />
+  ```
+  > Сокращение `:` — это тот же `x-bind`, поэтому значение берётся из свойства `required`.
+- [x] <span class="sr-only">Полная запись x-bind</span>
+  ```html wrap
+  <input type="text" x-bind:required="required" />
+  ```
+  > Полная запись `x-bind:` работает точно так же, как и её сокращение `:`.
 
-</Box>
+</Quiz>
+
+<Quiz id="bind-q2" title="Вопрос 2">
+
+Какой из блоков станет красным?
+
+- [ ] <span class="sr-only">Привязка стиля color</span>
+  ```html wrap
+  <div x-data :style="{ color: 'red' }">&nbsp;</div>
+  ```
+  > `color` задаёт цвет текста, а внутри блока только пробел — покраснеть тут нечему.
+- [x] <span class="sr-only">Привязка стиля background</span>
+  ```html wrap
+  <div x-data :style="{ background: 'red' }">&nbsp;</div>
+  ```
+  > `background` красит фон элемента, поэтому блок действительно станет красным.
+- [ ] <span class="sr-only">Привязка класса red</span>
+  ```html wrap
+  <div x-data :class="{ 'red': true }">&nbsp;</div>
+  ```
+  > Класс `red` к элементу добавится, но без описанных для него стилей цвет не изменится.
+
+</Quiz>
+
+<QuizResults />

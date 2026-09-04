@@ -5,7 +5,7 @@ sidebar:
   order: 8
 ---
 
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 `x-model` позволяет вам привязать значение входного элемента к данным Alpine.
 
@@ -327,41 +327,41 @@ Alpine предоставляет встроенные утилиты для п�
 </div>
 ```
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Директива `x-model`...
+<Quiz id="model-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        работает в паре с `x-text`
-      </Option>
-      <Option>
-        не работает с элементами форм
-      </Option>
-      <Option isCorrect>
-        имеет двустороннюю привязку
-      </Option>
-    </MultipleChoice>
+Директива `x-model`...
 
-2. Как принудить Alpine сохранять введённое значение в виде числа?
+- [ ] работает в паре с `x-text`
+  > `x-text` лишь выводит значение, для работы `x-model` он не нужен.
+- [ ] не работает с элементами форм
+  > Наоборот, `x-model` создан именно для полей форм: `input`, `textarea`, `select`.
+- [x] имеет двустороннюю привязку
+  > `x-model` и записывает значение поля в данные, и обновляет поле при изменении данных.
 
-    <MultipleChoice>
-      <Option isCorrect>
-        ```html wrap
-        <input type="text" x-model.number="..." />
-        ```
-      </Option>
-      <Option>
-        ```html wrap
-        <input type="text" x-model.integer="..." />
-        ```
-      </Option>
-      <Option>
-        ```html wrap
-        <input type="text" x-model.fill="..." />
-        ```
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="model-q2" title="Вопрос 2">
+
+Как принудить Alpine сохранять введённое значение в виде числа?
+
+- [x] <span class="sr-only">Поле с модификатором number</span>
+  ```html wrap
+  <input type="text" x-model.number="..." />
+  ```
+  > Модификатор `.number` приводит введённую строку к числу JavaScript.
+- [ ] <span class="sr-only">Поле с модификатором integer</span>
+  ```html wrap
+  <input type="text" x-model.integer="..." />
+  ```
+  > Модификатора `.integer` в Alpine не существует.
+- [ ] <span class="sr-only">Поле с модификатором fill</span>
+  ```html wrap
+  <input type="text" x-model.fill="..." />
+  ```
+  > `.fill` лишь заполняет пустое свойство из атрибута `value`, тип значения он не меняет.
+
+</Quiz>
+
+<QuizResults />

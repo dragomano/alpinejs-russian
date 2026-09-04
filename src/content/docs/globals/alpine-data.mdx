@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 `Alpine.data(...)` предоставляет возможность повторного использования контекстов `x-data` в вашем приложении.
 
@@ -168,51 +168,53 @@ Alpine.data('dropdown', () => ({
 }));
 ```
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Правильный вызов провайдеров `Alpine.data`...
+<Quiz id="alpine-data-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option isCorrect>
-         `x-data="func"`
-      </Option>
-      <Option>
-         `x-data="{ func() }"`
-      </Option>
-      <Option isCorrect>
-         `x-data="func()"`
-      </Option>
-    </MultipleChoice>
+Правильный вызов провайдеров `Alpine.data`...
 
-2. Как обратиться к магическому методу `$watch` компонента??
+_Выберите все подходящие варианты._
 
-    ```js wrap
-    Alpine.data('dropdown', () => ({
-        open: false,
+- [x] `x-data="func"`
+  > Так тоже можно: провайдер вызывается по имени, но передать ему исходные параметры уже не получится.
+- [ ] `x-data="{ func() }"`
+  > Провайдер не оборачивают в объект — `x-data` принимает либо его имя, либо вызов `func()`.
+- [x] `x-data="func()"`
+  > Вызов со скобками обращается к провайдеру как к функции и позволяет передать в него исходные параметры.
 
-        init() {
-            // обращаемся к методу $watch
-        }
-    }))
-    ```
+</Quiz>
 
-    <MultipleChoice>
-      <Option>
-         ```js wrap
-         $watch('open', () => {...})
-         ```
-      </Option>
-      <Option isCorrect>
-         ```js wrap
-         this.$watch('open', () => {...})
-         ```
-      </Option>
-      <Option>
-         ```js wrap
-         return $watch('open', () => {...})
-         ```
-      </Option>
-    </MultipleChoice>
+<Quiz id="alpine-data-q2" title="Вопрос 2">
 
-</Box>
+Как обратиться к магическому методу `$watch` компонента?
+
+```js wrap
+Alpine.data('dropdown', () => ({
+    open: false,
+
+    init() {
+        // обращаемся к методу $watch
+    }
+}))
+```
+
+- [ ] <span class="sr-only">Вызов $watch без контекста</span>
+  ```js wrap
+  $watch('open', () => {...})
+  ```
+  > Внутри `Alpine.data` магические методы недоступны как обычные переменные.
+- [x] <span class="sr-only">Вызов $watch через this</span>
+  ```js wrap
+  this.$watch('open', () => {...})
+  ```
+  > Магические свойства и методы объекта компонента доступны через контекст `this`.
+- [ ] <span class="sr-only">Возврат $watch без контекста</span>
+  ```js wrap
+  return $watch('open', () => {...})
+  ```
+  > `return` здесь ни к чему, да и без `this` метод `$watch` не найдётся.
+
+</Quiz>
+
+<QuizResults />

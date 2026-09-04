@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 В Alpine всё начинается с директивы `x-data`.
 
@@ -155,49 +155,51 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 <LinkCard title="Подробнее об <strong>Alpine.data</strong>" href="/globals/alpine-data" />
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Свойства, определённые в директиве `x-data`...
+<Quiz id="data-q1" title="Вопрос 1">
 
-    ```html wrap
-    <div x-data="...">
-      <div x-data="...">
-        <div x-data="..."></div>
-      </div>
-    </div>
-    ```
+Свойства, определённые в директиве `x-data`...
 
-    <MultipleChoice>
-      <Option>
-        видны только на первом уровне вложенности
-      </Option>
-      <Option isCorrect>
-        доступны всем дочерним элементам
-      </Option>
-      <Option>
-        не могут быть переопределены ниже
-      </Option>
-    </MultipleChoice>
+```html wrap
+<div x-data="...">
+  <div x-data="...">
+    <div x-data="..."></div>
+  </div>
+</div>
+```
 
-2. Как определить компонент Alpine.js без каких-либо данных?
+- [ ] видны только на первом уровне вложенности
+  > Область видимости одним уровнем не ограничена — данные доступны на любой глубине.
+- [x] доступны всем дочерним элементам
+  > Свойства видны всем вложенным элементам, даже внутри других компонентов `x-data`.
+- [ ] не могут быть переопределены ниже
+  > Одноимённое свойство во вложенном `x-data` перекрывает родительское.
 
-    <MultipleChoice>
-      <Option isCorrect>
-        ```html wrap
-        <div x-data="{}"></div>
-        ```
-      </Option>
-      <Option>
-        ```html wrap
-        <div x-data=""></div>
-        ```
-      </Option>
-      <Option isCorrect>
-        ```html wrap
-        <div x-data></div>
-        ```
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="data-q2" title="Вопрос 2">
+
+Как определить компонент Alpine.js без каких-либо данных?
+
+_Выберите все подходящие варианты._
+
+- [x] <span class="sr-only">Пустой объект в значении</span>
+  ```html wrap
+  <div x-data="{}"></div>
+  ```
+  > Пустой объект — вполне корректное значение: компонент создаётся без данных.
+- [ ] <span class="sr-only">Пустая строка в значении</span>
+  ```html wrap
+  <div x-data=""></div>
+  ```
+  > Пустая строка в значении не описана в документации: используйте `{}` либо `x-data` без значения.
+- [x] <span class="sr-only">Директива без значения</span>
+  ```html wrap
+  <div x-data></div>
+  ```
+  > Значение можно опустить полностью — так компонент тоже объявляется без данных.
+
+</Quiz>
+
+<QuizResults />

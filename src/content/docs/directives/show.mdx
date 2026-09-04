@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 `x-show` — одна из самых полезных и мощных директив Alpine. Она обеспечивает выразительный способ отображения и скрытия элементов DOM.
 
@@ -51,25 +51,23 @@ import { Box, MultipleChoice, Option } from '@components/index';
 </div>
 ```
 
-<Box icon="question-mark">
 ## Проверка знаний
+
+<Quiz id="show-q1">
 
 Что делает `x-show` с элементом?
 
-    ```html wrap
-    <div x-show="false">...</div>
-    ```
+```html wrap
+<div x-show="false">...</div>
+```
 
-    <MultipleChoice>
-      <Option>
-        Полностью скрывает его из разметки HTML
-      </Option>
-      <Option isCorrect>
-        Добавляет атрибут `style="display: none"`
-      </Option>
-      <Option>
-        Прячет элемент между тегами комментариев
-      </Option>
-    </MultipleChoice>
+- [ ] Полностью скрывает его из разметки HTML
+  > Элемент остаётся в DOM — `x-show` не удаляет его из разметки.
+- [x] Добавляет атрибут `style="display: none"`
+  > При ложном значении Alpine скрывает элемент инлайновым стилем `display: none`.
+- [ ] Прячет элемент между тегами комментариев
+  > Комментарии здесь не используются — это приём других библиотек, а не `x-show`.
 
-</Box>
+</Quiz>
+
+<QuizResults />

@@ -5,7 +5,7 @@ sidebar:
   order: 9
 ---
 
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 `$id` — это магическое свойство, которое можно использовать для генерации идентификатора элемента и обеспечения того, что он не будет конфликтовать с другими одноимёнными идентификаторами на той же странице.
 
@@ -99,43 +99,46 @@ import { Box, MultipleChoice, Option } from '@components/index';
 
 Это неполный пример списка, но всё равно будет полезно продемонстрировать сценарий, в котором вам может потребоваться, чтобы каждый идентификатор в группе по-прежнему был уникальным для страницы, но при этом вводился в цикле, чтобы вы могли ссылаться на отдельные идентификаторы внутри этой группы.
 
-<Box icon="question-mark">
 ## Проверка знаний
+
+<Quiz id="id-q1">
 
 Как правильно связать `label` с `input` в этом коде?
 
-    ```html wrap
-    <div>
-        <label>
-        <input type="text">
-    </div>
-    ```
+```html wrap
+<div>
+    <label>
+    <input type="text">
+</div>
+```
 
-    <MultipleChoice>
-      <Option isCorrect>
-        ```html wrap
-        <div x-id="['text-input']">
-            <label :for="$id('text-input')">
-            <input type="text" :id="$id('text-input')">
-        </div>
-        ```
-      </Option>
-      <Option>
-        ```html wrap
-        <div x-data="{ id: 'text-input' }">
-            <label :for="id">
-            <input type="text" :id="id">
-        </div>
-        ```
-      </Option>
-      <Option isCorrect>
-        ```html wrap
-        <div x-data="{ id: $id('text-input') }">
-            <label :for="id">
-            <input type="text" :id="id">
-        </div>
-        ```
-      </Option>
-    </MultipleChoice>
+_Выберите все подходящие варианты._
 
-</Box>
+- [x] <span class="sr-only">Группа x-id с вызовами $id</span>
+  ```html wrap
+  <div x-id="['text-input']">
+      <label :for="$id('text-input')">
+      <input type="text" :id="$id('text-input')">
+  </div>
+  ```
+  > Группа `x-id` выдаёт всем вызовам `$id()` внутри себя один и тот же идентификатор, уникальный для страницы.
+- [ ] <span class="sr-only">Идентификатор строкой в x-data</span>
+  ```html wrap
+  <div x-data="{ id: 'text-input' }">
+      <label :for="id">
+      <input type="text" :id="id">
+  </div>
+  ```
+  > Идентификатор задан обычной строкой, поэтому при нескольких таких блоках на странице он продублируется.
+- [x] <span class="sr-only">Вызов $id внутри x-data</span>
+  ```html wrap
+  <div x-data="{ id: $id('text-input') }">
+      <label :for="id">
+      <input type="text" :id="id">
+  </div>
+  ```
+  > Идентификатор тоже получается уникальным, правда его приходится хранить в данных компонента — менее гибко, чем группа `x-id`.
+
+</Quiz>
+
+<QuizResults />

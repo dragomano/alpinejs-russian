@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 Alpine предлагает глобальное управление состоянием через API `Alpine.store()`.
 
@@ -117,35 +117,32 @@ Alpine предлагает глобальное управление состо
 </script>
 ```
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Как получить доступ к хранилищу Alpine с именем `myStore`?
+<Quiz id="alpine-store-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-         `myStore.get()`
-      </Option>
-      <Option isCorrect>
-         `$store.myStore`
-      </Option>
-      <Option>
-         `$store['my-store']`
-      </Option>
-    </MultipleChoice>
+Как получить доступ к хранилищу Alpine с именем `myStore`?
 
-2. Когда выполняется метод `init` внутри хранилища?
+- [ ] `myStore.get()`
+  > У хранилища нет метода `get()`: в выражениях Alpine оно доступно как `$store.myStore`, а снаружи — через `Alpine.store('myStore')`.
+- [x] `$store.myStore`
+  > Магическое свойство `$store` даёт доступ к хранилищу по тому имени, под которым оно зарегистрировано.
+- [ ] `$store['my-store']`
+  > Ключ должен точно совпадать с именем регистрации, а это `myStore`, а не `my-store`.
 
-    <MultipleChoice>
-      <Option>
-         непосредственно перед регистрацией хранилища
-      </Option>
-      <Option>
-         одновременно с регистрацией хранилища
-      </Option>
-      <Option isCorrect>
-         сразу после регистрации хранилища
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="alpine-store-q2" title="Вопрос 2">
+
+Когда выполняется метод `init` внутри хранилища?
+
+- [ ] непосредственно перед регистрацией хранилища
+  > До регистрации хранилища ещё не существует, поэтому вызывать `init()` попросту не на чем.
+- [ ] одновременно с регистрацией хранилища
+  > Alpine сначала регистрирует хранилище и только затем вызывает `init()`.
+- [x] сразу после регистрации хранилища
+  > `init()` вызывается сразу после регистрации, поэтому начальные значения успевают установиться до первой отрисовки страницы.
+
+</Quiz>
+
+<QuizResults />

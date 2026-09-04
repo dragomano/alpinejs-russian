@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 Alpine уже из коробки предоставляет надёжную утилиту для анимации переходов. С помощью нескольких директив `x-transition` можно создавать плавные переходы между появлением и исчезновением элемента.
 
@@ -138,35 +138,32 @@ Alpine уже из коробки предоставляет надёжную у
 | `:leave-start` | Срабатывает сразу при начале удаления, отключается через кадр.           |
 | `:leave-end`   | Включается через кадр после начала удаления, убирается после анимации.   |
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Как указать продолжительность анимации перехода?
+<Quiz id="transition-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        `x-transition.time.10s`
-      </Option>
-      <Option isCorrect>
-        `x-transition.duration.50ms`
-      </Option>
-      <Option>
-        `x-transition.origin.fast`
-      </Option>
-    </MultipleChoice>
+Как указать продолжительность анимации перехода?
 
-2. Какой из вариантов отвечает за анимацию исчезновения элемента?
+- [ ] `x-transition.time.10s`
+  > Модификатора `.time` в Alpine не существует.
+- [x] `x-transition.duration.50ms`
+  > Длительность задаётся модификатором `.duration` со значением времени.
+- [ ] `x-transition.origin.fast`
+  > `.origin` задаёт точку начала масштабирования, а не длительность.
 
-    <MultipleChoice>
-      <Option isCorrect>
-        `x-transition:leave`
-      </Option>
-      <Option>
-        `x-transition:exit`
-      </Option>
-      <Option>
-        `x-transition:enter`
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="transition-q2" title="Вопрос 2">
+
+Какой из вариантов отвечает за анимацию исчезновения элемента?
+
+- [x] `x-transition:leave`
+  > Процесс удаления элемента описывает именно `leave`.
+- [ ] `x-transition:exit`
+  > Такого имени в Alpine нет — используется `leave`.
+- [ ] `x-transition:enter`
+  > `enter` отвечает за появление элемента, а не за его исчезновение.
+
+</Quiz>
+
+<QuizResults />

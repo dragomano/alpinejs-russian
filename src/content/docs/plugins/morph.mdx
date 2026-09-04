@@ -6,8 +6,8 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 import { PackageManagers } from 'starlight-package-managers';
-import { Box, MultipleChoice, Option } from '@components/index';
 
 Плагин Morph позволяет «преобразовать» элемент на странице в предоставленный HTML-шаблон, при этом сохраняется любое состояние браузера или Alpine внутри «морфированного» элемента.
 
@@ -247,35 +247,32 @@ Alpine.morph(el, newHtml, {
 | `newHtml`     | Строка HTML или DOM-элемент для замены содержимого между маркерами                  |
 | `options`     | Объект с опциями (аналогично опциям в `Alpine.morph()`)                             |
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Как внедрить хуки жизненного цикла с помощью функции `Alpine.morph()`?
+<Quiz id="morph-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-        Перечислить нужные хуки внутри параметра `newHtml`
-      </Option>
-      <Option>
-        Никак. Эта функция нужна для других целей.
-      </Option>
-      <Option isCorrect>
-        Использовать необязательный параметр `options`
-      </Option>
-    </MultipleChoice>
+Как внедрить хуки жизненного цикла с помощью функции `Alpine.morph()`?
 
-2. Какой хук вызывается перед добавлением нового элемента?
+- [ ] Перечислить нужные хуки внутри параметра `newHtml`
+  > В `newHtml` передаётся только новая разметка, колбеки туда не помещаются.
+- [ ] Никак. Эта функция нужна для других целей.
+  > У `Alpine.morph()` хуки есть — они передаются третьим аргументом.
+- [x] Использовать необязательный параметр `options`
+  > Хуки вроде `updating` или `adding` объявляются в объекте `options`.
 
-    <MultipleChoice>
-      <Option>
-        `mounted`
-      </Option>
-      <Option>
-        `updating`
-      </Option>
-      <Option isCorrect>
-        `adding`
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="morph-q2" title="Вопрос 2">
+
+Какой хук вызывается перед добавлением нового элемента?
+
+- [ ] `mounted`
+  > Такого хука у плагина Morph нет.
+- [ ] `updating`
+  > `updating` срабатывает перед обновлением уже существующего элемента, а не нового.
+- [x] `adding`
+  > `adding` вызывается перед добавлением нового элемента, а `added` — сразу после.
+
+</Quiz>
+
+<QuizResults />

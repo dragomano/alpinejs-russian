@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import { Box, MultipleChoice, Option } from '@components/index';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
 
 Alpine имеет очень открытую кодовую базу, которая позволяет расширять фреймворк различными способами. Фактически, каждая доступная директива и магическое свойство в самом Alpine используют именно эти API. Теоретически вы можете восстановить всю функциональность Alpine, используя их самостоятельно.
 
@@ -403,95 +403,97 @@ Alpine.interceptInit(el => {
 
 ---
 
-<Box icon="question-mark">
 ## Проверка знаний
 
-1. Порядок регистрации расширения при использовании сборки Alpine...
+<Quiz id="extending-q1" title="Вопрос 1">
 
-    <MultipleChoice>
-      <Option>
-         ПЕРЕД импортом глобального объекта Alpine и ПЕРЕД вызовом `Alpine.start()`
-      </Option>
-      <Option isCorrect>
-         ПОСЛЕ импорта глобального объекта Alpine и ПЕРЕД вызовом `Alpine.start()`
-      </Option>
-      <Option>
-         ПЕРЕД импортом глобального объекта Alpine и ПОСЛЕ вызова `Alpine.start()`
-      </Option>
-    </MultipleChoice>
+Порядок регистрации расширения при использовании сборки Alpine...
 
-2. Как зарегистрировать хелпер `$now` для вывода текущего времени?
+- [ ] ПЕРЕД импортом глобального объекта Alpine и ПЕРЕД вызовом `Alpine.start()`
+  > До импорта объекта `Alpine` ещё не существует, и регистрировать расширение не на чём.
+- [x] ПОСЛЕ импорта глобального объекта Alpine и ПЕРЕД вызовом `Alpine.start()`
+  > Объект `Alpine` уже доступен, а расширение успевает зарегистрироваться до обхода разметки.
+- [ ] ПЕРЕД импортом глобального объекта Alpine и ПОСЛЕ вызова `Alpine.start()`
+  > После `Alpine.start()` разметка уже обработана, и расширение в инициализацию не попадёт.
 
-    ```html wrap
-    <span x-data x-text="$now"></span>
+</Quiz>
 
-    <script>
-      document.addEventListener('alpine:init', () => {
-        // код расширения
-      });
-    </script>
-    ```
+<Quiz id="extending-q2" title="Вопрос 2">
 
-    <MultipleChoice>
-      <Option>
-         ```js wrap
-          Alpine.data('now', () => {
-            return new Date().toLocaleTimeString();
-          });
-         ```
-      </Option>
-      <Option isCorrect>
-         ```js wrap
-          Alpine.magic('now', () => {
-            return new Date().toLocaleTimeString();
-          });
-         ```
-      </Option>
-      <Option>
-         ```js wrap
-          Alpine.bind('now', () => {
-            return new Date().toLocaleTimeString();
-          });
-         ```
-      </Option>
-    </MultipleChoice>
+Как зарегистрировать хелпер `$now` для вывода текущего времени?
 
-2. Как создать свою директиву `x-lowercase`?
+```html wrap
+<span x-data x-text="$now"></span>
 
-    ```html wrap
-    <div x-data>
-      <span x-lowercase>НЕНАВИЖУ КАПС!</span>
-    </div>
+<script>
+  document.addEventListener('alpine:init', () => {
+    // код расширения
+  });
+</script>
+```
 
-    <script>
-      document.addEventListener('alpine:init', () => {
-        // определение директивы
-      });
-    </script>
-    ```
+- [ ] <span class="sr-only">Регистрация через Alpine.data</span>
+  ```js wrap
+  Alpine.data('now', () => {
+    return new Date().toLocaleTimeString();
+  });
+  ```
+  > `Alpine.data()` регистрирует переиспользуемый объект данных для `x-data`, а не магическое свойство.
+- [x] <span class="sr-only">Регистрация через Alpine.magic</span>
+  ```js wrap
+  Alpine.magic('now', () => {
+    return new Date().toLocaleTimeString();
+  });
+  ```
+  > `Alpine.magic()` создаёт магическое свойство, доступное в выражениях как `$now`.
+- [ ] <span class="sr-only">Регистрация через Alpine.bind</span>
+  ```js wrap
+  Alpine.bind('now', () => {
+    return new Date().toLocaleTimeString();
+  });
+  ```
+  > `Alpine.bind()` регистрирует набор атрибутов для `x-bind`, магию он не создаёт.
 
-    <MultipleChoice>
-      <Option>
-         ```js wrap
-          Alpine.custom('x-lowercase', (el) => {
-            el.textContent = el.textContent.toLowerCase();
-          });
-         ```
-      </Option>
-      <Option>
-         ```js wrap
-          Alpine.data('lowercase', (el) => {
-            el.textContent = el.textContent.toLowerCase();
-          });
-         ```
-      </Option>
-      <Option isCorrect>
-         ```js wrap
-          Alpine.directive('lowercase', (el) => {
-            el.textContent = el.textContent.toLowerCase();
-          });
-         ```
-      </Option>
-    </MultipleChoice>
+</Quiz>
 
-</Box>
+<Quiz id="extending-q3" title="Вопрос 3">
+
+Как создать свою директиву `x-lowercase`?
+
+```html wrap
+<div x-data>
+  <span x-lowercase>НЕНАВИЖУ КАПС!</span>
+</div>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    // определение директивы
+  });
+</script>
+```
+
+- [ ] <span class="sr-only">Вызов Alpine.custom</span>
+  ```js wrap
+  Alpine.custom('x-lowercase', (el) => {
+    el.textContent = el.textContent.toLowerCase();
+  });
+  ```
+  > Метода `Alpine.custom()` в фреймворке не существует.
+- [ ] <span class="sr-only">Вызов Alpine.data</span>
+  ```js wrap
+  Alpine.data('lowercase', (el) => {
+    el.textContent = el.textContent.toLowerCase();
+  });
+  ```
+  > `Alpine.data()` объявляет данные компонента и никакой директивы не регистрирует.
+- [x] <span class="sr-only">Вызов Alpine.directive</span>
+  ```js wrap
+  Alpine.directive('lowercase', (el) => {
+    el.textContent = el.textContent.toLowerCase();
+  });
+  ```
+  > `Alpine.directive()` регистрирует директиву, причём префикс `x-` в имени не указывается.
+
+</Quiz>
+
+<QuizResults />
