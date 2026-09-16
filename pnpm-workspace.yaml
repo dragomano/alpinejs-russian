@@ -4,7 +4,7 @@ allowBuilds:
   sharp: true
 minimumReleaseAgeExclude:
   - astro@6.4.5 || 7.0.2 || 7.2.2 || 7.2.6 || 7.2.10 || 7.3.2
-  - '@astrojs/starlight@0.40.0 || 0.41.0 || 0.41.8'
+  - '@astrojs/starlight@0.40.0 || 0.41.0 || 0.41.8 || 0.42.1'
   - '@expressive-code/*'
   - astro-expressive-code@0.43.1
   - expressive-code@0.43.1
@@ -16,5 +16,6 @@ minimumReleaseAgeExclude:
   - '@astrojs/internal-helpers@0.11.0'
   - '@astrojs/markdown-remark@7.3.0 || 7.3.1'
   - starlight-quiz@1.0.2
+  - starlight-package-managers@0.13.0
 patchedDependencies:
   astro-live-code@0.0.6: patches/astro-live-code@0.0.6.patch
