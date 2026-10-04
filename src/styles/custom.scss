@@ -13,6 +13,43 @@
     }
 }
 
+/* Wider article column on docs pages. */
+:root[data-has-sidebar] {
+    --sl-content-width: 50rem;
+}
+
+/* 72-120rem: two full-width sidebars don't fit — TOC becomes a dropdown bar. */
+@media (min-width: 72rem) and (max-width: 119.98rem) {
+    :root[data-has-sidebar][data-has-toc] {
+        --sl-mobile-toc-height: 3rem;
+    }
+
+    html[data-has-sidebar][data-has-toc] {
+        scroll-padding-top: calc(1.5rem + var(--sl-nav-height) + var(--sl-mobile-toc-height));
+    }
+
+    [data-has-sidebar] .right-sidebar-container {
+        width: 0;
+    }
+
+    [data-has-sidebar] .right-sidebar {
+        display: contents;
+    }
+
+    [data-has-sidebar] .right-sidebar-panel {
+        display: none;
+    }
+
+    [data-has-sidebar] .lg\:sl-hidden {
+        display: block;
+    }
+
+    [data-has-sidebar] .main-pane {
+        width: 100%;
+        --sl-content-margin-inline: auto;
+    }
+}
+
 /* Dark mode colors. */
 :root {
     --sl-color-accent-low: #ffffff;
@@ -47,7 +84,7 @@
 }
 
 /* Style the Markdown heading links. */
-.sl-markdown-content :is(h1, h2, h3, h4, h5, h6)>a {
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) > a {
     color: var(--sl-color-white);
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
