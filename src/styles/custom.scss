@@ -50,6 +50,26 @@
     }
 }
 
+/* 120rem+: fill the space between sidebars instead of pinning the article to the right. */
+@media (min-width: 120rem) {
+    :root[data-has-sidebar] {
+        --sl-content-width: min(calc(100% - 2rem), 110rem);
+    }
+
+    [data-has-sidebar][data-has-toc] .main-pane {
+        width: calc(100% - var(--sl-sidebar-width));
+        --sl-content-margin-inline: auto;
+    }
+
+    [data-has-sidebar][data-has-toc] .right-sidebar-container {
+        width: var(--sl-sidebar-width);
+    }
+
+    [data-has-sidebar][data-has-toc] .right-sidebar {
+        width: var(--sl-sidebar-width);
+    }
+}
+
 /* Dark mode colors. */
 :root {
     --sl-color-accent-low: #ffffff;
